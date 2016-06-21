@@ -1,0 +1,48 @@
+Readme
+
+Overview
+=========
+The MVP continuous-dev repo/branch. 
+
+Coding Guidelines
+==================
+
+The only coding guideline that will be enforced for V1 is 4.
+
+1. Clear concise code, with minimal documentation.
+
+2.  Backend - Use Pep8 standards when in doubt or as a first approach.
+    https://www.python.org/dev/peps/pep-0008/
+
+    Frontend - ? 
+
+3. Whitespaces (most preferrable)
+
+    LineWrap  - 80 Columns 
+    Backend   - 4 spaces, with expandtab(4 spaces for a tab stroke) 
+    Frontend  - 4/2 spaces, based on user/file preference. When in doubt use
+                what is used in the existing file. HTML files may generally go
+                over 80 columns, so to accommodate that developer may have used
+                2 spaces instead of 4.
+    LineBreaks - between logical chunks, functions. 
+
+4. Comments
+    Try to comment non-obvious pieces/functions. Document complicated pieces,
+    any tips/tricks discovered, primarily to help other developers to be able
+    to fix bugs/write tests/review.
+
+5. Commit Messages
+    Provide detailed commit messages. Use "git commit"
+
+<Sample Format>
+
+Enh</Iss/Ref> - One liner
+
+<Detailed description here>
+
+Tests 
+  Test 1 - Details
+  Test 2 - Details
+
+</Sample Format>
+
