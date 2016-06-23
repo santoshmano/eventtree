@@ -1,13 +1,30 @@
-Readme
+Readme before starting to work off this branch.
+Read the Developers Guide for more detailed information.
+
+To startoff
+===========
+Always checkout the mvp_v_0_X branch and work out of it, not off the master.
 
 Overview
 =========
-The MVP continuous-dev repo/branch. 
+The MVP continuous-dev repo has the following Branches
+ - master branch
+    This is the production ready, stable branch. The integration from the mvp
+    branches are done only by a single person at a point when the mvp1_X is 
+    deemed complete/stable after going over testing. The only other time to 
+    work on this branch is to provide hotfixes.
+   
+ - mvp1_1 branch
+    This is the branch to develop all pieces for the initial mvp - the landing
+    page. The mvp branches are public to the team. The team can submit directly
+    into this branch after basic sanity testing so that others are not broken
+    or is free to create private branches for their own features and later merge
+    into the mvp branch. 
+    
 
 Coding Guidelines
 ==================
-
-The only coding guideline that will be enforced for V1 is 4.
+The only coding guideline that will be enforced for V1 is 5.
 
 1. Clear concise code, with minimal documentation.
 
@@ -20,10 +37,7 @@ The only coding guideline that will be enforced for V1 is 4.
 
     LineWrap  - 80 Columns 
     Backend   - 4 spaces, with expandtab(4 spaces for a tab stroke) 
-    Frontend  - 4/2 spaces, based on user/file preference. When in doubt use
-                what is used in the existing file. HTML files may generally go
-                over 80 columns, so to accommodate that developer may have used
-                2 spaces instead of 4.
+    Frontend  - 2 spaces.
     LineBreaks - between logical chunks, functions. 
 
 4. Comments
@@ -46,3 +60,7 @@ Tests
 
 </Sample Format>
 
+    If the developer is doing frequent smaller commits to team branch, it is ok
+    to provide one line commit message, but the feature start/end should 
+    contain detailed commit message like above, and the smaller one liners should
+    have something linking to the main feature/issue/fix reference.
