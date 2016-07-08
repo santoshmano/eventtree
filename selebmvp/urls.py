@@ -15,7 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from .views import home, contact
 
 urlpatterns = [
+    #Admin
     url(r'^admin/', admin.site.urls),
+
+    #Application
+    # The home url '/'. displays landing page
+    url(r'^$', home, name='home'),
+    url(r'^contact/', contact, name='contact'),
 ]

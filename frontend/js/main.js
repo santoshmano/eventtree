@@ -1,6 +1,7 @@
 jQuery.noConflict();
 jQuery(document).ready(function($){
-	var formModal = $('.cd-user-modal'),
+
+	  var formModal = $('.cd-user-modal'),
 		formLogin = formModal.find('#cd-login'),
 		formSignup = formModal.find('#cd-signup'),
 		formForgotPassword = formModal.find('#cd-reset-password'),
@@ -25,7 +26,7 @@ jQuery(document).ready(function($){
 	formModal.on('click', function(event){
 		if( $(event.target).is(formModal) || $(event.target).is('.cd-close-form') ) {
 			formModal.removeClass('is-visible');
-		}	
+		}
 	});
 	//close modal when clicking the esc keyboard button
 	$(document).keyup(function(event){
@@ -44,14 +45,14 @@ jQuery(document).ready(function($){
 	$('.hide-password').on('click', function(){
 		var togglePass= $(this),
 			passwordField = togglePass.prev('input');
-		
+
 		( 'password' == passwordField.attr('type') ) ? passwordField.attr('type', 'text') : passwordField.attr('type', 'password');
 		( 'Hide' == togglePass.text() ) ? togglePass.text('Show') : togglePass.text('Hide');
 		//focus and move cursor to the end of input field
 		passwordField.putCursorAtEnd();
 	});
 
-	//show forgot-password form 
+	//show forgot-password form
 	forgotPasswordLink.on('click', function(event){
 		event.preventDefault();
 		forgot_password_selected();
@@ -89,7 +90,7 @@ jQuery(document).ready(function($){
 		formForgotPassword.addClass('is-selected');
 	}
 
-	//REMOVE THIS - it's just to show error messages 
+	//REMOVE THIS - it's just to show error messages
 	formLogin.find('input[type="submit"]').on('click', function(event){
 		event.preventDefault();
 		formLogin.find('input[type="email"]').toggleClass('has-error').next('span').toggleClass('is-visible');
@@ -134,13 +135,13 @@ jQuery.fn.putCursorAtEnd = function() {
     	if (this.setSelectionRange) {
       		// ... then use it (Doesn't work in IE)
       		// Double the length because Opera is inconsistent about whether a carriage return is one character or two. Sigh.
-      		var len = $(this).val().length * 2;
+      		var len = jQuery(this).val().length * 2;
       		this.focus();
       		this.setSelectionRange(len, len);
     	} else {
     		// ... otherwise replace the contents with itself
     		// (Doesn't work in Google Chrome)
-      		$(this).val($(this).val());
+      		$(this).val(jQuery(this).val());
     	}
 	});
 };
