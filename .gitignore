@@ -108,7 +108,6 @@ coverage.xml
 
 ######## Seleb Project start ######## 
 
-seleb_hh_1/static/photos/
 
 ######## Seleb Project end ######## 
 
@@ -149,6 +148,6 @@ frontend/dist
 .vscode
 
 # Mac files
-.DS_Store
+frontend/.DS_Store
 
 ######## Frontend end #########
