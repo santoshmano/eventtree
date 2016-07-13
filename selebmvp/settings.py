@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
+    'selebmvp.user_profile',
+    'selebmvp.user_packages',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -124,3 +126,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
 	os.path.join(BASE_DIR, 'frontend'),
 )
+
+# Custom Auth
+AUTH_USER_MODEL = 'user_profile.SelebUser'
+LOGIN_REDIRECT_URL = '/user/dashboard'
+LOGIN_URL = '/login/'

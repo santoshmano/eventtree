@@ -16,8 +16,16 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from .views import home, contact
+from selebmvp.user_profile.views import dashboard, Register, bookings
+from django.contrib.auth import views
 
 urlpatterns = [
+
+    #Auth
+    url(r'^login/$', views.login, {'template_name': 'login.html'}, name='login'),
+    url(r'^logout/$', views.logout, {'next_page': '/'}, name='logout'),
+    url(r'^register/$', Register.as_view(), name='register'),
+
     #Admin
     url(r'^admin/', admin.site.urls),
 
@@ -25,4 +33,8 @@ urlpatterns = [
     # The home url '/'. displays landing page
     url(r'^$', home, name='home'),
     url(r'^contact/', contact, name='contact'),
+
+    #User
+    url(r'^user/dashboard/', dashboard, name='user_dashboard'),
+    url(r'^user/bookings/', bookings, name='user_bookings'),
 ]

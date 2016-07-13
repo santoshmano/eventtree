@@ -3,7 +3,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,9 +35,43 @@
 
 </head>
 
-<body id="page-top" class="index">
+<body>
 
-    {% block content %}{% endblock %}
+    <header>
+        <nav id="mainNav" class="navbar navbar-custom navbar-default navbar-fixed-top affix">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                    </button>
+                      <a class="navbar-brand" href="/">EventTree</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="hidden">
+                            <a href="#page-top"></a>
+                        </li>
+                        {% if request.user.is_authenticated %}
+                        <li>
+                            <a class="page-scroll" href="{% url 'user_bookings' %}">Bookings</a>
+                        </li>
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                        {% else %} {% endif %}
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+        </nav>
+
+    </header>
+    <main class="user-body">
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
 
     <!-- jQuery -->
     <!--    <script src="vendor/jquery/jquery.min.js"></script> -->
@@ -59,7 +92,7 @@
 
     <!-- Theme JavaScript -->
     <script src="{% static 'js/agency.js' %}"></script>
-
+    {% block script %}{% endblock %}
     <script>
         (function(i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
@@ -76,8 +109,6 @@
         ga('create', 'UA-80318717-1', 'auto');
         ga('send', 'pageview');
     </script>
-
-
 </body>
 
 </html>

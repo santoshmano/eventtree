@@ -1,0 +1,23 @@
+{% extends "user_base.html" %}
+
+{% block content %}
+  <h1>
+    User Bookings
+  </h1>
+  <div>
+    <ul class="nav nav-tabs" role="tablist">
+      {% for package in user.packages.all %}
+        <li role="presentation" class="{% if forloop.first %}active{% endif %}">
+          <a href="#{{ package.name}}" aria-controls="{{ package.name}}" role="tab" data-toggle="tab">{{ package.name}}</a>
+        </li>
+      {% endfor %}
+    </ul>
+    <div class="tab-content">
+      {% for package in user.packages.all %}
+        <div role="tabpanel" class="tab-pane {% if forloop.first %}active{% endif %}" id="{{ package.name}}">
+          {% include "packages/"|add:package.filename %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
