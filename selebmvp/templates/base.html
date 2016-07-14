@@ -38,7 +38,11 @@
 
 <body id="page-top" class="index">
 
-    {% block content %}{% endblock %}
+    {% block menu %}
+      {% include "menu.html" %}
+    {% endblock %}
+    {% block content %}
+    {% endblock %}
 
     <!-- jQuery -->
     <!--    <script src="vendor/jquery/jquery.min.js"></script> -->

@@ -18,11 +18,15 @@ from django.contrib import admin
 from .views import home, contact
 from selebmvp.user_profile.views import dashboard, Register, bookings
 from django.contrib.auth import views
+from django.contrib.auth.decorators import user_passes_test
+
+#login_forbidden = user_passes_test(lambda u: u.is_anonymous(), lazy(reverse, str)('my-url-name'))
+login_forbidden = user_passes_test(lambda u: u.is_anonymous(), '/user/bookings/')
 
 urlpatterns = [
 
     #Auth
-    url(r'^login/$', views.login, {'template_name': 'login.html'}, name='login'),
+    url(r'^login/$', login_forbidden(views.login), {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', views.logout, {'next_page': '/'}, name='logout'),
     url(r'^register/$', Register.as_view(), name='register'),
 
