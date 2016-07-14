@@ -3,6 +3,7 @@ botocore==1.4.36
 Django==1.9.7
 django-braces==1.9.0
 django-debug-toolbar==1.4
+django-environ==0.4.0
 docutils==0.12
 jmespath==0.9.0
 python-dateutil==2.5.3

@@ -36,5 +36,5 @@ urlpatterns = [
 
     #User
     #url(r'^user/dashboard/', dashboard, name='user_dashboard'),
-    url(r'^user/bookings/', bookings, name='user_bookings'),
+    url(r'^user/bookings/$', bookings, name='user_bookings'),
 ]

@@ -10,22 +10,26 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
+import environ
 import os
+root = environ.Path(__file__) - 2 # 1 folder back (/a/ - 1 = /)
+env = environ.Env(DEBUG=(bool, False),) # set default values and casting
+environ.Env.read_env() # reading .env file
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = root
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '1ot_exld@pk!rri%_$)-jz4y^#x)r7w31xvfm=l9k=&=p9=@=l'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG', default=False)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 
 
 # Application definition
@@ -58,7 +62,7 @@ ROOT_URLCONF = 'selebmvp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'selebmvp', 'templates')],
+        'DIRS': [root('selebmvp', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,7 +84,7 @@ WSGI_APPLICATION = 'selebmvp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': root('db.sqlite3'),
     }
 }
 
@@ -107,15 +111,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
+LANGUAGE_CODE = env('LANGUAGE_CODE', default='en-us')
+TIME_ZONE = env('TIME_ZONE', default='UTC')
+USE_I18N = env('USE_I18N', default=True)
+USE_L10N = env('USE_L10N', default=True)
+USE_TZ = env('USE_TZ', default=True)
 
 
 # Static files (CSS, JavaScript, Images)
@@ -124,7 +124,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-	os.path.join(BASE_DIR, 'frontend'),
+	root('frontend'),
 )
 
 # Custom Auth

@@ -106,10 +106,10 @@ coverage.xml
 *.log
 *.pot
 
-######## Seleb Project start ######## 
+######## Seleb Project start ########
+*.env
 
-
-######## Seleb Project end ######## 
+######## Seleb Project end ########
 
 
 ######## Frontend start ########A
