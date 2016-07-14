@@ -35,6 +35,6 @@ urlpatterns = [
     url(r'^contact/', contact, name='contact'),
 
     #User
-    url(r'^user/dashboard/', dashboard, name='user_dashboard'),
+    #url(r'^user/dashboard/', dashboard, name='user_dashboard'),
     url(r'^user/bookings/', bookings, name='user_bookings'),
 ]

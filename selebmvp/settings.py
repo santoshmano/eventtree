@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '1ot_exld@pk!rri%_$)-jz4y^#x)r7w31xvfm=l9k=&=p9=@=l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -129,5 +129,5 @@ STATICFILES_DIRS = (
 
 # Custom Auth
 AUTH_USER_MODEL = 'user_profile.SelebUser'
-LOGIN_REDIRECT_URL = '/user/dashboard'
+LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
