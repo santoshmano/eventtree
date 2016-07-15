@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'selebmvp.user_profile',
     'selebmvp.user_packages',
+    'selebmvp.app_mailer'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -88,6 +89,41 @@ DATABASES = {
     }
 }
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt' : "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': root('logs', 'debug.log'),
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers':['file'],
+            'propagate': True,
+            'level':'DEBUG',
+        },
+        'selebmvp.app_mailer': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+        },
+    }
+}
+
+
+EMAIL_BACKEND = 'selebmvp.app_mailer.AWSSESBackend'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -131,3 +167,11 @@ STATICFILES_DIRS = (
 AUTH_USER_MODEL = 'user_profile.SelebUser'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
+
+# AWS SES stuff
+AWS_ACCESS_KEY = env('AWS_ACCESS_KEY')
+AWS_SECRET_KEY = env('AWS_SECRET_KEY')
+AWS_SES_REGION_NAME = env('AWS_SES_REGION_NAME')
+AWS_SES_REGION_ENDPOINT = env('AWS_SES_REGION_ENDPOINT')
+AWS_SES_AUTO_THROTTLE = env('AWS_SES_AUTO_THROTTLE')
+AWS_SES_RETURN_PATH = env('AWS_SES_RETURN_PATH')
