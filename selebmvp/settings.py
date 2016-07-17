@@ -19,6 +19,8 @@ environ.Env.read_env() # reading .env file
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = root
 
+SITE_URL=env('SITE_URL', default='http://localhost:8000/')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -175,3 +177,5 @@ AWS_SES_REGION_NAME = env('AWS_SES_REGION_NAME')
 AWS_SES_REGION_ENDPOINT = env('AWS_SES_REGION_ENDPOINT')
 AWS_SES_AUTO_THROTTLE = env('AWS_SES_AUTO_THROTTLE')
 AWS_SES_RETURN_PATH = env('AWS_SES_RETURN_PATH')
+AWS_SES_TO_EMAIL = env('AWS_SES_TO_EMAIL')
+DEFAULT_FROM_EMAIL = AWS_SES_RETURN_PATH = env('AWS_SES_RETURN_PATH')

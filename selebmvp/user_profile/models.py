@@ -49,6 +49,7 @@ class SelebUser(AbstractBaseUser):
         default=False,
         help_text=_('Designates whether the user can log into this admin site.'),
     )
+    is_active = models.BooleanField(_('Is active?'), default=True)
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
     objects = SelebUserManager()

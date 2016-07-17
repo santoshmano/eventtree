@@ -1,0 +1,6 @@
+Dear {{email}}
+
+Thank you for registering at Eventtree. We are sure you will have a great time booking event via Eventtree.
+
+Best Regards, <br/>
+Santosh Manoharan

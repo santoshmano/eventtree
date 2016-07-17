@@ -7,6 +7,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import SelebUserCreationForm
 
+from selebmvp.utils import AppMailer
+
 User = get_user_model()
 
 @login_required
@@ -28,6 +30,8 @@ class Register(View):
         form = SelebUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
+            AppMailer().send_registration_email_to_admin(request.POST.get('email'))
+            AppMailer().send_registration_email_to_user(request.POST.get('email'))
             return redirect('/')
 
         context = {

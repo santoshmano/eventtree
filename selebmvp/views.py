@@ -2,9 +2,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.http import JsonResponse
 from django.conf import settings
 
-import boto3
-
-from django.core.mail import EmailMessage
+from .utils import AppMailer
 
 #show the home page
 def home(request):
@@ -17,12 +15,11 @@ def contact(request):
         sender_email = request.POST.get('email')
         message = request.POST.get('message')
 
-        msg = EmailMessage(
-                'Contact from ' + name,
-                message,
-                settings.AWS_SES_RETURN_PATH,
-                [settings.AWS_SES_RETURN_PATH],
-                reply_to=[sender_email])
+        data = AppMailer().send_contact_us_email_to_admin(
+                    name,
+                    sender_email,
+                    message,
+                    phone
+                )
 
-        data = msg.send()
         return JsonResponse(data, safe=False)
