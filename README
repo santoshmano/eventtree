@@ -10,17 +10,65 @@ Overview
 The MVP continuous-dev repo has the following Branches
  - master branch
     This is the production ready, stable branch. The integration from the mvp
-    branches are done only by a single person at a point when the mvp1_X is 
-    deemed complete/stable after going over testing. The only other time to 
+    branches are done only by a single person at a point when the mvp1_X is
+    deemed complete/stable after going over testing. The only other time to
     work on this branch is to provide hotfixes.
-   
+
  - mvp1_1 branch
     This is the branch to develop all pieces for the initial mvp - the landing
     page. The mvp branches are public to the team. The team can submit directly
     into this branch after basic sanity testing so that others are not broken
     or is free to create private branches for their own features and later merge
-    into the mvp branch. 
-    
+    into the mvp branch.
+
+Project Structure
+==================
+
+1. Root folder has two main folders
+    - frontend (for all CSS and JS sources)
+    - selebmvp (for all the django code)
+
+2. The root folder also has overall app views and utils
+    - Example: Contact Us view
+    - Utils for sending emails (compose emails and call send email)
+    - In general anything that is used by any subapps or the whole app itself
+      goes here
+
+3. Here is the list of sub apps of django (they are inside selebmvp folder)
+    - user_profile -> User Model, Auth templates and Auth Custom Views
+    - user_packages -> User packages management
+    - app_mailer -> Email backend for django send_mail that implements sending
+      emails via AWS SES. Handling of bounced emails and emails sending stats
+      will be handled by this app in future (Right now it is just a custom
+      Email backend for AWS SES, all code is in __init.py__)
+
+Pulling Latest version
+==================
+Do the following whenever you pull latest changes
+
+1. Always pull latest changes when you have no active development going on
+    (working on a feature or a bug) or when you need it urgently (but please stash your current version or create a mid way commit)
+
+2. Merge if needed and create a new commit just for the merge
+
+3. Update your virtual env with latest requirements.txt
+
+4. if .env.example was updated, update your local .env accordingly
+
+5. Backup production database
+
+6. Run migrations
+
+Running in production
+==================
+
+1. Follow the instructions at
+    https://docs.djangoproject.com/en/1.9/howto/static-files/deployment/
+    for generating static files
+
+2. Set DEBUG = FALSE in .env
+
+3. You can run runserver with --insecure option (use this only if you know the implications, never run this command on the actual production server)
 
 Coding Guidelines
 ==================
@@ -28,17 +76,17 @@ The only coding guideline that will be enforced for V1 is 5.
 
 1. Clear concise code, with minimal documentation.
 
-2.  Backend - Use Pep8 standards when in doubt or as a first approach.
+2. Backend - Use Pep8 standards when in doubt or as a first approach.
     https://www.python.org/dev/peps/pep-0008/
 
-    Frontend - ? 
+    Frontend - ?
 
 3. Whitespaces (most preferrable)
 
-    LineWrap  - 80 Columns 
-    Backend   - 4 spaces, with expandtab(4 spaces for a tab stroke) 
+    LineWrap  - 80 Columns
+    Backend   - 4 spaces, with expandtab(4 spaces for a tab stroke)
     Frontend  - 2 spaces.
-    LineBreaks - between logical chunks, functions. 
+    LineBreaks - between logical chunks, functions.
 
 4. Comments
     Try to comment non-obvious pieces/functions. Document complicated pieces,
@@ -54,13 +102,13 @@ Enh</Iss/Ref> - One liner
 
 <Detailed description here>
 
-Tests 
+Tests
   Test 1 - Details
   Test 2 - Details
 
 </Sample Format>
 
     If the developer is doing frequent smaller commits to team branch, it is ok
-    to provide one line commit message, but the feature start/end should 
+    to provide one line commit message, but the feature start/end should
     contain detailed commit message like above, and the smaller one liners should
     have something linking to the main feature/issue/fix reference.
