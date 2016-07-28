@@ -1,0 +1,19 @@
+{% extends "emails/email_base.html" %}
+
+{% block salutation %}
+   Dear Santosh Manoharan
+{% endblock %}
+
+{% block content %}
+You have received a confirmed package selection for a event, details below.
+<br/>
+    From: <strong>{{ user }}</strong>
+    <br/><br/>
+    Event: {{ booking.event }} <br/>
+    Package: {{ booking.package }}
+{% endblock %}
+
+{% block signature %}
+   Best Regards, <br/>
+   Webmaster - Eventtree
+{% endblock %}

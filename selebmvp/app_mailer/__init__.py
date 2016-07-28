@@ -1,4 +1,4 @@
-"""#This is inspired by https://github.com/django-ses/django-ses.
+"""This is inspired by https://github.com/django-ses/django-ses.
     But uses boto3
 """
 
@@ -26,13 +26,37 @@ recent_send_times = []
 
 class AWSSESBackend(BaseEmailBackend):
     """Django Email backend that uses AWS's Simple Email Service (SES).
+
+    Attributes:
+        _access_key_id: Amazon IAM access key
+            (preferebly specify in settings.AWS_ACCESS_KEY)
+        _access_key: Amazon IAM Secret
+            (preferebly specify in settings.AWS_SECRET_KEY)
+        _region: Amazon SES Region
+            (preferebly specify in settings.AWS_SES_REGION_NAME)
+        _throttle: Amazon SES sending rate limit
+            (preferebly specify in settings.AWS_SES_AUTO_THROTTLE)
     """
 
     def __init__(self, fail_silently=False, aws_access_key=None,
                  aws_secret_key=None, aws_region_name=None,
                  aws_region_endpoint=None, aws_auto_throttle=None,
                  **kwargs):
+        """
+        Initialize the SES client with passed in Amazon AWS credentials
 
+        Args:
+            fail_silently: True if errors are not tobe propogated and ignored.
+                These are AWS SES errors
+            aws_access_key: Amazon IAM access key.
+                (passed only if settings.AWS_ACCESS_KEY is not tobe used)
+            aws_secret_key: Amazon IAM Secret.
+                (passed only if settings.AWS_SECRET_KEY is not tobe used)
+            aws_region_name: Amazon SES Region.
+                (passed only if settings.AWS_SES_REGION_NAME is not tobe used)
+            aws_auto_throttle: Amazon SES sending rate limit.
+                (passed only if settings.AWS_SES_AUTO_THROTTLE is not tobe used)
+        """
         super(AWSSESBackend, self).__init__(fail_silently=fail_silently, **kwargs)
         self._access_key_id = aws_access_key or settings.AWS_ACCESS_KEY
         self._access_key = aws_secret_key or settings.AWS_SECRET_KEY
@@ -50,8 +74,15 @@ class AWSSESBackend(BaseEmailBackend):
                 raise
 
     def send_messages(self, email_messages):
-        """Sends one or more EmailMessage objects and returns the number of
-        email messages sent.
+        """Sends one or more EmailMessage objects.
+
+        Args:
+            email_messages: List of email_messages that needs to be sent.
+                The method is called by django's send_email(or send_raw_email)
+
+        Returns:
+            Returns the number of email messages sent.
+            This is the requirment by django when using a custom Email Backend
         """
         if not email_messages:
             return
@@ -97,7 +128,7 @@ class AWSSESBackend(BaseEmailBackend):
                 # Since I'm not sure how Amazon determines at exactly what
                 # point to throttle, better be safe than sorry and let in, say,
                 # half of the allowed rate.
-                
+
                 if len(new_send_times) > rate_limit * window * self._throttle:
                     # Sleep the remainder of the window period.
                     delta = now - new_send_times[0]
@@ -134,6 +165,14 @@ class AWSSESBackend(BaseEmailBackend):
         return num_sent
 
     def get_rate_limit(self):
+        """Calculate our own email sending rate limit.
+
+        This is to make sure AWS SES does not reject emails because hit rate
+        limit was reached.
+
+        Returns:
+            A float representing the internal rate limit
+        """
         if self._access_key_id in cached_rate_limits:
             return cached_rate_limits[self._access_key_id]
 

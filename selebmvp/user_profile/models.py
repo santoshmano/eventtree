@@ -7,6 +7,10 @@ from django.contrib.auth.models import (
 from django.contrib.auth.forms import UserCreationForm
 
 class SelebUserManager(BaseUserManager):
+    """Create a custom User model.
+
+    See https://docs.djangoproject.com/en/1.9/topics/auth/customizing/#a-full-example for more details. This is just taken from the link
+    """
     def create_user(self, email, password=None):
         """
         Creates and saves a User with the given email, password.

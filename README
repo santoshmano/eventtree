@@ -79,6 +79,8 @@ The only coding guideline that will be enforced for V1 is 5.
 2. Backend - Use Pep8 standards when in doubt or as a first approach.
     https://www.python.org/dev/peps/pep-0008/
 
+    Alternatively you can look at google PyGuide (specifically for comments) https://google.github.io/styleguide/pyguide.html 
+
     Frontend - ?
 
 3. Whitespaces (most preferrable)

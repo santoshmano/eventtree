@@ -1,25 +1,66 @@
 {% extends "base.html" %}
 
-
 {% block content %}
   <main class="user-body">
       <div class="container">
-          <h1>
-            User Bookings
-          </h1>
-          <div>
-            <ul class="nav nav-tabs" role="tablist">
-              {% for package in user.packages.all %}
-                <li role="presentation" class="{% if forloop.first %}active{% endif %}">
-                  <a href="#{{ package.name}}" aria-controls="{{ package.name}}" role="tab" data-toggle="tab">{{ package.name}}</a>
-                </li>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Pending Boonkings</h3>
+            </div>
+            <div class="panel-body">
+              {% if not bookings.count %}
+                You donot have any pending bookings
+              {% endif %}
+              {% for booking in bookings %}
+                <table class="table table-bordered col-xs-12">
+                  <tr>
+                    <td rowspan="2" class="col-xs-10">
+                      {{ booking.summary}}
+                    </td>
+                    <td class="col-xs-2 text-center">
+                      ${{ booking.amount }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="col-xs-2 text-center">
+                      <button type="button" class="btn btn-sm btn-success">
+                        Pay Now
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+                      {% include "bookings/"|add:booking.filename %}
+                    </td>
+                  </tr>
+                </table>
               {% endfor %}
-            </ul>
-            <div class="tab-content">
-              {% for package in user.packages.all %}
-                <div role="tabpanel" class="tab-pane {% if forloop.first %}active{% endif %}" id="{{ package.name}}">
-                  {% include "packages/"|add:package.filename %}
-                </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Completed Boonkings</h3>
+            </div>
+            <div class="panel-body">
+              {% if not complete_bookings.count %}
+                You donot have any completed bookings
+              {% endif %}
+              {% for booking in completed_bookings %}
+                <table class="table table-bordered col-xs-12">
+                  <tr>
+                    <td rowspan="2" class="col-xs-10">
+                      {{ booking.summary}}
+                    </td>
+                    <td class="col-xs-2 text-center">
+                      ${{ booking.amount }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="col-xs-2 text-center">
+                      Paid on: {{ booking.payment_date}}
+                    </td>
+                  </tr>
+                </table>
               {% endfor %}
             </div>
           </div>

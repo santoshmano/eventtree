@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+  <main class="user-body">
+      <div class="container">
+          <h1>
+            {{ event.name }}
+          </h1>
+          {% if event.booking.count %}
+          <div class="alert alert-success">
+            You have selected Package <strong>{{ event.booking.first.package.name }}</strong> for your event
+          </div>
+          {% endif %}
+
+          Count = {{ event.booking.slug }}
+          <div>
+            <ul class="nav nav-tabs" role="tablist">
+              {% for package in event.packages.all %}
+                <li role="presentation" class="{% if forloop.first %}active{% endif %}">
+                  <a href="#{{ package.name}}" aria-controls="{{ package.name}}" role="tab" data-toggle="tab">{{ package.name}}</a>
+                </li>
+              {% endfor %}
+            </ul>
+            <div class="tab-content">
+              {% for package in event.packages.all %}
+                <div role="tabpanel" class="tab-pane {% if forloop.first %}active{% endif %}" id="{{ package.name}}">
+                  {% include "packages/"|add:package.filename %}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+      </div>
+  </main>
+{% endblock %}

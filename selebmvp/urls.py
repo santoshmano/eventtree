@@ -16,7 +16,8 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from .views import home, contact
-from selebmvp.user_profile.views import dashboard, Register, bookings
+from selebmvp.user_profile.views import (dashboard, Register, bookings, events,
+                                        event, select_event)
 from django.contrib.auth import views
 from django.contrib.auth.decorators import user_passes_test
 
@@ -46,4 +47,8 @@ urlpatterns = [
     #User
     #url(r'^user/dashboard/', dashboard, name='user_dashboard'),
     url(r'^user/bookings/$', bookings, name='user_bookings'),
+    url(r'^user/events/$', events, name='user_events'),
+    url(r'^user/events/(?P<slug>[\w-]+)/$', event, name='user_event'),
+    url(r'^user/events/select/(?P<slug>[\w-]+)/(?P<package>[-\w]+)/$',
+        select_event, name='user_select_event'),
 ]

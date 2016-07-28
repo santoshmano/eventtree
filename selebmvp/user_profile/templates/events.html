@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+  <main class="user-body">
+      <div class="container">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">My Events</h3>
+            </div>
+            <div class="panel-body">
+              <ul class="list-group">
+                {% for event in user.events.all %}
+                  <li class="list-group-item">
+                    <a href="{% url 'user_event' event.slug %}">{{ event.name}}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+      </div>
+  </main>
+{% endblock %}

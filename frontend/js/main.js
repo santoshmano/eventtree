@@ -134,3 +134,23 @@ jQuery.fn.putCursorAtEnd = function() {
     	}
 	});
 };
+
+function show_toast(toast_message, toast_timeout, toast_position, toast_type) {
+	toastr.options = {
+			"closeButton": true,
+			"newestOnTop": true,
+			"progressBar": true,
+			"positionClass": toast_position,
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": toast_timeout,
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+	};
+	toastr[toast_type](toast_message);
+}

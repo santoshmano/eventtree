@@ -109,6 +109,9 @@ coverage.xml
 
 ######## Seleb Project start ########
 *.env
+#Package and Booking partial render
+selebmvp/user_profile/templates/bookings/
+selebmvp/user_profile/templates/packages/
 
 ######## Seleb Project end ########
 
