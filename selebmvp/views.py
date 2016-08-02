@@ -1,14 +1,21 @@
-from django.shortcuts import get_object_or_404, redirect, render
+""" Application level Views"""
+
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from django.conf import settings
+from django.contrib import messages
 
-from .utils import AppMailer
+from selebmvp.utils import AppMailer
 
-#show the home page
+
 def home(request):
+    """Display the home/landing page
+    """
     return render(request, "home.html")
 
+
 def contact(request):
+    """Handle the contact us form
+    """
     if request.is_ajax():
         name = request.POST.get('name')
         phone = request.POST.get('phone')
@@ -23,3 +30,10 @@ def contact(request):
                 )
 
         return JsonResponse(data, safe=False)
+
+
+def send_test_email(request):
+    AppMailer().send_test_email()
+
+    messages.success(request, 'successfully sent the test email')
+    return redirect('home')

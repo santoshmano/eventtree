@@ -12,8 +12,6 @@
             You have selected Package <strong>{{ event.booking.first.package.name }}</strong> for your event
           </div>
           {% endif %}
-
-          Count = {{ event.booking.slug }}
           <div>
             <ul class="nav nav-tabs" role="tablist">
               {% for package in event.packages.all %}

@@ -24,18 +24,9 @@ logger = logging.getLogger(__name__)
 cached_rate_limits = {}
 recent_send_times = []
 
+
 class AWSSESBackend(BaseEmailBackend):
     """Django Email backend that uses AWS's Simple Email Service (SES).
-
-    Attributes:
-        _access_key_id: Amazon IAM access key
-            (preferebly specify in settings.AWS_ACCESS_KEY)
-        _access_key: Amazon IAM Secret
-            (preferebly specify in settings.AWS_SECRET_KEY)
-        _region: Amazon SES Region
-            (preferebly specify in settings.AWS_SES_REGION_NAME)
-        _throttle: Amazon SES sending rate limit
-            (preferebly specify in settings.AWS_SES_AUTO_THROTTLE)
     """
 
     def __init__(self, fail_silently=False, aws_access_key=None,
@@ -53,22 +44,24 @@ class AWSSESBackend(BaseEmailBackend):
             aws_secret_key: Amazon IAM Secret.
                 (passed only if settings.AWS_SECRET_KEY is not tobe used)
             aws_region_name: Amazon SES Region.
-                (passed only if settings.AWS_SES_REGION_NAME is not tobe used)
+                (passed only if settings.AWS_SES_REGION_NAME is not used)
             aws_auto_throttle: Amazon SES sending rate limit.
-                (passed only if settings.AWS_SES_AUTO_THROTTLE is not tobe used)
+                (passed only if settings.AWS_SES_AUTO_THROTTLE is not used)
         """
-        super(AWSSESBackend, self).__init__(fail_silently=fail_silently, **kwargs)
+        super(AWSSESBackend, self).__init__(fail_silently=fail_silently,
+                                            **kwargs)
         self._access_key_id = aws_access_key or settings.AWS_ACCESS_KEY
         self._access_key = aws_secret_key or settings.AWS_SECRET_KEY
         self._region = aws_region_name or settings.AWS_SES_REGION_NAME
-        self._throttle = aws_auto_throttle or float(settings.AWS_SES_AUTO_THROTTLE)
+        self._throttle = aws_auto_throttle or \
+            float(settings.AWS_SES_AUTO_THROTTLE)
 
         try:
             self.client = boto3.client('ses',
-                aws_access_key_id=self._access_key_id,
-                aws_secret_access_key=self._access_key,
-                region_name=self._region,
-            )
+                                       aws_access_key_id=self._access_key_id,
+                                       aws_secret_access_key=self._access_key,
+                                       region_name=self._region,
+                                       )
         except:
             if not self.fail_silently:
                 raise
@@ -92,7 +85,7 @@ class AWSSESBackend(BaseEmailBackend):
             return
 
         num_sent = 0
-        source = settings.AWS_SES_RETURN_PATH
+        source = settings.APP_EMAIL_RETURN_PATH
         for message in email_messages:
             # Automatic throttling. Assumes that this is the only SES client
             # currently operating. The AWS_SES_AUTO_THROTTLE setting is a

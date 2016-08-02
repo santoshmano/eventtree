@@ -5,6 +5,7 @@ from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 
+
 class AppMailer:
     """The class responsible for composing and sending different app emails
 
@@ -12,22 +13,10 @@ class AppMailer:
     text emails are sent by default.
     The app is set to use Amazon AWS SES as the email backend. Check app_mailer
     app for more details about the custom email backend
-
-    Attributes:
-        _from: The senders email, always defaults to
-            settings.AWS_SES_RETURN_PATH
-        _to: The recipients' email address
-        _subject: The subject of the email
-        _reply_to: When receiver of the email hits reply, the reply is sent to
-            this address
-        _html_message: The template name and location for the HTML email
-        _text_message: The template name and location for the Text email
-
-
     """
     def __init__(self):
-        self._from = settings.AWS_SES_RETURN_PATH
-        self._reply_to = settings.AWS_SES_RETURN_PATH
+        self._from = settings.APP_EMAIL_RETURN_PATH
+        self._reply_to = settings.APP_EMAIL_RETURN_PATH
 
     def send_contact_us_email_to_admin(self, name, email, message, phone=None):
         """send email to admin when someone fills a contact us form.
@@ -39,7 +28,7 @@ class AppMailer:
             phone: Phone number in the form (this is optional, defualt to None)
         """
         self._subject = 'You are received a new enquiry from ' + name
-        self._to = settings.AWS_SES_TO_EMAIL
+        self._to = settings.APP_TO_EMAIL
         self._reply_to = email
 
         context = {
@@ -86,7 +75,7 @@ class AppMailer:
             email: The email of the registered user
         """
         self._subject = 'A new registration at Eventtree'
-        self._to = settings.AWS_SES_TO_EMAIL
+        self._to = settings.APP_TO_EMAIL
         self._reply_to = email
 
         context = {
@@ -109,7 +98,7 @@ class AppMailer:
             user: The SelebUser that selected the booking
         """
         self._subject = 'A user had just confirmed a package'
-        self._to = settings.AWS_SES_TO_EMAIL
+        self._to = settings.APP_TO_EMAIL
         self._reply_to = user.email
 
         context = {
@@ -122,6 +111,23 @@ class AppMailer:
                                               context)
         self._text_message = render_to_string(
                                               'emails/booking.txt',
+                                              context)
+        return self.deliver()
+
+    def send_test_email(self):
+        self._subject = 'This is a test email'
+        self._to = settings.APP_TO_EMAIL
+
+        context = {
+            'name': 'Sandeep Patil',
+            'body': 'This is some junk in the email body'
+        }
+
+        self._html_message = render_to_string(
+                                              'emails/test_email.html',
+                                              context)
+        self._text_message = render_to_string(
+                                              'emails/test_email.txt',
                                               context)
         return self.deliver()
 

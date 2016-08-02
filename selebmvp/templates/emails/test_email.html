@@ -1,14 +1,14 @@
 {% extends "emails/email_base.html" %}
 
 {% block salutation %}
-   Dear {{email}}
+   Dear {{ name }}
 {% endblock %}
 
 {% block content %}
-    Thank you for registering at Eventtree. We are sure you will have a great time booking event via Eventtree.
+  {{ body}}
 {% endblock %}
 
 {% block signature %}
    Best Regards, <br/>
-   Santosh Manoharan
+   Webmaster - Eventtree
 {% endblock %}

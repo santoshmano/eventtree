@@ -1,45 +1,58 @@
+"""user_profile modules"""
+
 from django.db import models
 from django.utils.translation import gettext as _
-from django.utils import six, timezone
+from django.utils import timezone
 from django.contrib.auth.models import (
-    BaseUserManager, AbstractBaseUser
+    BaseUserManager, AbstractBaseUser, PermissionsMixin
 )
-from django.contrib.auth.forms import UserCreationForm
+
 
 class SelebUserManager(BaseUserManager):
     """Create a custom User model.
 
-    See https://docs.djangoproject.com/en/1.9/topics/auth/customizing/#a-full-example for more details. This is just taken from the link
+    See https://docs.djangoproject.com/en/1.9/topics/\
+    auth/customizing/#a-full-example for more details.
+    This is just taken from the link
     """
-    def create_user(self, email, password=None):
+
+    def _create_user(self, email, password, **extra_fields):
         """
-        Creates and saves a User with the given email, password.
+        Creates and saves a User with the given username, email and password.
         """
         if not email:
             raise ValueError('Users must have an email address')
-
-        user = self.model(
-            email=self.normalize_email(email)
-        )
-
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, password):
+    def create_user(self, email, password=None, **extra_fields):
+        """
+        Creates and saves a User with the given email, password.
+        """
+        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_superuser', False)
+        return self._create_user(email, password, **extra_fields)
+
+    def create_superuser(self, email, password, **extra_fields):
         """
         Creates and saves a superuser with the given email, password.
         """
-        user = self.create_user(
-            email,
-            password=password
-        )
-        user.is_admin = True
-        user.save(using=self._db)
-        return user
+
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+
+        return self._create_user(email, password, **extra_fields)
 
 
-class SelebUser(AbstractBaseUser):
+class SelebUser(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(
         verbose_name='email address',
@@ -51,7 +64,8 @@ class SelebUser(AbstractBaseUser):
     is_admin = models.BooleanField(
         _('staff status'),
         default=False,
-        help_text=_('Designates whether the user can log into this admin site.'),
+        help_text=_('Designates whether the user can log \
+        into this admin site.'),
     )
     is_active = models.BooleanField(_('Is active?'), default=True)
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)

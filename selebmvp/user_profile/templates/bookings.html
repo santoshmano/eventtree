@@ -5,7 +5,7 @@
       <div class="container">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Pending Boonkings</h3>
+              <h3 class="panel-title">Pending Bookings</h3>
             </div>
             <div class="panel-body">
               {% if not bookings.count %}
@@ -23,9 +23,20 @@
                   </tr>
                   <tr>
                     <td class="col-xs-2 text-center">
-                      <button type="button" class="btn btn-sm btn-success">
-                        Pay Now
-                      </button>
+                      <form action="{% url 'user_stripe_charge' booking.event.slug booking.slug %}"
+                            method="POST">
+                        {% csrf_token %}
+                        <script
+                          src="https://checkout.stripe.com/checkout.js"
+                          class="stripe-button"
+                          data-key="pk_test_NPT4XvVsxqo4hpv5P7RyFKbV"
+                          data-amount="${{ booking.amount }}"
+                          data-name="eventtree.com"
+                          data-locale="auto"
+                          data-zip-code="true"
+                          data-email="{{ request.user.email }}">
+                        </script>
+                      </form>
                     </td>
                   </tr>
                   <tr>
@@ -39,10 +50,10 @@
           </div>
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Completed Boonkings</h3>
+              <h3 class="panel-title">Completed Bookings</h3>
             </div>
             <div class="panel-body">
-              {% if not complete_bookings.count %}
+              {% if not completed_bookings.count %}
                 You donot have any completed bookings
               {% endif %}
               {% for booking in completed_bookings %}

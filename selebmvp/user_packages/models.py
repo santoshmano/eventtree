@@ -1,6 +1,8 @@
+""" All the models for the user_packages modules"""
 from django.db import models
 
 from selebmvp.user_profile.models import SelebUser
+
 
 class Event(models.Model):
     """Event model represents an event
@@ -28,13 +30,16 @@ class Event(models.Model):
                                     verbose_name="who can manage this event",
                                     related_name="events")
 
-    #prepopulated_fields = {"slug": ("name",)}
+    # prepopulated_fields = {"slug": ("name",)}
 
     def event_owners(self):
         """Return a ',' seperated values of event owners first_name.
             If first_name is not set, email is used
         """
-        return ", ".join([owner.first_name or owner.email for owner in self.owners.all()])
+        return ", ".join([
+                        owner.first_name or owner.email
+                        for owner in self.owners.all()
+                        ])
 
     def __str__(self):
         return self.name
@@ -59,7 +64,7 @@ class EventPackage(models.Model):
     filename = models.CharField(max_length=150)
     name = models.CharField(max_length=150)
 
-    #<TODO> make this a one-to-one relation
+    # <TODO> make this a one-to-one relation
     event = models.ForeignKey(Event, blank=True, null=True,
                               related_name="packages")
 
@@ -102,7 +107,8 @@ class Booking(models.Model):
 
     slug = models.SlugField("booking slug",
                             max_length=255,
-                            help_text="-nated Name for referring to this booking",
+                            help_text="-nated Name for referring to this\
+                            booking",
                             unique=True)
     event = models.ForeignKey(Event, blank=False, null=False,
                               on_delete=models.CASCADE,
@@ -115,6 +121,28 @@ class Booking(models.Model):
     amount = models.FloatField("Event cost", default=0.00)
     status = models.CharField(max_length=2, choices=BOOKING_STATUS,
                               default="CR")
-    payment_date = models.DateTimeField("Stripe payment date", null=True, blank=True)
+    payment_date = models.DateTimeField("Stripe payment date",
+                                        null=True,
+                                        blank=True)
 
-    #prepopulated_fields = {"slug": ("event", "package",)}
+    # prepopulated_fields = {"slug": ("event", "package",)}
+
+
+class Payments(models.Model):
+    """Store details about stripe payments received
+
+    Attributes:
+        booking: Booking id, ForeignKey to Booking
+        stripe_payment_id: payment id from stripe
+        amount: payment amount
+        response: complete JSON response from stripe
+        payment_date: payment date returned from stripe
+    """
+
+    booking = models.ForeignKey(Booking, blank=False, null=False,
+                                related_name="payments")
+    stripe_payment_id = models.CharField("stripe payment id",
+                                         max_length=150)
+    amount = models.FloatField("amount")
+    response = models.TextField("json response")
+    payment_date = models.DateTimeField("payment date")

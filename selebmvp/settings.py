@@ -11,15 +11,15 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import environ
-import os
-root = environ.Path(__file__) - 2 # 1 folder back (/a/ - 1 = /)
-env = environ.Env(DEBUG=(bool, False),) # set default values and casting
-environ.Env.read_env() # reading .env file
+
+root = environ.Path(__file__) - 2  # 1 folder back (/a/ - 1 = /)
+env = environ.Env(DEBUG=(bool, False),)  # set default values and casting
+environ.Env.read_env()  # reading .env file
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = root
 
-SITE_URL=env('SITE_URL', default='http://localhost:8000/')
+SITE_URL = env('SITE_URL', default='http://localhost:8000/')
 
 
 # Quick-start development settings - unsuitable for production
@@ -96,8 +96,9 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
-            'datefmt' : "%d/%b/%Y %H:%M:%S"
+            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s]\
+                       %(message)s",
+            'datefmt': "%d/%b/%Y %H:%M:%S"
         },
         'simple': {
             'format': '%(levelname)s %(message)s'
@@ -113,9 +114,9 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers':['file'],
+            'handlers': ['file'],
             'propagate': True,
-            'level':'DEBUG',
+            'level': 'DEBUG',
         },
         'selebmvp.app_mailer': {
             'handlers': ['file'],
@@ -126,22 +127,26 @@ LOGGING = {
 
 
 EMAIL_BACKEND = 'selebmvp.app_mailer.AWSSESBackend'
-
+env('SITE_URL', default='http://localhost:8000/')
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.\
+                UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.\
+                MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.\
+                CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.\
+                NumericPasswordValidator',
     },
 ]
 
@@ -162,7 +167,7 @@ USE_TZ = env('USE_TZ', default=True)
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-	root('frontend'),
+    root('frontend'),
 )
 
 # Custom Auth
@@ -170,12 +175,23 @@ AUTH_USER_MODEL = 'user_profile.SelebUser'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
 
-# AWS SES stuff
-AWS_ACCESS_KEY = env('AWS_ACCESS_KEY')
-AWS_SECRET_KEY = env('AWS_SECRET_KEY')
-AWS_SES_REGION_NAME = env('AWS_SES_REGION_NAME')
-AWS_SES_REGION_ENDPOINT = env('AWS_SES_REGION_ENDPOINT')
-AWS_SES_AUTO_THROTTLE = env('AWS_SES_AUTO_THROTTLE')
-AWS_SES_RETURN_PATH = env('AWS_SES_RETURN_PATH')
-AWS_SES_TO_EMAIL = env('AWS_SES_TO_EMAIL')
-DEFAULT_FROM_EMAIL = AWS_SES_RETURN_PATH = env('AWS_SES_RETURN_PATH')
+# Email BACKEND
+EMAIL_BACKEND = env('EMAIL_BACKEND')
+
+if EMAIL_BACKEND == 'django.core.mail.backends.smtp.EmailBackend':
+    EMAIL_HOST = env('EMAIL_HOST')
+    EMAIL_PORT = env('EMAIL_PORT')
+    EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+    EMAIL_USE_TLS = env('EMAIL_USE_TLS')
+elif EMAIL_BACKEND == 'selebmvp.app_mailer.AWSSESBackend':
+    # AWS SES stuff
+    AWS_ACCESS_KEY = env('AWS_ACCESS_KEY')
+    AWS_SECRET_KEY = env('AWS_SECRET_KEY')
+    AWS_SES_REGION_NAME = env('AWS_SES_REGION_NAME')
+    AWS_SES_REGION_ENDPOINT = env('AWS_SES_REGION_ENDPOINT')
+    AWS_SES_AUTO_THROTTLE = env('AWS_SES_AUTO_THROTTLE')
+
+APP_EMAIL_RETURN_PATH = env('APP_EMAIL_RETURN_PATH')
+APP_TO_EMAIL = env('APP_TO_EMAIL')
+DEFAULT_FROM_EMAIL = APP_EMAIL_RETURN_PATH = env('APP_EMAIL_RETURN_PATH')
