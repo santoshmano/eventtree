@@ -1,3 +1,15 @@
-Dear {{ name }}
+Salutation Test
 
-{{ body }}
+Namaste!
+Email Content Test
+
+Birthdays 
+Magicians
+
+Warm Regards,
+EventTree Team
+support@eventtree.com
+
+Signature Test
+
+EventTree Inc, 2016. Located at San Jose, California.

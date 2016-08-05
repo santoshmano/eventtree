@@ -1,8 +1,3 @@
-Dear Santosh Manoharan
+Yippee! we have a new user {{ email }} :)
 
-A new user had registered with Eventtree.
 
-Email: {{ email }}
-
-Best Regards, <br/>
-Webmaster - Eventtree

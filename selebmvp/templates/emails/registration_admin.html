@@ -1,17 +1,4 @@
-{% extends "emails/email_base.html" %}
-
-{% block salutation %}
-   Dear Santosh Manoharan
-{% endblock %}
-
-
 {% block content %}
-    A new user had registered with Eventtree.
-    Email: {{ email }}
-    <br/>
+Yippee! we have a new user {{ email }} :)
 {% endblock %}
 
-{% block signature %}
-   Best Regards, <br/>
-   Webmaster - Eventtree
-{% endblock %}

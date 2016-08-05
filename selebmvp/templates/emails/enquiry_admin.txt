@@ -1,4 +1,4 @@
-Dear Santosh Manoharan
+Yay! We have an Enquiry!
 
 From: <strong>{{ name }}</strong>
 
@@ -7,6 +7,3 @@ Email: {{ email }}
 Message: {{ message }}
 
 Phone: {{ phone }}
-
-Best Regards,
-   Webmaster - Eventtrees

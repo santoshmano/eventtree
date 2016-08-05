@@ -1,9 +1,6 @@
-{% extends "emails/email_base.html" %}
-
 {% block salutation %}
-   Dear Santosh Manoharan
+Yay! We have an Enquiry!
 {% endblock %}
-
 
 {% block content %}
     From: <strong>{{ name }}</strong>
@@ -15,7 +12,3 @@
     Phone: {{ phone }}
 {% endblock %}
 
-{% block signature %}
-   Best Regards, <br/>
-   Webmaster - Eventtree
-{% endblock %}

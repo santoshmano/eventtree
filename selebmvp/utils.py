@@ -120,7 +120,7 @@ class AppMailer:
 
         context = {
             'name': 'Sandeep Patil',
-            'body': 'This is some junk in the email body'
+            'body': 'This is some test data in the email body'
         }
 
         self._html_message = render_to_string(

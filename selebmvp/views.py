@@ -35,5 +35,5 @@ def contact(request):
 def send_test_email(request):
     AppMailer().send_test_email()
 
-    messages.success(request, 'successfully sent the test email')
+    messages.success(request, 'Successfully sent the test email')
     return redirect('home')

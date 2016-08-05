@@ -60,8 +60,13 @@ urlpatterns = [
 
     # User
     # url(r'^user/dashboard/', dashboard, name='user_dashboard'),
-    # TODO remove this once email template testing is done.
-    # url(r'^sendtestemail/$', send_test_email, name='send_test_email'),
+
+    # TODO #
+    # PRODUCTION_MODE_CHECK #
+    # comment the below this once email template testing is done
+    # should be commendted in production mode/before going live
+    #url(r'^sendtestemail/$', send_test_email, name='send_test_email'),
+
     url(r'^user/bookings/$', bookings, name='user_bookings'),
     url(r'^user/events/$', events, name='user_events'),
     url(r'^user/events/(?P<slug>[\w-]+)/$', event, name='user_event'),

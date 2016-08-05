@@ -1,14 +1,29 @@
 {% extends "emails/email_base.html" %}
 
 {% block salutation %}
-   Dear {{ name }}
+Salutation Test
+
+Namaste!
 {% endblock %}
 
 {% block content %}
-  {{ body}}
+<p>
+Email Content Test<br>
+
+Birthdays <br>
+Magicians <br>
+<br>
+{{ body}} <br>
+<br>
+Warm Regards,<br>
+EventTree Team<br>
+support@eventtree.com<br>
+</p>
+
 {% endblock %}
 
 {% block signature %}
-   Best Regards, <br/>
-   Webmaster - Eventtree
+Signature Test
+
+EventTree Inc, 2016. Located at San Jose, California.
 {% endblock %}
