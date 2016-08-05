@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
     <head>
@@ -14,7 +15,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>*|MC:SUBJECT|*</title>
-        
+
     <style type="text/css">
         p{
             margin:10px 0;
@@ -524,7 +525,11 @@
 }</style></head>
     <body>
         <center>
-            <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable"
+            style="max-width:600px;
+                  height:100%;
+                  margin:0;
+                  padding:0;">
                 <tr>
                     <td align="center" valign="top" id="bodyCell">
                         <!-- BEGIN TEMPLATE // -->
@@ -533,7 +538,9 @@
                         <tr>
                         <td align="center" valign="top" width="600" style="width:600px;">
                         <![endif]-->
-                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="templateContainer">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="templateContainer"
+                        style="max-width:600px !important;
+                               border:0;">
                             <tr>
                                 <td valign="top" id="templatePreheader"></td>
                             </tr>
@@ -545,11 +552,11 @@
                     <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0" class="mcnImageContentContainer" style="min-width:100%;">
                         <tbody><tr>
                             <td class="mcnImageContent" valign="top" style="padding-right: 9px; padding-left: 9px; padding-top: 0; padding-bottom: 0; text-align:center;">
-                                
+
                                     <a href="http://eventtree.com" title="" class="" target="_blank">
-                                        <img align="center" alt="" src="https://gallery.mailchimp.com/b3139e18ae3dac0e609efecec/images/5488604a-ed90-4681-a70c-cc799517b500.jpg" width="564" style="max-width:682px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage">
+                                        <img align="center" alt="" src="http://{{ domain }}{% static 'img/email/user_email_et.jpeg' %}" width="564" style="max-width:682px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage">
                                     </a>
-                                
+
                             </td>
                         </tr>
                     </tbody></table>
@@ -567,15 +574,15 @@
                 <table align="left" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100%;">
                 <tr>
                 <![endif]-->
-                
+
                 <!--[if mso]>
                 <td valign="top" width="600" style="width:600px;">
                 <![endif]-->
                 <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
                     <tbody><tr>
-                        
+
                         <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
-                        
+
                             {% block content %}
                             {% endblock %}
 
@@ -585,7 +592,7 @@
                 <!--[if mso]>
                 </td>
                 <![endif]-->
-                
+
                 <!--[if mso]>
                 </tr>
                 </table>
@@ -607,7 +614,7 @@
                         </td>
                     </tr>
                 </tbody></table>
-<!--            
+<!--
                 <td class="mcnDividerBlockInner" style="padding: 18px;">
                 <hr class="mcnDividerContent" style="border-bottom-color:none; border-left-color:none; border-right-color:none; border-bottom-width:0; border-left-width:0; border-right-width:0; margin-top:0; margin-right:0; margin-bottom:0; margin-left:0;" />
 -->
@@ -631,85 +638,85 @@
                                     <table align="center" border="0" cellspacing="0" cellpadding="0">
                                     <tr>
                                     <![endif]-->
-                                    
+
                                         <!--[if mso]>
                                         <td align="center" valign="top">
                                         <![endif]-->
-                                        
+
                                             <table align="left" border="0" cellpadding="0" cellspacing="0" class="mcnFollowStacked" style="display:inline;">
-                                                 
+
                                                 <tbody><tr>
                                                     <td align="center" valign="top" class="mcnFollowIconContent" style="padding-right:10px; padding-bottom:5px;">
-                                                        <a href="http://www.eventtree.com" target="_blank"><img src="https://cdn-images.mailchimp.com/icons/social-block-v2/color-link-96.png" alt="Website" class="mcnFollowBlockIcon" width="48" style="width:48px; max-width:48px; display:block;"></a>
+                                                        <a href="http://www.eventtree.com" target="_blank"><img src="http://{{ domain }}{% static 'img/email/color-link-96.png' %}" alt="Website" class="mcnFollowBlockIcon" width="48" style="width:48px; max-width:48px; display:block;"></a>
                                                     </td>
                                                 </tr>
-                                                
-                                                
+
+
                                                 <tr>
                                                     <td align="center" valign="top" class="mcnFollowTextContent" style="padding-right:10px; padding-bottom:9px;">
                                                         <a href="http://www.eventtree.com" target="_blank" style="color: #202020;font-family: Arial;font-size: 11px;font-weight: normal;text-decoration: none;">Website</a>
                                                     </td>
                                                 </tr>
-                                                
+
                                             </tbody></table>
-                                        
-                                        
+
+
                                         <!--[if mso]>
                                         </td>
                                         <![endif]-->
-                                    
+
                                         <!--[if mso]>
                                         <td align="center" valign="top">
                                         <![endif]-->
-                                        
+
                                             <table align="left" border="0" cellpadding="0" cellspacing="0" class="mcnFollowStacked" style="display:inline;">
-                                                 
+
                                                 <tbody><tr>
                                                     <td align="center" valign="top" class="mcnFollowIconContent" style="padding-right:10px; padding-bottom:5px;">
-                                                        <a href="mailto:support@eventtree.com" target="_blank"><img src="https://cdn-images.mailchimp.com/icons/social-block-v2/color-forwardtofriend-96.png" alt="Email" class="mcnFollowBlockIcon" width="48" style="width:48px; max-width:48px; display:block;"></a>
+                                                        <a href="mailto:support@eventtree.com" target="_blank"><img src="http://{{ domain }}{% static 'img/email/color-forwardtofriend-96.png' %}" alt="Email" class="mcnFollowBlockIcon" width="48" style="width:48px; max-width:48px; display:block;"></a>
                                                     </td>
                                                 </tr>
-                                                
-                                                
+
+
                                                 <tr>
                                                     <td align="center" valign="top" class="mcnFollowTextContent" style="padding-right:10px; padding-bottom:9px;">
                                                         <a href="mailto:support@eventtree.com" target="_blank" style="color: #202020;font-family: Arial;font-size: 11px;font-weight: normal;text-decoration: none;">Email</a>
                                                     </td>
                                                 </tr>
-                                                
+
                                             </tbody></table>
-                                        
-                                        
+
+
                                         <!--[if mso]>
                                         </td>
                                         <![endif]-->
-                                    
+
                                         <!--[if mso]>
                                         <td align="center" valign="top">
                                         <![endif]-->
-                                        
+
                                             <table align="left" border="0" cellpadding="0" cellspacing="0" class="mcnFollowStacked" style="display:inline;">
-                                                 
+
                                                 <tbody><tr>
                                                     <td align="center" valign="top" class="mcnFollowIconContent" style="padding-right:0; padding-bottom:5px;">
-                                                        <a href="https://twitter.com/eventtreeinc" target="_blank"><img src="https://cdn-images.mailchimp.com/icons/social-block-v2/color-twitter-96.png" alt="Twitter" class="mcnFollowBlockIcon" width="48" style="width:48px; max-width:48px; display:block;"></a>
+                                                        <a href="https://twitter.com/eventtreeinc" target="_blank"><img src="http://{{ domain }}{% static 'img/email/color-twitter-96.png' %}" alt="Twitter" class="mcnFollowBlockIcon" width="48" style="width:48px; max-width:48px; display:block;"></a>
                                                     </td>
                                                 </tr>
-                                                
-                                                
+
+
                                                 <tr>
                                                     <td align="center" valign="top" class="mcnFollowTextContent" style="padding-right:0; padding-bottom:9px;">
                                                         <a href="https://twitter.com/eventtreeinc" target="_blank" style="color: #202020;font-family: Arial;font-size: 11px;font-weight: normal;text-decoration: none;">Twitter</a>
                                                     </td>
                                                 </tr>
-                                                
+
                                             </tbody></table>
-                                        
-                                        
+
+
                                         <!--[if mso]>
                                         </td>
                                         <![endif]-->
-                                    
+
                                     <!--[if mso]>
                                     </tr>
                                     </table>
@@ -735,15 +742,15 @@
                 <table align="left" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100%;">
                 <tr>
                 <![endif]-->
-                
+
                 <!--[if mso]>
                 <td valign="top" width="600" style="width:600px;">
                 <![endif]-->
                 <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
                     <tbody><tr>
-                        
+
                         <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
-                        
+
                             <div style="text-align: center;"><em>EventTree Inc,&nbsp;2016. </em>Located at San Jose, California.</div>
 
                         </td>
@@ -752,7 +759,7 @@
                 <!--[if mso]>
                 </td>
                 <![endif]-->
-                
+
                 <!--[if mso]>
                 </tr>
                 </table>

@@ -4,6 +4,7 @@
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
+from django.contrib.sites.shortcuts import get_current_site
 
 
 class AppMailer:
@@ -14,9 +15,11 @@ class AppMailer:
     The app is set to use Amazon AWS SES as the email backend. Check app_mailer
     app for more details about the custom email backend
     """
-    def __init__(self):
+    def __init__(self, request):
         self._from = settings.APP_EMAIL_RETURN_PATH
         self._reply_to = settings.APP_EMAIL_RETURN_PATH
+        current_site = get_current_site(request)
+        self.context = {'domain': current_site.domain}
 
     def send_contact_us_email_to_admin(self, name, email, message, phone=None):
         """send email to admin when someone fills a contact us form.
@@ -31,19 +34,19 @@ class AppMailer:
         self._to = settings.APP_TO_EMAIL
         self._reply_to = email
 
-        context = {
+        self.context.update({
             'name': name,
             'email': email,
             'phone': phone,
             'message': message
-        }
+        })
 
         self._html_message = render_to_string(
                                               'emails/enquiry_admin.html',
-                                              context)
+                                              self.context)
         self._text_message = render_to_string(
                                               'emails/enquiry_admin.txt',
-                                              context)
+                                              self.context)
         return self.deliver()
 
     def send_registration_email_to_user(self, email):
@@ -56,16 +59,16 @@ class AppMailer:
         self._subject = 'Welcome to Eventtree'
         self._to = email
 
-        context = {
+        self.context.update({
             'email': email
-        }
+        })
 
         self._html_message = render_to_string(
                                               'emails/registration_user.html',
-                                              context)
+                                              self.context)
         self._text_message = render_to_string(
                                               'emails/registration_user.txt',
-                                              context)
+                                              self.context)
         return self.deliver()
 
     def send_registration_email_to_admin(self, email):
@@ -78,16 +81,16 @@ class AppMailer:
         self._to = settings.APP_TO_EMAIL
         self._reply_to = email
 
-        context = {
+        self.context.update({
             'email': email
-        }
+        })
 
         self._html_message = render_to_string(
                                               'emails/registration_admin.html',
-                                              context)
+                                              self.context)
         self._text_message = render_to_string(
                                               'emails/registration_admin.txt',
-                                              context)
+                                              self.context)
         return self.deliver()
 
     def send_booking_email_to_admin(self, booking, user):
@@ -101,34 +104,34 @@ class AppMailer:
         self._to = settings.APP_TO_EMAIL
         self._reply_to = user.email
 
-        context = {
+        self.context.update({
             'user': user,
             'booking': booking,
-        }
+        })
 
         self._html_message = render_to_string(
                                               'emails/booking.html',
-                                              context)
+                                              self.context)
         self._text_message = render_to_string(
                                               'emails/booking.txt',
-                                              context)
+                                              self.context)
         return self.deliver()
 
     def send_test_email(self):
         self._subject = 'This is a test email'
         self._to = settings.APP_TO_EMAIL
 
-        context = {
+        self.context.update({
             'name': 'Sandeep Patil',
             'body': 'This is some test data in the email body'
-        }
+        })
 
         self._html_message = render_to_string(
                                               'emails/test_email.html',
-                                              context)
+                                              self.context)
         self._text_message = render_to_string(
                                               'emails/test_email.txt',
-                                              context)
+                                              self.context)
         return self.deliver()
 
     def deliver(self):

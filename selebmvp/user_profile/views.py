@@ -97,7 +97,7 @@ def select_event(request, slug, package):
                                                        package.name.split()))
         messages.success(request, 'You have sussessfully selected a package, \
                                    you will hear from us soon')
-        AppMailer().send_booking_email_to_admin(booking, request.user)
+        AppMailer(request).send_booking_email_to_admin(booking, request.user)
     else:
         messages.error(request, 'You have already selected a package for your\
                       event')
@@ -196,9 +196,9 @@ class Register(View):
         form = SelebUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            AppMailer().send_registration_email_to_admin(
+            AppMailer(request).send_registration_email_to_admin(
                                                     request.POST.get('email'))
-            AppMailer().send_registration_email_to_user(
+            AppMailer(request).send_registration_email_to_user(
                                                     request.POST.get('email'))
             messages.success(request, 'Your were successfully registered')
             return redirect('/')
