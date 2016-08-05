@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block title %}
+  {{ request.user }}'s Bookings
+{% endblock %}
+
 {% block content %}
   <main class="user-body">
       <div class="container">
