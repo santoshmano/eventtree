@@ -83,13 +83,26 @@ WSGI_APPLICATION = 'selebmvp.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': root('db.sqlite3'),
+DB_BACKEND = env('DB_BACKEND')
+if DB_BACKEND == 'SQLITE3':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': root(env('DB_NAME', default='db.sqlite3')),
+        }
     }
-}
+elif DB_BACKEND == 'POSTGRES':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': env('DB_NAME', default='eventtree'),
+            'USER': env('DB_USER', default='postgre'),
+            'PASSWORD': env('DB_PASSWORD', default='root123'),
+            'HOST': env('DB_HOST', default='localhost'),
+            'PORT': env('DB_PORT', default='5432'),
+        }
+    }
+
 
 LOGGING = {
     'version': 1,
