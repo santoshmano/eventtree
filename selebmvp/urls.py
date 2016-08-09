@@ -65,7 +65,7 @@ urlpatterns = [
     # PRODUCTION_MODE_CHECK #
     # comment the below this once email template testing is done
     # should be commendted in production mode/before going live
-    #url(r'^sendtestemail/$', send_test_email, name='send_test_email'),
+    url(r'^sendtestemail/$', send_test_email, name='send_test_email'),
 
     url(r'^user/bookings/$', bookings, name='user_bookings'),
     url(r'^user/events/$', events, name='user_events'),
