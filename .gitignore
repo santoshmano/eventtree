@@ -108,7 +108,6 @@ coverage.xml
 *.pot
 
 ######## Seleb Project start ########
-*.env
 
 ######## Seleb Project end ########
 
