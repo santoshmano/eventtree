@@ -152,3 +152,8 @@ frontend/dist
 frontend/.DS_Store
 
 ######## Frontend end #########
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
