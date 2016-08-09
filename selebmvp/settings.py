@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import environ
+import os
 
 root = environ.Path(__file__) - 2  # 1 folder back (/a/ - 1 = /)
 env = environ.Env(DEBUG=(bool, False),)  # set default values and casting
@@ -83,8 +84,20 @@ WSGI_APPLICATION = 'selebmvp.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
+
 DB_BACKEND = env('DB_BACKEND')
-if DB_BACKEND == 'SQLITE3':
+if 'RDS_DB_NAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
+    }
+elif DB_BACKEND == 'SQLITE3':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
