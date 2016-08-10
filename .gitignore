@@ -22,6 +22,8 @@
 
 # Logs and databases #
 ######################
+logs/
+*.log
 *.db
 *.sql
 *.sqlite
@@ -102,9 +104,11 @@ coverage.xml
 .ropeproject
 
 # Django stuff:
+*.log
 *.pot
 
 ######## Seleb Project start ########
+*.env
 
 ######## Seleb Project end ########
 
@@ -148,8 +152,3 @@ frontend/dist
 frontend/.DS_Store
 
 ######## Frontend end #########
-
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
