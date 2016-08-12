@@ -26,7 +26,7 @@
             <div class="tab-content">
               {% for package in event.packages.all %}
                 <div role="tabpanel" class="tab-pane {% if forloop.first %}active{% endif %}" id="{{ package.name}}">
-                  {% include "packages/"|add:package.filename %}
+                  {% include 'packages/'|add:package.filename %}
                 </div>
               {% endfor %}
             </div>

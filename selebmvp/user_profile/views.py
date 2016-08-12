@@ -7,6 +7,7 @@ from django.utils.decorators import decorator_from_middleware
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 import datetime
+from django.conf import settings
 
 import stripe
 
@@ -17,7 +18,7 @@ from selebmvp.user_packages.models import (Event, EventPackage, Booking,
                                            Payments)
 
 # Stripe API key
-stripe.api_key = "sk_test_70R9bYTD9Mp4b3hoXQP2LLYU "
+stripe.api_key = settings.STRIPE_SEC_KEY
 
 # Get custom user model, returns SelebUser
 User = get_user_model()
@@ -37,6 +38,12 @@ def dashboard(request):
 @login_required
 def bookings(request):
     """Renders the user bookings page
+
+    Args:
+        request: HttpRequest
+
+    Returns:
+        object: HttpResponse
     """
     events = request.user.events.all()
 
@@ -45,7 +52,9 @@ def bookings(request):
     context = {
         'bookings': bookings,
         'completed_bookings': completed_bookings,
+        'stripe_pvt_key': settings.STRIPE_PVT_KEY
     }
+
     return render(request, "bookings.html", context)
 
 
@@ -53,6 +62,12 @@ def bookings(request):
 @login_required
 def events(request):
     """Renders the user events page
+
+    Args:
+        request: HttpRequest
+
+    Returns:
+        object:  HttpResponse
     """
     context = {
         'packages': request.user.events
@@ -68,6 +83,9 @@ def event(request, slug):
 
     Args:
         slug: The event slug
+
+    Returns:
+        object: HttpResponse
     """
     event = get_object_or_404(Event, slug=slug)
     context = {
@@ -84,6 +102,9 @@ def select_event(request, slug, package):
     Args:
         slug: The event slug
         package: pk of the selected package
+
+    Returns:
+        object: HttpResponseRedirect
     """
 
     event = get_object_or_404(Event, slug=slug)
@@ -105,11 +126,15 @@ def select_event(request, slug, package):
     # TODO Check if the package belongs to the event (security check)
     return redirect(events)
 
-
 @login_required
 @event_owner
 def charge(request, slug, b_id):
     """The view for accepting credit card charges
+
+    Args:
+        request: HttpRequest
+        slug: Event SLug
+        b_id: Booking id
     """
 
     booking = Booking.objects.filter(slug=b_id).first()
@@ -137,7 +162,7 @@ def charge(request, slug, b_id):
         booking.save()
 
         messages.success(request,
-                         'Payment Successfull')
+                         'Payment Successful')
 
     except stripe.error.CardError as e:
         # Since it's a decline, stripe.error.CardError will be caught
@@ -186,11 +211,23 @@ class Register(View):
     """
     def get(self, request):
         """Show the initial SelebUserCreationForm
+
+        Args:
+            request: HttpRequest
+
+        Returns:
+            object: HttpResponse
         """
         return render(request, 'register.html')
 
     def post(self, request):
         """Handles the POST SelebUserCreationForm.
+
+        Args:
+            request: HttpRequest
+
+        Returns:
+            object: HttpResponse
         """
         # TODO send emails by handling user_created signal?
         form = SelebUserCreationForm(request.POST)

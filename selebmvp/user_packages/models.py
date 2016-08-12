@@ -26,6 +26,11 @@ class Event(models.Model):
                             help_text="-nated Event Name",
                             unique=True)
     date = models.DateField()
+    image = models.CharField("event image",
+                            max_length=250,
+                            help_text="Enter the Image Filename",
+                            null=True,
+                            blank=True,)
     owners = models.ManyToManyField(SelebUser,
                                     verbose_name="who can manage this event",
                                     related_name="events")

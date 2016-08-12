@@ -33,11 +33,10 @@
                         <script
                           src="https://checkout.stripe.com/checkout.js"
                           class="stripe-button"
-                          data-key="pk_test_NPT4XvVsxqo4hpv5P7RyFKbV"
+                          data-key={{ stripe_pvt_key }}
                           data-amount="${{ booking.amount }}"
                           data-name="eventtree.com"
                           data-locale="auto"
-                          data-zip-code="true"
                           data-email="{{ request.user.email }}">
                         </script>
                       </form>

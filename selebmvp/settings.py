@@ -164,7 +164,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
 LANGUAGE_CODE = env('LANGUAGE_CODE', default='en-us')
-TIME_ZONE = env('TIME_ZONE', default='UTC')
+TIME_ZONE = env('TIME_ZONE', default='US/Pacific')
 USE_I18N = env('USE_I18N', default=True)
 USE_L10N = env('USE_L10N', default=True)
 USE_TZ = env('USE_TZ', default=True)
@@ -204,3 +204,7 @@ elif EMAIL_BACKEND == 'selebmvp.app_mailer.AWSSESBackend':
 APP_EMAIL_RETURN_PATH = env('APP_EMAIL_RETURN_PATH')
 APP_TO_EMAIL = env('APP_TO_EMAIL')
 DEFAULT_FROM_EMAIL = APP_EMAIL_RETURN_PATH = env('APP_EMAIL_RETURN_PATH')
+
+#STRIPE
+STRIPE_PVT_KEY = env('STRIPE_PK')
+STRIPE_SEC_KEY = env('STRIPE_SK')

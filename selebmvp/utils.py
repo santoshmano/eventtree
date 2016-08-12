@@ -20,6 +20,10 @@ class AppMailer:
         self._reply_to = settings.APP_EMAIL_RETURN_PATH
         current_site = get_current_site(request)
         self.context = {'domain': current_site.domain}
+        self._subject = 'You got an email from Eventtree'
+        self._to = settings.APP_TO_EMAIL
+        self._html_message = None
+        self._text_message = None
 
     def send_contact_us_email_to_admin(self, name, email, message, phone=None):
         """send email to admin when someone fills a contact us form.
@@ -28,7 +32,7 @@ class AppMailer:
             name: Name in the form
             email: Email in the form
             message: Message in the form
-            phone: Phone number in the form (this is optional, defualt to None)
+            phone: Phone number in the form (this is optional, defaults to None)
         """
         self._subject = 'You are received a new enquiry from ' + name
         self._to = settings.APP_TO_EMAIL
@@ -73,7 +77,6 @@ class AppMailer:
 
     def send_registration_email_to_admin(self, email):
         """Send a new user registered alert email to admin
-
         Args:
             email: The email of the registered user
         """
