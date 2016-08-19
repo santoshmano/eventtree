@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}
   {{ request.user }}'s Bookings
 {% endblock %}
@@ -35,9 +35,11 @@
                           class="stripe-button"
                           data-key={{ stripe_pvt_key }}
                           data-amount="${{ booking.amount }}"
-                          data-name="eventtree.com"
                           data-locale="auto"
-                          data-email="{{ request.user.email }}">
+                          data-email="{{ request.user.email }}"
+                          data-description="Payment handled by stripe"
+                          data-image="{% static 'img/brand.png' %}"
+                          data-allow-remember-me="false">
                         </script>
                       </form>
                     </td>

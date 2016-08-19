@@ -1,14 +1,15 @@
 {%  load static %}
-<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-    <div class="panel panel-primary">
-        <img src="{% static 'img/event/'|add:event.image %}"
-             alt="Course Image" class="img-responsive">
-        <div class="panel-footer">
-            <div class="row">
-                <div class="col-xs-12 text-center">
-                    <a href="{% url 'user_event' event.slug %}">{{ event.name}}</a>
-                </div>
+<div class="col-md-4 col-sm-6 event-item">
+    <a href="{% url 'user_event' event.slug %}" class="event-link">
+        <div class="event-hover">
+            <div class="event-hover-content">
+                See Details
             </div>
         </div>
+        <img src="{% static 'img/event/'|add:event.image %}"
+             class="img-responsive" alt="">
+    </a>
+    <div class="event-caption">
+        <h4>{{ event.name}}</h4>
     </div>
 </div>
