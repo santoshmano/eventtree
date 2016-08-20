@@ -15,6 +15,12 @@
       {% for booking in bookings %}
         <table class="table table-bordered col-xs-12">
           <tr>
+          <tr>
+            <td >
+                {{ booking.summary | safe }}   
+            </td>
+          </tr>
+ 
             <td class="col-xs-12 text-center">
               Total: ${{ booking.amount }}
 
@@ -55,6 +61,12 @@
               Total : ${{ booking.amount }},  Paid on: {{ booking.payment_date}}
             </td>
           </tr>
+          <tr>
+            <td >
+                {{ booking.summary | safe }}   
+            </td>
+          </tr>
+ 
           <tr>
             <td >
               {% include "bookings/"|add:booking.filename %}
