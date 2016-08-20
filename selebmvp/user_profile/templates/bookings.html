@@ -5,81 +5,64 @@
 {% endblock %}
 
 {% block content %}
-  <main class="user-body">
-      <div class="container">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Pending Bookings</h3>
-            </div>
-            <div class="panel-body">
-              {% if not bookings.count %}
-                You donot have any pending bookings
-              {% endif %}
-              {% for booking in bookings %}
-                <table class="table table-bordered col-xs-12">
-                  <tr>
-                    <td rowspan="2" class="col-xs-10">
-                      {{ booking.summary}}
-                    </td>
-                    <td class="col-xs-2 text-center">
-                      ${{ booking.amount }}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="col-xs-2 text-center">
-                      <form action="{% url 'user_stripe_charge' booking.event.slug booking.slug %}"
-                            method="POST">
-                        {% csrf_token %}
-                        <script
-                          src="https://checkout.stripe.com/checkout.js"
-                          class="stripe-button"
-                          data-key={{ stripe_pvt_key }}
-                          data-amount="${{ booking.amount }}"
-                          data-locale="auto"
-                          data-email="{{ request.user.email }}"
-                          data-description="Payment handled by stripe"
-                          data-image="{% static 'img/brand.png' %}"
-                          data-allow-remember-me="false">
-                        </script>
-                      </form>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="2">
-                      {% include "bookings/"|add:booking.filename %}
-                    </td>
-                  </tr>
-                </table>
-              {% endfor %}
-            </div>
-          </div>
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Completed Bookings</h3>
-            </div>
-            <div class="panel-body">
-              {% if not completed_bookings.count %}
-                You donot have any completed bookings
-              {% endif %}
-              {% for booking in completed_bookings %}
-                <table class="table table-bordered col-xs-12">
-                  <tr>
-                    <td rowspan="2" class="col-xs-10">
-                      {{ booking.summary}}
-                    </td>
-                    <td class="col-xs-2 text-center">
-                      ${{ booking.amount }}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="col-xs-2 text-center">
-                      Paid on: {{ booking.payment_date}}
-                    </td>
-                  </tr>
-                </table>
-              {% endfor %}
-            </div>
-          </div>
-      </div>
-  </main>
+<main class="user-body">
+  <div class="container">
+    <div class="row">
+      <h2>Pending Bookings</h2>
+      {% if not bookings.count %}
+        You do not have any pending bookings
+      {% endif %}
+      {% for booking in bookings %}
+        <table class="table table-bordered col-xs-12">
+          <tr>
+            <td class="col-xs-12 text-center">
+              Total: ${{ booking.amount }}
+
+              <form action="{% url 'user_stripe_charge' booking.event.slug booking.slug %}"
+                    method="POST">
+                {% csrf_token %}
+                <script
+                  src="https://checkout.stripe.com/checkout.js"
+                  class="stripe-button"
+                  data-key={{ stripe_pvt_key }}
+                  data-amount="${{ booking.amount }}"
+                  data-locale="auto"
+                  data-email="{{ request.user.email }}"
+                  data-description="Payment via Stripe"
+                  data-image="{% static 'img/brand.png' %}"
+                  data-allow-remember-me="false">
+                </script>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td >
+              {% include "bookings/"|add:booking.filename %}
+            </td>
+          </tr>
+        </table>
+      {% endfor %}
+    </div>
+    <div class="row">
+      <h2>Completed Bookings</h2>
+      {% if not completed_bookings.count %}
+        You do not have any completed bookings
+      {% endif %}
+      {% for booking in completed_bookings %}
+        <table class="table table-bordered col-xs-12" style="background: #eeeeee">
+          <tr>
+            <td class="col-xs-12 text-center">
+              Total : ${{ booking.amount }},  Paid on: {{ booking.payment_date}}
+            </td>
+          </tr>
+          <tr>
+            <td >
+              {% include "bookings/"|add:booking.filename %}
+            </td>
+          </tr>
+        </table>
+      {% endfor %}
+    </div>
+  </div>
+</main>
 {% endblock %}

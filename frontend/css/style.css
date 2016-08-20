@@ -283,17 +283,20 @@ header[role=banner]::after {
 .event-item .event-caption {
     max-width: 400px;
     margin: 0 auto;
-    background-color: teal;
+    background-color: #eeeeee;
     text-align: center;
     padding: 25px;
 }
 .event-item .event-caption h4 {
     text-transform: none;
     margin: 0;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    color: black;
+    font-size: 16px;
 }
 .event-item .event-caption p {
     font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-style: italic;
     font-size: 16px;
     margin: 0;
 }

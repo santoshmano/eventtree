@@ -7,7 +7,8 @@
 {% block content %}
 <main class="user-body">
     <div class="container">
-        <h1> My Events</h1>
+        <h2> My Events</h2>
+        <br>
         <div class="row">
             {% for event in user.events.all %}
                 {% include 'event_panel.html' %}
@@ -20,11 +21,11 @@
                             <i class="fa fa-plus fa-3x"></i>
                         </div>
                     </div>
-                    <img src="{% static 'img/event/add_new.png' %}"
-                         class="img-responsive" alt="">
+                    <img src="{% static 'img/event/add_new_event.jpg' %}" class="img-responsive" alt="">
                 </a>
-                <div class="event-caption">
-                    <h4>Create New Event</h4>
+
+                <div class="event-caption" style="background-color: #eeeeee">
+                    <p>Start an Event</p>
                 </div>
             </div>
         </div>
