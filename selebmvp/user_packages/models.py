@@ -19,13 +19,12 @@ class Event(models.Model):
     """
     name = models.CharField("event name",
                             max_length=250,
-                            help_text="Enter the Event Name",
-                            unique=True)
+                            help_text="Enter the Event Name",)
     slug = models.SlugField("event slug",
                             max_length=255,
                             help_text="-nated Event Name",
                             unique=True)
-    date = models.DateField()
+    date = models.DateField(null=True, blank=True,)
     image = models.CharField("event image",
                             max_length=250,
                             help_text="Enter the Image Filename",
@@ -47,7 +46,7 @@ class Event(models.Model):
                         ])
 
     def __str__(self):
-        return self.name
+        return self.slug
 
 
 class EventPackage(models.Model):
@@ -121,7 +120,7 @@ class Booking(models.Model):
     package = models.ForeignKey(EventPackage, blank=False, null=False,
                                 on_delete=models.CASCADE,
                                 related_name="booking")
-    summary = models.TextField("Summary of the booking")
+    summary = models.TextField("Summary of the booking",)
     filename = models.CharField(max_length=150)
     amount = models.FloatField("Event cost", default=0.00)
     status = models.CharField(max_length=2, choices=BOOKING_STATUS,
