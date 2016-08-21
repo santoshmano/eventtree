@@ -22,8 +22,8 @@
 
 # Logs and databases #
 ######################
-logs/
-*.log
+#logs/
+#*.log
 *.db
 *.sql
 *.sqlite
@@ -104,7 +104,7 @@ coverage.xml
 .ropeproject
 
 # Django stuff:
-*.log
+#*.log
 *.pot
 
 ######## Seleb Project start ########
