@@ -110,6 +110,7 @@ coverage.xml
 ######## Seleb Project start ########
 *.env
 
+selebmvp/.env
 ######## Seleb Project end ########
 
 
