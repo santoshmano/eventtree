@@ -51,7 +51,7 @@ urlpatterns = [
         name='password_reset_complete'),
 
     # Admin
-    url(r'^admin/', admin.site.urls),
+    url(r'^adminsansan1931/', admin.site.urls),
 
     # Application
     # The home url '/'. displays landing page
