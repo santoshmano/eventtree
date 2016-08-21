@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import environ
+import os
 
 root = environ.Path(__file__) - 2  # 1 folder back (/a/ - 1 = /)
 env = environ.Env(DEBUG=(bool, False),)  # set default values and casting
