@@ -22,10 +22,10 @@
                   </li>
                   {% if request.user.is_authenticated %}
                   <li>
-                      <a class="page-scroll" href="{% url 'user_bookings' %}">Bookings</a>
+                      <a class="page-scroll" href="{% url 'user_events' %}">My Events</a>
                   </li>
                   <li>
-                      <a class="page-scroll" href="{% url 'user_events' %}">My Events</a>
+                      <a class="page-scroll" href="{% url 'user_bookings' %}">Bookings</a>
                   </li>
                   <li><a href="{% url 'logout' %}">Logout</a></li>
                   {% else %}
@@ -34,9 +34,6 @@
                     </li>
                     <li>
                         <a class="page-scroll" href="#about">How it Works</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#services">Value</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#contact">Start</a>

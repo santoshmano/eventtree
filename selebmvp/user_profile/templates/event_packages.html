@@ -10,9 +10,17 @@
           <h1>
             {{ event.name }}
           </h1>
+
+          <h3>
+            Invite
+          </h3>
+
+          <h3>
+            Packages
+          </h3>
           {% if event.booking.count %}
           <div class="alert alert-success">
-            You have selected Package <strong>{{ event.booking.first.package.name }}</strong> for your event
+            You have selected Package <strong>{{ event.booking.first.package.name }}</strong> for your event. Email or Call us if you want modifications.
           </div>
           {% endif %}
           <div>

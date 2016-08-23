@@ -247,6 +247,8 @@ header .intro-text .intro-lead-in {
   font-size: 22px;
   line-height: 22px;
   margin-bottom: 25px;
+  text-shadow: 3px 3px 4px #333;
+
 }
 header .intro-text .intro-heading {
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -255,6 +257,8 @@ header .intro-text .intro-heading {
   font-size: 50px;
   line-height: 50px;
   margin-bottom: 25px;
+  text-shadow: 3px 3px 4px #333;
+
 }
 @media (min-width: 768px) {
   header .intro-text {
@@ -309,6 +313,7 @@ section h3.section-subheading1 {
     padding: 75px 0;
   }
 }
+
 .service-heading {
   margin: 15px 0;
   text-transform: none;
