@@ -20,10 +20,11 @@
                 {{ booking.summary | safe }}   
             </td>
           </tr>
- 
             <td class="col-xs-12">
+              <center>
+              <p>
               <b>Total:</b> ${{ booking.amount }}
-              <br>
+              </p>
               <form action="{% url 'user_stripe_charge' booking.event.slug booking.slug %}"
                     method="POST">
                 {% csrf_token %}
@@ -39,6 +40,7 @@
                   data-allow-remember-me="false">
                 </script>
               </form>
+                </center>
             </td>
           </tr>
           <tr>
@@ -63,14 +65,12 @@
           </tr>
           <tr>
             <td class="col-xs-12">
+              <center>
               Total : ${{ booking.amount }},  Paid on: {{ booking.payment_date}}
+              </center>
             </td>
+
           </tr> 
-          <tr>
-            <td >
-              {% include "bookings/"|add:booking.filename %}
-            </td>
-          </tr>
         </table>
       {% endfor %}
     </div>
