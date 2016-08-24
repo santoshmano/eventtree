@@ -27643,3 +27643,146 @@ Traceback (most recent call last):
   File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
     (bit, current))  # missing attribute
 django.template.base.VariableDoesNotExist: Failed lookup for key [form] in '[{\'True\': True, \'None\': None, \'False\': False}, {\'messages\': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x113d61f98>, \'sql_queries\': <function debug.<locals>.<lambda> at 0x111ab6a60>, \'DEFAULT_MESSAGE_LEVELS\': {\'ERROR\': 40, \'INFO\': 20, \'SUCCESS\': 25, \'DEBUG\': 10, \'WARNING\': 30}, \'csrf_token\': <SimpleLazyObject: \'zFIOrkXzdR0TFW4sZADwZ5OWYK2FFwrL\'>, \'user\': <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x111a6e160>>, \'request\': <WSGIRequest: GET \'/register/\'>, \'perms\': <django.contrib.auth.context_processors.PermWrapper object at 0x111a6e1d0>, \'debug\': True}, {}, {\'block\': <Block Node: content. Contents: [<TextNode: \'\\n  <main class="auth-body\'>, <django.template.defaulttags.URLNode object at 0x1114e0828>, <TextNode: \'">\\n                    \'>, <django.template.defaulttags.CsrfTokenNode object at 0x110751748>, <TextNode: \'\\n                    <div\'>, <IfNode>, <TextNode: \'">\\n                      \'>, <Variable Node: form.email.value|default_if_none:"">, <TextNode: \'">\\n                      \'>, <IfNode>, <TextNode: \'\\n                    </di\'>, <IfNode>, <TextNode: \'\\n                    </di\'>, <IfNode>, <TextNode: \'\\n                    </di\'>, <django.template.defaulttags.URLNode object at 0x1114e0ba8>, <TextNode: \'">Login Now</a></p>\\n     \'>]>}]'
+[24/Aug/2016 03:01:38] DEBUG [django.template:927]                       Exception while resolving variable 'form' in template 'register.html'.
+Traceback (most recent call last):
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/context.py", line 77, in __getitem__
+    raise KeyError(key)
+KeyError: 'form'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/base.py", line 889, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'form'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'form'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [form] in '[{\'True\': True, \'None\': None, \'False\': False}, {\'messages\': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x110dcd1d0>, \'sql_queries\': <function debug.<locals>.<lambda> at 0x116b4a158>, \'DEFAULT_MESSAGE_LEVELS\': {\'ERROR\': 40, \'INFO\': 20, \'SUCCESS\': 25, \'DEBUG\': 10, \'WARNING\': 30}, \'csrf_token\': <SimpleLazyObject: \'zFIOrkXzdR0TFW4sZADwZ5OWYK2FFwrL\'>, \'user\': <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x1129f3b70>>, \'request\': <WSGIRequest: GET \'/register/\'>, \'perms\': <django.contrib.auth.context_processors.PermWrapper object at 0x1129f3748>, \'debug\': True}, {}, {\'block\': <Block Node: content. Contents: [<TextNode: \'\\n  <main class="auth-body\'>, <django.template.defaulttags.URLNode object at 0x1129f3cc0>, <TextNode: \'">\\n                    \'>, <django.template.defaulttags.CsrfTokenNode object at 0x1129f3ba8>, <TextNode: \'\\n                    <div\'>, <IfNode>, <TextNode: \'">\\n                      \'>, <Variable Node: form.email.value|default_if_none:"">, <TextNode: \'">\\n                      \'>, <IfNode>, <TextNode: \'\\n                    </di\'>, <IfNode>, <TextNode: \'\\n                    </di\'>, <IfNode>, <TextNode: \'\\n                    </di\'>, <django.template.defaulttags.URLNode object at 0x11268d550>, <TextNode: \'">Login Now</a></p>\\n     \'>]>}]'
+[24/Aug/2016 03:01:38] DEBUG [django.template:927]                       Exception while resolving variable 'form' in template 'register.html'.
+Traceback (most recent call last):
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/context.py", line 77, in __getitem__
+    raise KeyError(key)
+KeyError: 'form'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/base.py", line 889, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'form'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'form'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [form] in '[{\'True\': True, \'None\': None, \'False\': False}, {\'messages\': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x110dcd1d0>, \'sql_queries\': <function debug.<locals>.<lambda> at 0x116b4a158>, \'DEFAULT_MESSAGE_LEVELS\': {\'ERROR\': 40, \'INFO\': 20, \'SUCCESS\': 25, \'DEBUG\': 10, \'WARNING\': 30}, \'csrf_token\': <SimpleLazyObject: \'zFIOrkXzdR0TFW4sZADwZ5OWYK2FFwrL\'>, \'user\': <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x1129f3b70>>, \'request\': <WSGIRequest: GET \'/register/\'>, \'perms\': <django.contrib.auth.context_processors.PermWrapper object at 0x1129f3748>, \'debug\': True}, {}, {\'block\': <Block Node: content. Contents: [<TextNode: \'\\n  <main class="auth-body\'>, <django.template.defaulttags.URLNode object at 0x1129f3cc0>, <TextNode: \'">\\n                    \'>, <django.template.defaulttags.CsrfTokenNode object at 0x1129f3ba8>, <TextNode: \'\\n                    <div\'>, <IfNode>, <TextNode: \'">\\n                      \'>, <Variable Node: form.email.value|default_if_none:"">, <TextNode: \'">\\n                      \'>, <IfNode>, <TextNode: \'\\n                    </di\'>, <IfNode>, <TextNode: \'\\n                    </di\'>, <IfNode>, <TextNode: \'\\n                    </di\'>, <django.template.defaulttags.URLNode object at 0x11268d550>, <TextNode: \'">Login Now</a></p>\\n     \'>]>}]'
+[24/Aug/2016 03:01:38] DEBUG [django.template:927]                       Exception while resolving variable 'form' in template 'register.html'.
+Traceback (most recent call last):
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/context.py", line 77, in __getitem__
+    raise KeyError(key)
+KeyError: 'form'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/base.py", line 889, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'form'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'form'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [form] in '[{\'True\': True, \'None\': None, \'False\': False}, {\'messages\': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x110dcd1d0>, \'sql_queries\': <function debug.<locals>.<lambda> at 0x116b4a158>, \'DEFAULT_MESSAGE_LEVELS\': {\'ERROR\': 40, \'INFO\': 20, \'SUCCESS\': 25, \'DEBUG\': 10, \'WARNING\': 30}, \'csrf_token\': <SimpleLazyObject: \'zFIOrkXzdR0TFW4sZADwZ5OWYK2FFwrL\'>, \'user\': <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x1129f3b70>>, \'request\': <WSGIRequest: GET \'/register/\'>, \'perms\': <django.contrib.auth.context_processors.PermWrapper object at 0x1129f3748>, \'debug\': True}, {}, {\'block\': <Block Node: content. Contents: [<TextNode: \'\\n  <main class="auth-body\'>, <django.template.defaulttags.URLNode object at 0x1129f3cc0>, <TextNode: \'">\\n                    \'>, <django.template.defaulttags.CsrfTokenNode object at 0x1129f3ba8>, <TextNode: \'\\n                    <div\'>, <IfNode>, <TextNode: \'">\\n                      \'>, <Variable Node: form.email.value|default_if_none:"">, <TextNode: \'">\\n                      \'>, <IfNode>, <TextNode: \'\\n                    </di\'>, <IfNode>, <TextNode: \'\\n                    </di\'>, <IfNode>, <TextNode: \'\\n                    </di\'>, <django.template.defaulttags.URLNode object at 0x11268d550>, <TextNode: \'">Login Now</a></p>\\n     \'>]>}]'
+[24/Aug/2016 03:01:38] DEBUG [django.template:927]                       Exception while resolving variable 'form' in template 'register.html'.
+Traceback (most recent call last):
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/context.py", line 77, in __getitem__
+    raise KeyError(key)
+KeyError: 'form'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/base.py", line 889, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'form'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'form'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [form] in '[{\'True\': True, \'None\': None, \'False\': False}, {\'messages\': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x110dcd1d0>, \'sql_queries\': <function debug.<locals>.<lambda> at 0x116b4a158>, \'DEFAULT_MESSAGE_LEVELS\': {\'ERROR\': 40, \'INFO\': 20, \'SUCCESS\': 25, \'DEBUG\': 10, \'WARNING\': 30}, \'csrf_token\': <SimpleLazyObject: \'zFIOrkXzdR0TFW4sZADwZ5OWYK2FFwrL\'>, \'user\': <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x1129f3b70>>, \'request\': <WSGIRequest: GET \'/register/\'>, \'perms\': <django.contrib.auth.context_processors.PermWrapper object at 0x1129f3748>, \'debug\': True}, {}, {\'block\': <Block Node: content. Contents: [<TextNode: \'\\n  <main class="auth-body\'>, <django.template.defaulttags.URLNode object at 0x1129f3cc0>, <TextNode: \'">\\n                    \'>, <django.template.defaulttags.CsrfTokenNode object at 0x1129f3ba8>, <TextNode: \'\\n                    <div\'>, <IfNode>, <TextNode: \'">\\n                      \'>, <Variable Node: form.email.value|default_if_none:"">, <TextNode: \'">\\n                      \'>, <IfNode>, <TextNode: \'\\n                    </di\'>, <IfNode>, <TextNode: \'\\n                    </di\'>, <IfNode>, <TextNode: \'\\n                    </di\'>, <django.template.defaulttags.URLNode object at 0x11268d550>, <TextNode: \'">Login Now</a></p>\\n     \'>]>}]'
+[24/Aug/2016 03:01:38] DEBUG [django.template:927]                       Exception while resolving variable 'form' in template 'register.html'.
+Traceback (most recent call last):
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/context.py", line 77, in __getitem__
+    raise KeyError(key)
+KeyError: 'form'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/base.py", line 889, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'form'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'form'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/santosh/.virtualenvs/selebmvp/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [form] in '[{\'True\': True, \'None\': None, \'False\': False}, {\'messages\': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x110dcd1d0>, \'sql_queries\': <function debug.<locals>.<lambda> at 0x116b4a158>, \'DEFAULT_MESSAGE_LEVELS\': {\'ERROR\': 40, \'INFO\': 20, \'SUCCESS\': 25, \'DEBUG\': 10, \'WARNING\': 30}, \'csrf_token\': <SimpleLazyObject: \'zFIOrkXzdR0TFW4sZADwZ5OWYK2FFwrL\'>, \'user\': <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x1129f3b70>>, \'request\': <WSGIRequest: GET \'/register/\'>, \'perms\': <django.contrib.auth.context_processors.PermWrapper object at 0x1129f3748>, \'debug\': True}, {}, {\'block\': <Block Node: content. Contents: [<TextNode: \'\\n  <main class="auth-body\'>, <django.template.defaulttags.URLNode object at 0x1129f3cc0>, <TextNode: \'">\\n                    \'>, <django.template.defaulttags.CsrfTokenNode object at 0x1129f3ba8>, <TextNode: \'\\n                    <div\'>, <IfNode>, <TextNode: \'">\\n                      \'>, <Variable Node: form.email.value|default_if_none:"">, <TextNode: \'">\\n                      \'>, <IfNode>, <TextNode: \'\\n                    </di\'>, <IfNode>, <TextNode: \'\\n                    </di\'>, <IfNode>, <TextNode: \'\\n                    </di\'>, <django.template.defaulttags.URLNode object at 0x11268d550>, <TextNode: \'">Login Now</a></p>\\n     \'>]>}]'
+[24/Aug/2016 03:01:47] DEBUG [django.db.backends:89]                       (0.036) SELECT (1) AS "a" FROM "user_profile_selebuser" WHERE "user_profile_selebuser"."email" = 's.antoshmano@gmail.com' LIMIT 1; args=('s.antoshmano@gmail.com',)
+[24/Aug/2016 03:01:47] DEBUG [django.db.backends:89]                       (0.000) BEGIN; args=()
+[24/Aug/2016 03:01:47] DEBUG [django.db.backends:89]                       (0.011) INSERT INTO "user_profile_selebuser" ("password", "last_login", "is_superuser", "email", "first_name", "last_name", "is_admin", "is_active", "date_joined") VALUES ('pbkdf2_sha256$24000$yKIHLeHsF3aX$1YEU+5u/MMo0qQ6Gq6wKSANFAkun6M12k26RvhXEYMQ=', NULL, 0, 's.antoshmano@gmail.com', '', '', 0, 1, '2016-08-24 03:01:46.946772'); args=['pbkdf2_sha256$24000$yKIHLeHsF3aX$1YEU+5u/MMo0qQ6Gq6wKSANFAkun6M12k26RvhXEYMQ=', None, False, 's.antoshmano@gmail.com', '', '', False, True, '2016-08-24 03:01:46.946772']
