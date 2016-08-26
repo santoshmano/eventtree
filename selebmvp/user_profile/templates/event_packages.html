@@ -6,39 +6,110 @@
 
 {% block content %}
   <main class="user-body">
-      <div class="container">
-          <h1>
-            {{ event.name }}
-          </h1>
+    <div class="container">
+      <h1>
+        {{ event.name }}
+      </h1>
 
-          <h3>
-            Invite
-          </h3>
+      <!--Start - For later , do this if a If Package is Selected/payment is made/booking is confirmed etc. -->
 
-          <h3>
-            Packages
-          </h3>
-          {% if event.booking.count %}
-          <div class="alert alert-success">
-            You have selected Package <strong>{{ event.booking.first.package.name }}</strong> for your event. Kindly email/call us if you want any changes.
+        <div class="container">
+          <h2> Invite </h2>
+
+          <div class="table-responsive"> 
+          <table class="table table-hover table-condensed ">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Attending?</th>
+                <th>#Adults</th>
+                <th>#Children</th>
+                <th>Email</th>
+                <th>Message</th>
+              </tr>
+            </thead>
+
+            <!-- Examples, to be put in a for loop accessing the invite table/db-->
+            <!-- For loop also needs to calculate sum of yes/maybe/no adults and children to display stats below js/jq -->
+            <tbody>
+              <tr>
+                <td>Sandeep</td>
+                <td>Yes</td>
+                <td>2</td>
+                <td>11</td>
+                <td>sandeep@eventtree.com</td>
+                <td>Looking forward to meeting you<td>
+              </tr>
+
+              <tr>
+                <td>Santosh</td>
+                <td>Yes</td>
+                <td>2</td>
+                <td>11</td>
+                <td>santosheventtree.com</td>
+                <td>Looking forward to meeeting you<td>
+              </tr>
+
+              <tr>
+                <td>Trupthi</td>
+                <td>Maybe</td>
+                <td>2</td>
+                <td>11</td>
+                <td>blah@eventtree.com</td>
+                <td>I will confirm at a later date, May drop in<td>
+              </tr>
+            </tbody>
+          </table>
           </div>
-          {% endif %}
+
           <div>
-            <ul class="nav nav-tabs" role="tablist">
-              {% for package in event.packages.all %}
-                <li role="presentation" class="{% if forloop.first %}active{% endif %}">
-                  <a href="#{{ package.name}}" aria-controls="{{ package.name}}" role="tab" data-toggle="tab">{{ package.name}}</a>
-                </li>
-              {% endfor %}
-            </ul>
-            <div class="tab-content">
-              {% for package in event.packages.all %}
-                <div role="tabpanel" class="tab-pane {% if forloop.first %}active{% endif %}" id="{{ package.name}}">
-                  {% include 'packages/'|add:package.filename %}
-                </div>
-              {% endfor %}
-            </div>
+            19 adults and 20 children, are coming. 3 adults and 4 children, may come. 4 invitees responded as not coming<br/>
           </div>
+
+          <br> 
+
+          <div>
+
+            <!-- This should actually be once the payment is made for a certain package, but can we enable it now when the booking is made to Inprogress from Created -->
+            {% if event.booking.count %}
+              Click on this link to <a href="">send/re-send the invite email </a>to your registered email account.<br/>
+            {% else %}
+              Kindly confirm/book your event package to enable the Invitation.
+            {% endif %}
+          </div>
+          <!-- End For later , do this if a If Package is Selected/payment is made/booking is confirmed etc. -->
+        </div>
+
+      <div class="container">
+        <h2>
+          Packages
+        </h2>
+
+        <div>
+          {% if event.booking.count %}
+            You have selected Package <strong>{{ event.booking.first.package.name }}</strong> for your event. Kindly email/call us if you want any changes.
+          {% else %}
+            Please look at your different options and Confirm a certain packages. Kindly email/call us if you want any changes to a package.
+          {% endif %}
+        </div>
+        <br/>
+        <div>
+          <ul class="nav nav-tabs" role="tablist">
+            {% for package in event.packages.all %}
+              <li role="presentation" class="{% if forloop.first %}active{% endif %}">
+                <a href="#{{ package.name}}" aria-controls="{{ package.name}}" role="tab" data-toggle="tab">{{ package.name}}</a>
+              </li>
+            {% endfor %}
+          </ul>
+          <div class="tab-content">
+            {% for package in event.packages.all %}
+              <div role="tabpanel" class="tab-pane {% if forloop.first %}active{% endif %}" id="{{ package.name}}">
+                {% include 'packages/'|add:package.filename %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
       </div>
+    </div>
   </main>
 {% endblock %}
