@@ -11,10 +11,15 @@
         {{ event.name }}
       </h1>
 
-      <!--Start - For later , do this if a If Package is Selected/payment is made/booking is confirmed etc. -->
+      {% comment %}Start - For later , do this if a If Package is
+        Selected/payment is
+        made/booking is confirmed etc.
+        {% endcomment %}
 
         <div class="container">
           <h2> Invite </h2>
+
+
 
           <div class="table-responsive"> 
           <table class="table table-hover table-condensed ">
@@ -29,55 +34,56 @@
               </tr>
             </thead>
 
-            <!-- Examples, to be put in a for loop accessing the invite table/db-->
-            <!-- For loop also needs to calculate sum of yes/maybe/no adults and children to display stats below js/jq -->
             <tbody>
+            {% for invitee in event.invite.invites.all %}
               <tr>
-                <td>Sandeep</td>
-                <td>Yes</td>
-                <td>2</td>
-                <td>11</td>
-                <td>sandeep@eventtree.com</td>
-                <td>Looking forward to meeting you<td>
+                <td>{{ invitee.full_name }}</td>
+                <td>{{ invitee.attending }}</td>
+                <td>{{ invitee.num_of_adults }}</td>
+                <td>{{ invitee.num_of_children }}</td>
+                <td>{{ invitee.email }}</td>
+                <td>{{ invitee.message }}</td>
               </tr>
-
-              <tr>
-                <td>Santosh</td>
-                <td>Yes</td>
-                <td>2</td>
-                <td>11</td>
-                <td>santosheventtree.com</td>
-                <td>Looking forward to meeeting you<td>
-              </tr>
-
-              <tr>
-                <td>Trupthi</td>
-                <td>Maybe</td>
-                <td>2</td>
-                <td>11</td>
-                <td>blah@eventtree.com</td>
-                <td>I will confirm at a later date, May drop in<td>
-              </tr>
+            {% endfor %}
             </tbody>
           </table>
+          {% if not event.invite.invites.count %}
+            <div class="alert alert-info">
+                No RSVP's received so far
+            </div>
+          {% endif %}
           </div>
 
           <div>
-            19 adults and 20 children, are coming. 3 adults and 4 children, may come. 4 invitees responded as not coming<br/>
+            <strong>TODO: autocalculate </strong>19 adults and 20 children, are
+              coming. 3
+              adults
+                and 4
+                children, may come. 4 invitees responded as not coming<br/>
           </div>
-
           <br> 
 
           <div>
 
-            <!-- This should actually be once the payment is made for a certain package, but can we enable it now when the booking is made to Inprogress from Created -->
-            {% if event.booking.count %}
-              Click on this link to <a href="">send/re-send the invite email </a>to your registered email account.<br/>
-            {% else %}
-              Kindly confirm/book your event package to enable the Invitation.
-            {% endif %}
+          {% if not event.invite %}
+              {% if event.can_invite %}
+                Click on this link to
+                <a href="{% url 'send_event_invite' event.slug %}"> send
+                  the invite email </a>to your
+                  registered email account.<br/>
+              {% else %}
+                Kindly select a package {{ event.booking.status }}.
+              {% endif %}
+          {% comment %} Change the ability to invite only after booking is confirmed or is in progress {% endcomment %}
+          {% else %}
+                Click on this link to <a href="{% url 'send_event_invite' event.slug %}">re-send the invite email </a>to your registered email account.<br/>
+          {% endif %}
           </div>
-          <!-- End For later , do this if a If Package is Selected/payment is made/booking is confirmed etc. -->
+          {% comment %}
+          End For later , do this if a If Package is
+            Selected/payment is
+            made/booking is confirmed etc.
+          {% endcomment %}
         </div>
 
       <div class="container">

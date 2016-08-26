@@ -137,6 +137,26 @@ class AppMailer:
                                               self.context)
         return self.deliver()
 
+    def send_invite_email_to_event_owner(self, event, user):
+        self._subject = 'Your event Invitation'
+        self._to = user.email
+
+        email_template_file_name = 'emails/invite_birthday_email_' + \
+            "_".join(event.slug.split('-'))
+
+        self.context.update({
+            'event': event,
+            'user': user
+        })
+
+        self._html_message = render_to_string(
+            email_template_file_name + '.html',
+            self.context)
+        self._text_message = render_to_string(
+            email_template_file_name + '.txt',
+            self.context)
+        return self.deliver()
+
     def deliver(self):
         """All the send_*_email_* methods will call this method
 

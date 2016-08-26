@@ -48,9 +48,13 @@ class Event(models.Model):
     def __str__(self):
         return self.slug
 
+    def can_invite(self):
+        return [booking for booking in self.booking.all() if (booking.status ==
+                "CP" or booking.status == "IP")]
+
 
 class EventPackage(models.Model):
-    """List of packages that is send to the client to select.
+    """List of packages that is sent to the client to select.
 
     A event can have more than 1 packages to choose from. Eact package will
     have a package details file designed manually at first, look at filename

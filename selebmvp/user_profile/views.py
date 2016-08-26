@@ -16,6 +16,8 @@ from selebmvp.user_profile.middleware import EventOwnerMiddleware
 from selebmvp.utils import AppMailer
 from selebmvp.user_packages.models import (Event, EventPackage, Booking,
                                            Payments)
+from selebmvp.event_invites.models import Invite
+from selebmvp.event_invites.forms import RSVPForm
 
 # Stripe API key
 stripe.api_key = settings.STRIPE_SEC_KEY
@@ -60,7 +62,7 @@ def bookings(request):
 
 # TODO Combine this and event view to genric views
 @login_required
-def events(request):
+def show_events(request):
     """Renders the user events page
 
     Args:
@@ -78,7 +80,7 @@ def events(request):
 
 @login_required
 @event_owner
-def event(request, slug):
+def show_event(request, slug):
     """Renders the user individual page
 
     Args:
@@ -124,7 +126,7 @@ def select_event(request, slug, package):
                       event')
 
     # TODO Check if the package belongs to the event (security check)
-    return redirect(events)
+    return redirect(show_events)
 
 @login_required
 @event_owner
@@ -200,6 +202,77 @@ def charge(request, slug, b_id):
 
     return redirect('user_bookings')
 
+@login_required
+@event_owner
+def send_invite(request, slug):
+    """The view for sending an invite to the event to the event owner
+
+        Args:
+            slug: The event slug
+
+        Returns:
+            object: HttpResponseRedirect
+        """
+
+    event = get_object_or_404(Event, slug=slug)
+
+    if event.can_invite():
+        # Check if the given event already has a invite
+        if not Invite.objects.filter(event=event).count():
+            Invite.objects.create(event=event)
+
+        AppMailer(request).send_invite_email_to_event_owner(event,
+                                                            request.user)
+
+        messages.success(request,
+                     'Your invite email has been successfully sent')
+    else:
+        messages.error(request,
+                       'Sorry, you cannot send an invite at this stage')
+
+    # TODO Check if the package belongs to the event (security check)
+    return redirect(show_event, slug=event.slug)
+
+
+class EventRSVP(View):
+    """Handles the get and post for event rsvp
+    """
+    def get(self, request, uuid):
+        """Show the initial SelebUserCreationForm
+
+        Args:
+            request: HttpRequest
+
+        Returns:
+            object: HttpResponse
+        """
+        invite = get_object_or_404(Invite, uuid=uuid)
+        context = {
+            'invite': invite
+        }
+        return render(request, 'rsvp_form.html', context)
+
+    def post(self, request, uuid):
+        """Handles the POST SelebUserCreationForm.
+
+        Args:
+            request: HttpRequest
+
+        Returns:
+            object: HttpResponse
+        """
+        invite = get_object_or_404(Invite, uuid=uuid)
+        form = RSVPForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Thank you for RSVP')
+            return redirect('/')
+
+        context = {
+            'form': form,
+            'invite': invite
+        }
+        return render(request, 'rsvp_form.html', context)
 
 # TODO send confirm email link in the registration welcome email
 class Register(View):

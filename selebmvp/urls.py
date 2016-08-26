@@ -16,8 +16,9 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from selebmvp.views import home, contact, send_test_email
-from selebmvp.user_profile.views import (Register, bookings, events,
-                                         event, select_event, charge,)
+from selebmvp.user_profile.views import (Register, bookings, show_events,
+                                         show_event, select_event, charge,
+                                         send_invite, EventRSVP)
 from django.contrib.auth import views
 from django.contrib.auth.decorators import user_passes_test
 
@@ -68,10 +69,14 @@ urlpatterns = [
     #url(r'^sendtestemail/$', send_test_email, name='send_test_email'),
 
     url(r'^user/bookings/$', bookings, name='user_bookings'),
-    url(r'^user/events/$', events, name='user_events'),
-    url(r'^user/events/(?P<slug>[\w-]+)/$', event, name='user_event'),
+    url(r'^user/events/$', show_events, name='user_events'),
+    url(r'^user/events/(?P<slug>[\w-]+)/$', show_event, name='user_event'),
     url(r'^user/events/select/(?P<slug>[\w-]+)/(?P<package>[-\w]+)/$',
         select_event, name='user_select_event'),
     url(r'^user/stripe/charge/(?P<slug>[\w-]+)/(?P<b_id>[-\w]+)/$',
         charge, name='user_stripe_charge'),
+    url(r'^user/events/invite/(?P<slug>[\w-]+)/$',
+        send_invite, name='send_event_invite'),
+    url(r'^events/rsvp/(?P<uuid>[\w-]+)/$',
+        EventRSVP.as_view(), name='request_event_rsvp')
 ]
