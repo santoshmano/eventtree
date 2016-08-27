@@ -3,7 +3,7 @@
       {% for message in messages %}
         var toast_message = '{{ message }}';
         var toast_type = '{{ message.tags }}';
-        var toast_position = 'toast-bottom-full-width';
+        var toast_position = 'toast-top-full-width';
         var toast_timeout = '5000';
         show_toast(toast_message, toast_timeout, toast_position, toast_type);
       {% endfor %}

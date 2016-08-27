@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 import datetime
 from django.conf import settings
+from django.db.models import Sum
 
 import stripe
 
@@ -93,6 +94,29 @@ def show_event(request, slug):
     context = {
         'event': event
     }
+    try:
+        if event.invite:
+            num_attending =\
+                event.invite.invites.filter(attending="YES").aggregate(
+                    Sum('num_of_adults'), Sum('num_of_children'))
+
+            num_maybe =\
+                event.invite.invites.filter(attending="MAYBE").aggregate(
+                    Sum('num_of_adults'), Sum('num_of_children'))
+
+            num_not_attending =\
+                event.invite.invites.filter(attending="NO").count()
+                
+            context.update({
+                'num_adults_attending': num_attending['num_of_adults__sum'],
+                'num_children_attending': num_attending['num_of_children__sum'],
+                'num_adults_maybe': num_maybe['num_of_adults__sum'],
+                'num_children_maybe': num_maybe['num_of_children__sum'],
+                'num_not_attending': num_not_attending
+            })
+    except:
+        pass
+
     return render(request, "event_packages.html", context)
 
 

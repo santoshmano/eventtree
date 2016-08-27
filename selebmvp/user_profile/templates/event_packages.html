@@ -20,8 +20,8 @@
           <h2> Invite </h2>
 
 
-
-          <div class="table-responsive"> 
+          {% if event.invite %}
+          <div class="table-responsive">
           <table class="table table-hover table-condensed ">
             <thead>
               <tr>
@@ -38,9 +38,9 @@
             {% for invitee in event.invite.invites.all %}
               <tr>
                 <td>{{ invitee.full_name }}</td>
-                <td>{{ invitee.attending }}</td>
-                <td>{{ invitee.num_of_adults }}</td>
-                <td>{{ invitee.num_of_children }}</td>
+                <td>{{ invitee.attending|lower|capfirst }}</td>
+                <td>{{ invitee.num_of_adults|default_if_none:"-"}}</td>
+                <td>{{ invitee.num_of_children|default_if_none:"-" }}</td>
                 <td>{{ invitee.email }}</td>
                 <td>{{ invitee.message }}</td>
               </tr>
@@ -53,16 +53,16 @@
             </div>
           {% endif %}
           </div>
-
           <div>
-            <strong>TODO: autocalculate </strong>19 adults and 20 children, are
-              coming. 3
+            {{ num_adults_attending }} adults
+            and {{ num_children_attending }}  children are
+              coming. {{ num_adults_maybe }}
               adults
-                and 4
-                children, may come. 4 invitees responded as not coming<br/>
+                and {{ num_children_maybe }}
+                children, may come. {{ num_not_attending }} invitees responded as not coming<br/>
           </div>
-          <br> 
-
+          <br>
+          {% endif %}
           <div>
 
           {% if not event.invite %}

@@ -20,6 +20,9 @@ class Invite(models.Model):
                                  on_delete=models.CASCADE,
                                  related_name="invite")
 
+    def __str__(self):
+        return str(self.event)
+
 
 class EventInvite(models.Model):
     """Invite List for the selected item.
