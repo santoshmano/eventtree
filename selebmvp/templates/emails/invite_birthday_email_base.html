@@ -765,13 +765,34 @@
 
 																		{% endblock %}
                        							<!-- Content -->
-	<button class="button" style="vertical-align:middle">
-	<span>
+                       							<center>
+	<button class="button"   
+	style="display: inline-block;
+  border-radius: 4px;
+  background-color: #2db16c;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 18px;
+  font-color: #FFFFFF;
+  padding: 15px;
+  width: 215px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  vertical-align:middle">
+	<span
+
+	 style="cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;">
 		<a href="http://{{ domain }}
 {% url 'request_event_rsvp' event.invite.uuid %}">RSVP
             Now</a>
 	</span>
 	</button>
+	</center>
 						                        </td>
                     							</tr>
                 									</tbody>
