@@ -139,9 +139,9 @@ function show_toast(toast_message, toast_timeout, toast_position, toast_type) {
 	toastr.options = {
 			"closeButton": true,
 			"newestOnTop": true,
-			"progressBar": true,
 			"positionClass": toast_position,
 			"preventDuplicates": false,
+			"progressBar": false,
 			"onclick": null,
 			"showDuration": "300",
 			"hideDuration": "1000",

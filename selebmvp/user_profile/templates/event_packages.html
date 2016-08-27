@@ -16,13 +16,12 @@
         made/booking is confirmed etc.
         {% endcomment %}
 
-        <div class="container">
           <h2> Invite </h2>
 
 
           {% if event.invite %}
           <div class="table-responsive">
-          <table class="table table-hover table-condensed ">
+          <table class="table table-hover table-condensed table-bordered ">
             <thead>
               <tr>
                 <th>Name</th>
@@ -47,39 +46,35 @@
             {% endfor %}
             </tbody>
           </table>
-          {% if not event.invite.invites.count %}
-            <div class="alert alert-info">
-                No RSVP's received so far
-            </div>
-          {% endif %}
           </div>
-          <div>
-            {{ num_adults_attending }} adults
-            and {{ num_children_attending }}  children are
-              coming. {{ num_adults_maybe }}
-              adults
-                and {{ num_children_maybe }}
-                children, may come. {{ num_not_attending }} invitees responded as not coming<br/>
-          </div>
-          <br>
-          {% endif %}
-          <div>
 
+          <div>
+          {% if not event.invite.invites.count %}
+                No RSVP's received so far
+          {% else %}
+            {{ num_adults_attending|default_if_none:"0"}} adults, {{ num_children_attending|default_if_none:"0"}} children, responded Yes.<br>
+            {{ num_adults_maybe|default_if_none:"0"}} adults, {{ num_children_maybe|default_if_none:"0"}} children, responded Maybe. <br>
+            {{ num_not_attending }} responded No.<br/>
+          {% endif %}
+          </div>
+
+          <br>
+
+          {% endif %}
+          <div>
           {% if not event.invite %}
               {% if event.can_invite %}
-                Click on this link to
-                <a href="{% url 'send_event_invite' event.slug %}"> send
-                  the invite email </a>to your
-                  registered email account.<br/>
+                Click on this <a href="{% url 'send_event_invite' event.slug %}">link to send</a>
+                  the invite email to your registered email account.<br/>
               {% elif event.booking.count %}
                   Waiting for admin to approve your package, your invites
                   will appear here soon
                {% else %}
-                  Kindly select a package {{ event.booking.status }}.
+                  You invitation will appear once your Booking is confirmed, kindly select a package {{ event.booking.status }}.
               {% endif %}
           {% comment %} Change the ability to invite only after booking is confirmed or is in progress {% endcomment %}
           {% else %}
-                Click on this link to <a href="{% url 'send_event_invite' event.slug %}">re-send the invite email </a>to your registered email account.<br/>
+                Click on this <a href="{% url 'send_event_invite' event.slug %}">link to re-send</a> the invite email to your registered email account.<br/>
           {% endif %}
           </div>
           {% comment %}
@@ -117,7 +112,6 @@
               </div>
             {% endfor %}
           </div>
-        </div>
       </div>
     </div>
   </main>

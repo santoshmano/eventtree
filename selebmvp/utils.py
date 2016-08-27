@@ -138,7 +138,7 @@ class AppMailer:
         return self.deliver()
 
     def send_invite_email_to_event_owner(self, event, user):
-        self._subject = 'Your event Invitation'
+        self._subject = event.name+ ' Invitation'
         self._to = user.email
 
         email_template_file_name = 'emails/invite_birthday_email_' + \

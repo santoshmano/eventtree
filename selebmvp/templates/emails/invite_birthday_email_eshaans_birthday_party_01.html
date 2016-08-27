@@ -1,8 +1,8 @@
 {% extends "emails/invite_birthday_email_base.html" %}
-
+{% load static %}
 {% block title_img %}
 
-	<img align="center" alt="" src="https://gallery.mailchimp.com/b3139e18ae3dac0e609efecec/images/ae46063e-ff9d-42d0-b7e8-7971ddfa1ea8.jpg" width="564" style="max-width:600px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage">
+	<img align="center" alt="" src="http://{{ domain }}{% static 'img/email/birthday_invite_email_title_img.jpg' %}" width="564" style="max-width:600px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage">
 
 {% endblock %}
 
@@ -26,12 +26,10 @@
             Now</a>
 	</span>
 	</button>
-</center> <br>
-
+</center>
 {% endblock %}
 
 {% block col1 %}
-
   Host - Sushanth /&nbsp;<br>
 	(408) 242-8674<br>
 	<strong id="docs-internal-guid-724ed0ad-9ff6-6387-c087-4131d16fa1d9"><a href="mailto:sushanth_rai@yahoo.com">sushanth_rai@yahoo.com</a></strong><br>
@@ -55,6 +53,6 @@
 
 {% block map %}
 
-	<img align="center" alt="" src="https://gallery.mailchimp.com/b3139e18ae3dac0e609efecec/images/05c21b14-365e-424b-84b7-fd3414d958d0.png" width="564" style="max-width:725px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage">
+	<img align="center" alt="" src="http://{{ domain }}{% static 'img/email/location_email_emma_prusch_park.png' %}" width="564" style="max-width:725px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage">
 
 {% endblock %}

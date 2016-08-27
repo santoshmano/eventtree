@@ -23,10 +23,10 @@ class EventInviteAdmin(admin.ModelAdmin):
     fieldsets = [
         ("Event Invitees", {"fields": ["invite", "full_name", "email",
                                        "attending", "num_of_adults",
-                                       "num_of_children"]}),
+                                       "num_of_children", "newsletter"]}),
     ]
 
     def event_name(self, obj):
         return obj.invite
 
-    list_display = ("event_name", "full_name", "email", "attending",)
+    list_display = ("event_name", "full_name", "email", "attending", "newsletter",)

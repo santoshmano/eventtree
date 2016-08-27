@@ -49,8 +49,7 @@ class Event(models.Model):
         return self.slug
 
     def can_invite(self):
-        return [booking for booking in self.booking.all() if (booking.status ==
-                "CP" or booking.status == "IP")]
+        return self.booking 
 
 
 class EventPackage(models.Model):
