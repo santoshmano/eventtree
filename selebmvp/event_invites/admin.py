@@ -5,7 +5,7 @@ from selebmvp.event_invites.models import Invite, EventInvite
 @admin.register(Invite)
 class InviteAdmin(admin.ModelAdmin):
     fieldsets = [
-        ("Invites", {"fields": ["event", "uuid"]}),
+        ("Invites", {"fields": ["event"]}),
     ]
 
     def event_name(self, obj):

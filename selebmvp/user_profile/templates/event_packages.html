@@ -71,8 +71,11 @@
                 <a href="{% url 'send_event_invite' event.slug %}"> send
                   the invite email </a>to your
                   registered email account.<br/>
-              {% else %}
-                Kindly select a package {{ event.booking.status }}.
+              {% elif event.booking.count %}
+                  Waiting for admin to approve your package, your invites
+                  will appear here soon
+               {% else %}
+                  Kindly select a package {{ event.booking.status }}.
               {% endif %}
           {% comment %} Change the ability to invite only after booking is confirmed or is in progress {% endcomment %}
           {% else %}
