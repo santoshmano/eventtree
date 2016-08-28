@@ -16,9 +16,11 @@
 	<p style="text-align: center;"><br>
 		We are celebrating Eshaan's Third birthday. We would love for you and your family to join us :). There are a lot of fun activities planned.<br>
 		<br>
-		Looking forward to meeting you.&nbsp;Kindly RSVP at the earliest.
-	</p>
+		Looking forward to meeting you.&nbsp;Kindly RSVP at the earliest.</p> 
     <center>
+		<a href="http://{{ domain }}
+{% url 'request_event_rsvp' event.invite.uuid %}"> <img align="center" alt="" src="http://{{ domain }}{% static 'img/email/rsvp_button.png' %}" width="100" style="max-width:725px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage">
+		</a>
 
 </center>
 {% endblock %}

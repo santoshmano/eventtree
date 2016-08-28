@@ -52,8 +52,8 @@
           {% if not event.invite.invites.count %}
                 No RSVP's received so far
           {% else %}
-            {{ num_adults_attending|default_if_none:"0"}} adults, {{ num_children_attending|default_if_none:"0"}} children, responded Yes.<br>
-            {{ num_adults_maybe|default_if_none:"0"}} adults, {{ num_children_maybe|default_if_none:"0"}} children, responded Maybe. <br>
+            {{ num_adults_attending|default_if_none:"0"}} adults, {{ num_children_attending|default_if_none:"0"}} children, responded Yes.
+            {{ num_adults_maybe|default_if_none:"0"}} adults, {{ num_children_maybe|default_if_none:"0"}} children, responded Maybe. 
             {{ num_not_attending }} responded No.<br/>
           {% endif %}
           </div>
