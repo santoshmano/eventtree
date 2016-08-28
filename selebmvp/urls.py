@@ -25,7 +25,7 @@ from django.contrib.auth.decorators import user_passes_test
 # login_forbidden = user_passes_test(lambda u: u.is_anonymous(),
 # lazy(reverse, str)('my-url-name'))
 login_forbidden = user_passes_test(
-                    lambda u: u.is_anonymous(), '/user/bookings/')
+        lambda u: u.is_anonymous(), '/user/bookings/')
 
 urlpatterns = [
 
@@ -35,9 +35,11 @@ urlpatterns = [
     url(r'^logout/$', views.logout, {'next_page': '/'}, name='logout'),
     url(r'^register/$', Register.as_view(), name='register'),
     url(r'^password_reset/$', views.password_reset,
-        {'template_name': 'password_reset.html',
-         'email_template_name': 'emails/password_reset_request.txt',
-         'html_email_template_name': 'emails/password_reset_request.html'},
+        {
+            'template_name': 'password_reset.html',
+            'email_template_name': 'emails/password_reset_request.txt',
+            'html_email_template_name': 'emails/password_reset_request.html'
+        },
         name='password_reset'),
     url(r'^password_reset/done/$', views.password_reset_done,
         {'template_name': 'password_reset_done.html'},
@@ -66,7 +68,7 @@ urlpatterns = [
     # PRODUCTION_MODE_CHECK #
     # comment the below this once email template testing is done
     # should be commendted in production mode/before going live
-    #url(r'^sendtestemail/$', send_test_email, name='send_test_email'),
+    # url(r'^sendtestemail/$', send_test_email, name='send_test_email'),
 
     url(r'^user/bookings/$', bookings, name='user_bookings'),
     url(r'^user/events/$', show_events, name='user_events'),

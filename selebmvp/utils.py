@@ -15,6 +15,7 @@ class AppMailer:
     The app is set to use Amazon AWS SES as the email backend. Check app_mailer
     app for more details about the custom email backend
     """
+
     def __init__(self, request):
         self._from = settings.APP_EMAIL_RETURN_PATH
         self._reply_to = settings.APP_EMAIL_RETURN_PATH
@@ -46,11 +47,11 @@ class AppMailer:
         })
 
         self._html_message = render_to_string(
-                                              'emails/enquiry_admin.html',
-                                              self.context)
+                'emails/enquiry_admin.html',
+                self.context)
         self._text_message = render_to_string(
-                                              'emails/enquiry_admin.txt',
-                                              self.context)
+                'emails/enquiry_admin.txt',
+                self.context)
         return self.deliver()
 
     def send_registration_email_to_user(self, email):
@@ -68,11 +69,11 @@ class AppMailer:
         })
 
         self._html_message = render_to_string(
-                                              'emails/registration_user.html',
-                                              self.context)
+                'emails/registration_user.html',
+                self.context)
         self._text_message = render_to_string(
-                                              'emails/registration_user.txt',
-                                              self.context)
+                'emails/registration_user.txt',
+                self.context)
         return self.deliver()
 
     def send_registration_email_to_admin(self, email):
@@ -89,11 +90,11 @@ class AppMailer:
         })
 
         self._html_message = render_to_string(
-                                              'emails/registration_admin.html',
-                                              self.context)
+                'emails/registration_admin.html',
+                self.context)
         self._text_message = render_to_string(
-                                              'emails/registration_admin.txt',
-                                              self.context)
+                'emails/registration_admin.txt',
+                self.context)
         return self.deliver()
 
     def send_booking_email_to_admin(self, booking, user):
@@ -113,11 +114,11 @@ class AppMailer:
         })
 
         self._html_message = render_to_string(
-                                              'emails/booking.html',
-                                              self.context)
+                'emails/booking.html',
+                self.context)
         self._text_message = render_to_string(
-                                              'emails/booking.txt',
-                                              self.context)
+                'emails/booking.txt',
+                self.context)
         return self.deliver()
 
     def send_test_email(self):
@@ -130,19 +131,19 @@ class AppMailer:
         })
 
         self._html_message = render_to_string(
-                                              'emails/test_email.html',
-                                              self.context)
+                'emails/test_email.html',
+                self.context)
         self._text_message = render_to_string(
-                                              'emails/test_email.txt',
-                                              self.context)
+                'emails/test_email.txt',
+                self.context)
         return self.deliver()
 
     def send_invite_email_to_event_owner(self, event, user):
-        self._subject = event.name+ ' Invitation'
+        self._subject = event.name + ' Invitation'
         self._to = user.email
 
         email_template_file_name = 'emails/invite_birthday_email_' + \
-            "_".join(event.slug.split('-'))
+                                   "_".join(event.slug.split('-'))
 
         self.context.update({
             'event': event,
@@ -150,11 +151,11 @@ class AppMailer:
         })
 
         self._html_message = render_to_string(
-            email_template_file_name + '.html',
-            self.context)
+                email_template_file_name + '.html',
+                self.context)
         self._text_message = render_to_string(
-            email_template_file_name + '.txt',
-            self.context)
+                email_template_file_name + '.txt',
+                self.context)
         return self.deliver()
 
     def deliver(self):
@@ -169,7 +170,7 @@ class AppMailer:
                 self._from,
                 [self._to],
                 reply_to=[self._reply_to]
-              )
+        )
 
         msg.attach_alternative(self._html_message, "text/html")
         return msg.send()

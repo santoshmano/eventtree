@@ -34,7 +34,7 @@ class EventInvite(models.Model):
         invite: The invite to which the invites belong
         full_name: Full name of the attendee
         email: Email of the attendee
-        attending: Enumurated value of Yes, Maybe and No
+        attending: Enumerated value of Yes, Maybe and No
         num_of_adults: Number of adults attending
         num_of_children: Number of children attending
         message: The message from the attendee to the invitee
@@ -48,15 +48,15 @@ class EventInvite(models.Model):
     )
 
     invite = models.ForeignKey(Invite, blank=False, null=False,
-                              on_delete=models.CASCADE,
-                              related_name="invites")
+                               on_delete=models.CASCADE,
+                               related_name="invites")
     full_name = models.CharField(max_length=150, blank=False, null=False)
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
     )
     attending = models.CharField(max_length=5, choices=ATTEND_STATUS,
-                              default="YS")
+                                 default="YS")
     num_of_adults = models.IntegerField(blank=True, null=True, default=0)
     num_of_children = models.IntegerField(blank=True, null=True, default=0)
     message = models.TextField("Message", blank=True, null=True)

@@ -13,14 +13,13 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import environ
 
 root = environ.Path(__file__) - 2  # 1 folder back (/a/ - 1 = /)
-env = environ.Env(DEBUG=(bool, False),)  # set default values and casting
+env = environ.Env(DEBUG=(bool, False), )  # set default values and casting
 environ.Env.read_env()  # reading .env file
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = root
 
 SITE_URL = env('SITE_URL', default='http://localhost:8000/')
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -32,7 +31,6 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG', default=False)
 
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
-
 
 # Application definition
 
@@ -81,7 +79,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'selebmvp.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 DB_BACKEND = env('DB_BACKEND')
@@ -104,7 +101,6 @@ elif DB_BACKEND == 'POSTGRES':
             'PORT': env('DB_PORT', default='5432'),
         }
     }
-
 
 LOGGING = {
     'version': 1,
@@ -140,7 +136,6 @@ LOGGING = {
     }
 }
 
-
 EMAIL_BACKEND = 'selebmvp.app_mailer.AWSSESBackend'
 env('SITE_URL', default='http://localhost:8000/')
 # Password validation
@@ -148,19 +143,22 @@ env('SITE_URL', default='http://localhost:8000/')
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation'
+                '.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation'
+                '.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation'
+                '.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation'
+                '.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
@@ -170,7 +168,6 @@ TIME_ZONE = env('TIME_ZONE', default='US/Pacific')
 USE_I18N = env('USE_I18N', default=True)
 USE_L10N = env('USE_L10N', default=True)
 USE_TZ = env('USE_TZ', default=True)
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
@@ -209,6 +206,6 @@ APP_EMAIL_RETURN_PATH = env('APP_EMAIL_RETURN_PATH')
 APP_TO_EMAIL = env('APP_TO_EMAIL')
 DEFAULT_FROM_EMAIL = APP_EMAIL_RETURN_PATH = env('APP_EMAIL_RETURN_PATH')
 
-#STRIPE
+# STRIPE
 STRIPE_PVT_KEY = env('STRIPE_PK')
 STRIPE_SEC_KEY = env('STRIPE_SK')

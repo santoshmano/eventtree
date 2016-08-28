@@ -11,7 +11,8 @@ class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Password confirmation',
+                                widget=forms.PasswordInput)
 
     class Meta:
         model = SelebUser
@@ -43,7 +44,8 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = SelebUser
-        fields = ('email', 'password', 'first_name', 'last_name', 'date_joined', 'is_admin', 'is_active')
+        fields = ('email', 'password', 'first_name', 'last_name', 'date_joined',
+                  'is_admin', 'is_active')
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -64,7 +66,8 @@ class UserAdmin(BaseUserAdmin):
     list_filter = ('is_admin',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name', 'date_joined')}),
+        ('Personal info',
+         {'fields': ('first_name', 'last_name', 'date_joined')}),
         ('Permissions', {'fields': ('is_admin', 'is_active')}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -72,12 +75,14 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2')}
-        ),
+            'fields': ('email', 'password1', 'password2')
+        }
+         ),
     )
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ()
+
 
 # Now register the new UserAdmin...
 admin.site.register(SelebUser, UserAdmin)

@@ -53,18 +53,17 @@ class SelebUserManager(BaseUserManager):
 
 
 class SelebUser(AbstractBaseUser, PermissionsMixin):
-
     email = models.EmailField(
-        verbose_name='email address',
-        max_length=255,
-        unique=True,
+            verbose_name='email address',
+            max_length=255,
+            unique=True,
     )
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=30, blank=True)
     is_admin = models.BooleanField(
-        _('staff status'),
-        default=False,
-        help_text=_('Designates whether the user can log \
+            _('staff status'),
+            default=False,
+            help_text=_('Designates whether the user can log \
         into this admin site.'),
     )
     is_active = models.BooleanField(_('Is active?'), default=True)
@@ -82,21 +81,21 @@ class SelebUser(AbstractBaseUser, PermissionsMixin):
         return full_name.strip()
 
     def get_short_name(self):
-        "Returns the short name for the user."
+        """Returns the short name for the user."""
         return self.first_name
 
     def has_perm(self, perm, obj=None):
-        "Does the user have a specific permission?"
+        """Does the user have a specific permission?"""
         # Simplest possible answer: Yes, always
         return True
 
     def has_module_perms(self, app_label):
-        "Does the user have permissions to view the app `app_label`?"
+        """Does the user have permissions to view the app `app_label`?"""
         # Simplest possible answer: Yes, always
         return True
 
     @property
     def is_staff(self):
-        "Is the user a member of staff?"
+        """Is the user a member of staff?"""
         # Simplest possible answer: All admins are staff
         return self.is_admin

@@ -1,5 +1,6 @@
 {% if not event.booking.count %}
-<a class="btn btn-success" href="{% url 'user_select_event' event.slug package.id %}">
-  Confirm this Package
-</a>
+  <a class="btn btn-success"
+     href="{% url 'user_select_event' event.slug package.id %}">
+    Confirm this Package
+  </a>
 {% endif %}

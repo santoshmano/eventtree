@@ -23,11 +23,11 @@ def contact(request):
         message = request.POST.get('message')
 
         data = AppMailer(request).send_contact_us_email_to_admin(
-                    name,
-                    sender_email,
-                    message,
-                    phone
-                )
+                name,
+                sender_email,
+                message,
+                phone
+        )
 
         return JsonResponse(data, safe=False)
 

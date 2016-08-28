@@ -1,15 +1,15 @@
-{%  load static %}
+{% load static %}
 <div class="col-md-4 col-sm-6 event-item">
-    <a href="{% url 'user_event' event.slug %}" class="event-link">
-        <div class="event-hover">
-            <div class="event-hover-content">
-                See Details
-            </div>
-        </div>
-        <img src="{% static 'img/event/'|add:event.image %}"
-             class="img-responsive" alt="">
-    </a>
-    <div class="event-caption" style="background-color: #eeeeee">
-        <p>{{ event.name}}</p>
+  <a href="{% url 'user_event' event.slug %}" class="event-link">
+    <div class="event-hover">
+      <div class="event-hover-content">
+        See Details
+      </div>
     </div>
+    <img src="{% static 'img/event/'|add:event.image %}"
+         class="img-responsive" alt="">
+  </a>
+  <div class="event-caption" style="background-color: #eeeeee">
+    <p>{{ event.name }}</p>
+  </div>
 </div>

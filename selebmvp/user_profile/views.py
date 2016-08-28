@@ -96,17 +96,17 @@ def show_event(request, slug):
     }
     try:
         if event.invite:
-            num_attending =\
+            num_attending = \
                 event.invite.invites.filter(attending="YES").aggregate(
-                    Sum('num_of_adults'), Sum('num_of_children'))
+                        Sum('num_of_adults'), Sum('num_of_children'))
 
-            num_maybe =\
+            num_maybe = \
                 event.invite.invites.filter(attending="MAYBE").aggregate(
-                    Sum('num_of_adults'), Sum('num_of_children'))
+                        Sum('num_of_adults'), Sum('num_of_children'))
 
-            num_not_attending =\
+            num_not_attending = \
                 event.invite.invites.filter(attending="NO").count()
-                
+
             context.update({
                 'num_adults_attending': num_attending['num_of_adults__sum'],
                 'num_children_attending': num_attending['num_of_children__sum'],
@@ -152,6 +152,7 @@ def select_event(request, slug, package):
     # TODO Check if the package belongs to the event (security check)
     return redirect(show_events)
 
+
 @login_required
 @event_owner
 def charge(request, slug, b_id):
@@ -167,10 +168,10 @@ def charge(request, slug, b_id):
 
     try:
         response = stripe.Charge.create(
-          amount=int(booking.amount) * 100,
-          currency="usd",
-          source=request.POST.get('stripeToken'),
-          metadata={'order_id': b_id}
+                amount=int(booking.amount) * 100,
+                currency="usd",
+                source=request.POST.get('stripeToken'),
+                metadata={'order_id': b_id}
         )
 
         data = response.to_dict()
@@ -180,11 +181,11 @@ def charge(request, slug, b_id):
                                 amount=data['amount'],
                                 response=str(data),
                                 payment_date=datetime.datetime.fromtimestamp(
-                                    int(data['created'])))
+                                        int(data['created'])))
 
         booking.status = "CP"
         booking.payment_date = datetime.datetime.fromtimestamp(
-                                int(data['created']))
+                int(data['created']))
         booking.save()
 
         messages.success(request,
@@ -226,6 +227,7 @@ def charge(request, slug, b_id):
 
     return redirect('user_bookings')
 
+
 @login_required
 @event_owner
 def send_invite(request, slug):
@@ -249,7 +251,7 @@ def send_invite(request, slug):
                                                             request.user)
 
         messages.success(request,
-                     'Your invite email has been successfully sent')
+                         'Your invite email has been successfully sent')
     else:
         messages.error(request,
                        'Sorry, you cannot send an invite at this stage')
@@ -261,6 +263,7 @@ def send_invite(request, slug):
 class EventRSVP(View):
     """Handles the get and post for event rsvp
     """
+
     def get(self, request, uuid):
         """Show the initial SelebUserCreationForm
 
@@ -298,6 +301,7 @@ class EventRSVP(View):
         }
         return render(request, 'rsvp_form.html', context)
 
+
 # TODO send confirm email link in the registration welcome email
 class Register(View):
     """Create new SelebUser
@@ -306,6 +310,7 @@ class Register(View):
     registered email to admin
 
     """
+
     def get(self, request):
         """Show the initial SelebUserCreationForm
 
@@ -331,9 +336,9 @@ class Register(View):
         if form.is_valid():
             form.save()
             AppMailer(request).send_registration_email_to_admin(
-                                                    request.POST.get('email'))
+                    request.POST.get('email'))
             AppMailer(request).send_registration_email_to_user(
-                                                    request.POST.get('email'))
+                    request.POST.get('email'))
             messages.success(request, 'Your were successfully registered')
             return redirect('/')
 
