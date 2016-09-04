@@ -61,9 +61,6 @@ Session.vim
 __pycache__/
 *.py[cod]
 
-# C extensions
-*.so
-
 # Distribution / packaging
 bin/
 build/
@@ -107,7 +104,8 @@ coverage.xml
 *.pot
 
 ######## Seleb Project start ########
-#*.env
+*.env
+*.env.*
 
 ######## Seleb Project end ########
 
