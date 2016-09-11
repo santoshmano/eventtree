@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'selebmvp.user_profile',
     'selebmvp.user_packages',
     'selebmvp.app_mailer',
-    'selebmvp.event_invites'
+    'selebmvp.event_invites',
+    'selebmvp.vendors'
 ]
 
 MIDDLEWARE_CLASSES = [
