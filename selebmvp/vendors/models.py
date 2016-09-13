@@ -1,5 +1,6 @@
 """All the vendors related models goes here """
 from django.db import models
+
 from selebmvp.user_profile.models import SelebUser
 
 
@@ -49,7 +50,8 @@ class VendorService(models.Model):
 
     title = models.CharField(max_length=250)
     short_desc = models.CharField(max_length=500)
-    contact_user = models.ForeignKey(SelebUser, related_name='managed_services')
+    contact_user = models.ForeignKey(
+        SelebUser, related_name='managed_services')
     price_type = models.CharField(choices=price_types, max_length=2)
     price = models.FloatField()
     detailed_desc = models.TextField()
@@ -67,9 +69,15 @@ class VendorServicePhoto(models.Model):
 class LocationAmenity(models.Model):
     amenity = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.title
+
 
 class CateringAmenity(models.Model):
     amenity = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.title
 
 
 class VendorLocationService(VendorService):
@@ -80,4 +88,3 @@ class VendorLocationService(VendorService):
 class VendorCateringService(VendorService):
     amenities = models.ManyToManyField(CateringAmenity)
     vendor = models.ForeignKey(Vendor)
-

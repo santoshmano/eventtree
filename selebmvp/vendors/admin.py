@@ -1,8 +1,9 @@
 from django.contrib import admin
-from .models import (Vendor, LocationAmenity, CateringAmenity,
-                     VendorSocialReview, VendorAddress, VendorPhoto,
-                     VendorLocationService, VendorCateringService,
-                     VendorServicePhoto)
+
+from .models import (CateringAmenity, LocationAmenity, Vendor, VendorAddress,
+                     VendorCateringService, VendorLocationService, VendorPhoto,
+                     VendorServicePhoto, VendorSocialReview)
+
 # from django import forms
 # from functools import partial
 
@@ -26,7 +27,8 @@ class VendorPhotoInLine(admin.TabularInline):
 
 # class VendorLocationServiceInLineForm(forms.ModelForm):
 #     def __init__(self, *args, **kwargs):
-#         super(VendorLocationServiceInLineForm, self).__init__(*args, **kwargs)
+#         super(VendorLocationServiceInLineForm, self).
+#            __init__(*args, **kwargs)
 #         self.fields['photos'].queryset = VendorPhoto.objects.filter(
 #             vendor=self.instance)
 
@@ -44,23 +46,23 @@ class VendorLocationServiceInLine(admin.StackedInline):
     #                                                 request,
     #                                                 **kwargs)
 
-        # def get_formset(self, request, obj=None, **kwargs):
-        #     kwargs['formfield_callback'] = partial(self.formfield_for_dbfield,
-        #                                            request=request, obj=obj)
-        #     return super(VendorLocationServiceInLine, self).get_formset(
-        # request,
-        #                                                                 obj,
-        #
-        # **kwargs)
-        #
-        # def formfield_for_dbfield(self, db_field, **kwargs):
-        #     vendor = kwargs.pop('obj', None)
-        #     formfield = super(VendorLocationServiceInLine,
-        #                       self).formfield_for_dbfield(db_field, **kwargs)
-        #     if db_field.name == "photos" and vendor:
-        #         kwargs["queryset"] = VendorPhoto.objects.filter(
-        #                 vendor=vendor)
-        #     return formfield
+    # def get_formset(self, request, obj=None, **kwargs):
+    #     kwargs['formfield_callback'] = partial(self.formfield_for_dbfield,
+    #                                            request=request, obj=obj)
+    #     return super(VendorLocationServiceInLine, self).get_formset(
+    # request,
+    #                                                                 obj,
+    #
+    # **kwargs)
+    #
+    # def formfield_for_dbfield(self, db_field, **kwargs):
+    #     vendor = kwargs.pop('obj', None)
+    #     formfield = super(VendorLocationServiceInLine,
+    #                       self).formfield_for_dbfield(db_field, **kwargs)
+    #     if db_field.name == "photos" and vendor:
+    #         kwargs["queryset"] = VendorPhoto.objects.filter(
+    #                 vendor=vendor)
+    #     return formfield
 
 
 class VendorCateringServiceInLine(admin.StackedInline):
