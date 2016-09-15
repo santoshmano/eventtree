@@ -113,7 +113,7 @@
           {% for package in event.packages.all %}
             <li role="presentation"
                 class="{% if forloop.first %}active{% endif %}">
-              <a href="#{{ package.name }}" aria-controls="{{ package.name }}"
+              <a href="#{{ package.event.slug}}{{ package.id }}" aria-controls="{{ package.name }}"
                  role="tab" data-toggle="tab">{{ package.name }}</a>
             </li>
           {% endfor %}
@@ -122,7 +122,7 @@
           {% for package in event.packages.all %}
             <div role="tabpanel"
                  class="tab-pane {% if forloop.first %}active{% endif %}"
-                 id="{{ package.name }}">
+                 id="{{ package.event.slug}}{{ package.id }}">
               {% include 'packages/'|add:package.filename %}
             </div>
           {% endfor %}

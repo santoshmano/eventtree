@@ -1,46 +1,41 @@
 {% load static %}
 
-<center>
-  <div>
-    <table class="col-xs-12">
-      <tr class="col-xs-6">
-        <br>
-        <img src="{% static 'img/event/emma_prusch_farm_park.jpg' %}" alt="">
-      </tr>
-      <tr class="col-xs-6">
-        <br><br>
-        <p>
-          <b> Location Details </b><br>
-          <a href="http://www.pruschfarmpark.org/"> Emma Prusch Farm Park</a>
-          <br>
-          Rooster Row Picnic Area <br>
-          ~14 Miles from Home, Ample Parking. <br>
-          <a href="http://www.yelp.com/biz/emma-prusch-farm-park-san-jose"> Yelp
-            Rating - 4.5 Stars, 131 Reviews </a><br>
-          <br>
-          <b>Rental Price</b> - 140-160$ <br>
-          Rental Timings - 10am - 5pm <br>
-          7 tables, 70 people max, 1 Large BBQ area
+<div class="text-center">
+  <br>
 
-        </p>
+  <div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-6">
+      <img src="{% static 'img/event/emma_prusch_farm_park.jpg' %}" alt="">
+    </div>
 
-        <br>
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-6">
+      <h4> Location </h4>
+      <a href="http://www.pruschfarmpark.org/" target="_blank"> Emma Prusch Farm Park</a>
+      <br>
+      Rooster Row Picnic Area <br>
+      ~14 Miles from Home, Ample Parking. <br>
+      <a href="http://www.yelp.com/biz/emma-prusch-farm-park-san-jose" target="_blank">
+        Yelp Rating - 4.5 Stars, 131 Reviews
+      </a>
+      <br>
+      <br>
+      <b>Rental Price</b> - 140$ <br>
+      Rental Timings - 10am - 5pm <br>
+      <br>    
+      <b>Amenities</b> <br>
+      7 tables, <br>
+      70 people max, <br>
+      1 Large BBQ area <br>
+      <br>
+      <b> Location Rules </b><br>
+      No balloons<br>
+      No alcohol <br>
+      Adult present by 10am <br> 
 
-        <p>
-          <b>Other Details</b> </br>
-
-          Kid Friendly, Trending with Activities and People <br>
-          No Alcohol, No Balloons
-          <br.>
-            Right next to animal petting and barn <br>
-            Right next to play structures
-            <br.
-
-
-        </p>
-      </tr>
-    </table>
+    </div>
+    <br>
   </div>
+  
 
   {% comment %}
   Do not remove the below select include, it includes the button to select
@@ -49,6 +44,4 @@
   <br>
   {% include 'packages/select.html' %} <br> <br>
 
-</center>
-
-
+</div>

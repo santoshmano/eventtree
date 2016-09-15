@@ -21,7 +21,7 @@
           <h4> Are you attending? </h4>
 
           <form class="login-form" method="post" action="
-{% url 'request_event_rsvp' invite.uuid %}">
+            {% url 'request_event_rsvp' invite.uuid %}">
             {% csrf_token %}
 
             {% if form.errors %}
