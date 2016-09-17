@@ -21,7 +21,7 @@ BASE_DIR = root
 
 SITE_URL = env('SITE_URL', default='http://localhost:8000/')
 
-DJANGO_MODE = env('MODE', default='Local').lower()
+DJANGO_MODE = env('Mode', default='Local').lower()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
