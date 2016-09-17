@@ -18,9 +18,12 @@
               <tr>
               <tr>
                 <td class="col-xs-12">
-                  <div class="text-center"> 
+                  <div class="text-center">
                   <p>
-                  {{ booking.summary | safe }}
+                    <h4>{{ booking.event.name}}</h4>
+                  </p>
+                  <p>
+                    {{ booking.summary | safe }}
                   </p>
                   <p>
                     <b>Total:</b> ${{ booking.amount }}
@@ -63,8 +66,13 @@
             You do not have any completed bookings
           {% endif %}
           {% for booking in completed_bookings %}
-            <table class="table table-bordered col-xs-12"
+            <table class="table table-bordered col-xs-12 text-center"
                    style="background: #eeeeee">
+              <tr>
+                <td>
+                  <h4>{{ booking.event.name}}</h4>
+                </td>
+              </tr>
               <tr>
                 <td>
                   {{ booking.summary | safe }}
@@ -72,10 +80,8 @@
               </tr>
               <tr>
                 <td class="col-xs-12">
-                  <center>
-                    Total : ${{ booking.amount }}, Paid
+                  Total : ${{ booking.amount }}, Paid
                     on: {{ booking.payment_date }}
-                  </center>
                 </td>
 
               </tr>
