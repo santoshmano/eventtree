@@ -14,18 +14,18 @@
             You do not have any pending bookings
           {% endif %}
           {% for booking in bookings %}
-            <table class="table table-bordered col-xs-12">
+            <table class="table table-bordered col-xs-12" class="text-center">
               <tr>
               <tr>
-                <td>
+                <td class="col-xs-12">
+                  <div class="text-center"> 
+                  <p>
                   {{ booking.summary | safe }}
-                </td>
-              </tr>
-              <td class="col-xs-12">
-                <center>
+                  </p>
                   <p>
                     <b>Total:</b> ${{ booking.amount }}
                   </p>
+                  <p>
                   <form
                       action="{% url 'user_stripe_charge' booking.event.slug booking.slug %}"
                       method="POST">
@@ -42,6 +42,8 @@
                         data-allow-remember-me="false">
                     </script>
                   </form>
+                  </p>
+                  </div>
                 </center>
               </td>
               </tr>

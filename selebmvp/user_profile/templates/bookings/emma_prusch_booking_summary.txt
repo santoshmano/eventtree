@@ -1,0 +1,22 @@
+====<Summary>======
+
+<div>
+<h4> Eshaans Birthday Party Summary</h4><br>
+<p>
+Location - 140$<br>
+Food - 500$ <br>
+Cake - 110.95$ <br>
+Entertainment - 100$ <br>
+Return Gifts - 173.67$ <br>
+Theme +Misc - 94.27$ <br>
+Total Vendor Taxes - 22.74$ <br>
+Delivery - 15$ <br>
+Event Organizer - discounted <br>
+Platform Services 8% -  92.53 $<br>
+</p>
+</div>
+
+====</Summary>======
+
+
+Total - 1249.16

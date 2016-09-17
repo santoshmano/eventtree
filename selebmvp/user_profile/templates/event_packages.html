@@ -68,21 +68,18 @@
       <div>
         {% if not event.invite %}
           {% if event.can_invite %}
-            Click on this
-            <a href="{% url 'send_event_invite' event.slug %}">link to send</a>
-            the invite email to your registered email account.<br/>
+            To get the invite to your email <a href="{% url 'send_event_invite' event.slug %}" class="btn btn-default">click here</a>
+            <br/>
           {% elif event.booking.count %}
-            Waiting for admin to approve your package, your invites
-            will appear here soon
+            Your invitation will appear here as soon as Admin approves your package selection.
           {% else %}
-            You invitation will appear once your Booking is confirmed, kindly
-            select a package {{ event.booking.status }}.
+            Your invitation will appear once you select a package below. {{ event.booking.status }}.
           {% endif %}
           {% comment %} Change the ability to invite only after booking is confirmed or is in progress {% endcomment %}
         {% else %}
-          Click on this
-          <a href="{% url 'send_event_invite' event.slug %}">link to re-send</a>
-          the invite email to your registered email account.<br/>
+          
+          To re-send the invite to your email <a href="{% url 'send_event_invite' event.slug %}" class="btn btn-default">click here </a>
+          <br/>
         {% endif %}
       </div>
       {% comment %}
@@ -92,6 +89,8 @@
           {% endcomment %}
     </div>
 
+    <br>
+
     <div class="container">
       <h2>
         Packages
@@ -99,21 +98,22 @@
 
       <div>
         {% if event.booking.count %}
-          You have selected Package
-          <strong>{{ event.booking.first.package.name }}</strong> for your
-          event. Kindly email/call us if you want any changes.
+          <p> You have selected 
+          <strong>{{ event.booking.first.package.name }}</strong> package for your
+          event. </p>
+
+          <p>Kindly email or call us if you want any changes.</p>
         {% else %}
-          Please look at your different options and Confirm a certain packages.
-          Kindly email/call us if you want any changes to a package.
+          <p>Please look at your different options and Confirm a certain packages </p>
+          <p>Kindly email/call us if you want any changes to a package.</p>
         {% endif %}
       </div>
-      <br/>
       <div>
-        <ul class="nav nav-tabs" role="tablist">
+        <ul class="nav nav-pills" role="tablist">
           {% for package in event.packages.all %}
             <li role="presentation"
                 class="{% if forloop.first %}active{% endif %}">
-              <a href="#{{ package.event.slug}}{{ package.id }}" aria-controls="{{ package.name }}"
+              <a href="#{{ package.event.slug}}{{ package.id }}"  class="btn btn-default" aria-controls="{{ package.name }}"
                  role="tab" data-toggle="tab">{{ package.name }}</a>
             </li>
           {% endfor %}
@@ -122,7 +122,7 @@
           {% for package in event.packages.all %}
             <div role="tabpanel"
                  class="tab-pane {% if forloop.first %}active{% endif %}"
-                 id="{{ package.event.slug}}{{ package.id }}">
+                 id="{{ package.event.slug}}{{ package.id }}" >
               {% include 'packages/'|add:package.filename %}
             </div>
           {% endfor %}
