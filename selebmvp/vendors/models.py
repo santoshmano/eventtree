@@ -5,6 +5,8 @@ from selebmvp.user_profile.models import SelebUser
 
 
 class Vendor(models.Model):
+    """Stores the Vendor Business Name, website and oener
+    """
     slug = models.CharField(max_length=250)
     name = models.CharField(max_length=245)
     website = models.CharField(max_length=250, blank=True, null=True)
@@ -16,6 +18,8 @@ class Vendor(models.Model):
 
 
 class VendorAddress(models.Model):
+    """Stores the Vendor Address, one address per Vendor Business
+    """
     addressline1 = models.CharField(max_length=250)
     addressline2 = models.CharField(max_length=250, blank=True, null=True)
     city = models.CharField(max_length=150)
@@ -25,6 +29,8 @@ class VendorAddress(models.Model):
 
 
 class VendorPhoto(models.Model):
+    """Store the Photos for Vendor Business. A Vendor can have multiple photos
+    """
     title = models.CharField(max_length=250)
     key = models.CharField(max_length=250)
     vendor = models.ForeignKey(Vendor, related_name='photos')
@@ -34,6 +40,8 @@ class VendorPhoto(models.Model):
 
 
 class VendorSocialReview(models.Model):
+    """Store a list of social reviews for the Vendor Business
+    """
     site = models.CharField(max_length=150)
     num_reviews = models.IntegerField(verbose_name='Number of Reviews')
     rating = models.IntegerField(verbose_name='Rating')
@@ -42,6 +50,8 @@ class VendorSocialReview(models.Model):
 
 
 class VendorService(models.Model):
+    """Vendor Service base, common service attributes go here
+    """
     price_types = (
         ('PH', 'Per Hour'),
         ('PP', 'Per Person'),
@@ -61,30 +71,47 @@ class VendorService(models.Model):
 
 
 class VendorServicePhoto(models.Model):
+    """A list of Photos for each service by the vendor.
+    Different from VendorPhotos
+    """
     title = models.CharField(max_length=250)
     key = models.CharField(max_length=250)
     vendor_service = models.ForeignKey(VendorService, related_name='photos')
 
 
 class LocationAmenity(models.Model):
+    """List of possible Amenities that a Location can support
+    """
     amenity = models.CharField(max_length=50)
+
+    class Meta:
+        verbose_name_plural = "Location amenities"
 
     def __str__(self):
         return self.title
 
 
 class CateringAmenity(models.Model):
+    """List of possible Amenities that a Catering service can support
+    """
     amenity = models.CharField(max_length=50)
+
+    class Meta:
+        verbose_name_plural = "Catering amenities"
 
     def __str__(self):
         return self.title
 
 
 class VendorLocationService(VendorService):
+    """Location Servic specific attributes
+    """
     amenities = models.ManyToManyField(LocationAmenity)
     vendor = models.ForeignKey(Vendor)
 
 
 class VendorCateringService(VendorService):
+    """Catering Servic specific attributes
+    """
     amenities = models.ManyToManyField(CateringAmenity)
     vendor = models.ForeignKey(Vendor)

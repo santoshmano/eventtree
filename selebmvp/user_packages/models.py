@@ -21,18 +21,18 @@ class Event(models.Model):
                             max_length=250,
                             help_text="Enter the Event Name",)
     slug = models.SlugField("event slug",
-                            max_length=255,
                             help_text="-nated Event Name",
                             unique=True)
     date = models.DateField(null=True, blank=True,)
     image = models.CharField("event image",
-                            max_length=250,
-                            help_text="Enter the Image Filename",
-                            null=True,
-                            blank=True,)
+                             max_length=250,
+                             help_text="Enter the Image Filename",
+                             null=True,
+                             blank=True,)
     owners = models.ManyToManyField(SelebUser,
                                     verbose_name="who can manage this event",
                                     related_name="events")
+    send_invite = models.BooleanField("Can Send Invite", default=False)
 
     # prepopulated_fields = {"slug": ("name",)}
 
@@ -41,15 +41,17 @@ class Event(models.Model):
             If first_name is not set, email is used
         """
         return ", ".join([
-                        owner.first_name or owner.email
-                        for owner in self.owners.all()
-                        ])
+            owner.first_name or owner.email
+            for owner in self.owners.all()
+        ])
 
     def __str__(self):
         return self.slug
 
     def can_invite(self):
-        return self.booking 
+        """Decides if the user can send invites
+        """
+        return self.send_invite
 
 
 class EventPackage(models.Model):

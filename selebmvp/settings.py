@@ -21,6 +21,8 @@ BASE_DIR = root
 
 SITE_URL = env('SITE_URL', default='http://localhost:8000/')
 
+DJANGO_MODE = env('MODE', default='Local').lower()
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
@@ -28,9 +30,17 @@ SITE_URL = env('SITE_URL', default='http://localhost:8000/')
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG', default=False)
+if DJANGO_MODE == 'local':
+    DEBUG = True
+else:
+    DEBUG = False
 
-ALLOWED_HOSTS = env('ALLOWED_HOSTS')
+ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(',')
+
+# HTTPS stuff
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 # Application definition
 
@@ -41,13 +51,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'debug_toolbar',
     'selebmvp.user_profile',
     'selebmvp.user_packages',
     'selebmvp.app_mailer',
     'selebmvp.event_invites',
-    'selebmvp.vendors'
+    'selebmvp.vendors',
 ]
+
+if DJANGO_MODE == 'local':
+    INSTALLED_APPS += [
+        'debug_toolbar',
+    ]
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -137,7 +151,6 @@ LOGGING = {
     }
 }
 
-EMAIL_BACKEND = 'selebmvp.app_mailer.AWSSESBackend'
 env('SITE_URL', default='http://localhost:8000/')
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
