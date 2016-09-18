@@ -1,0 +1,485 @@
+{% load static %}
+
+
+<div >
+<section id="portfolio" >
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-4 col-sm-6 col-lg-4 portfolio-item">
+        <a href="#portfolioModal_location" class="portfolio-link" data-toggle="modal">
+          <div class="portfolio-hover">
+            <div class="portfolio-hover-content">
+              <i class="fa fa-plus fa-3x"></i>
+            </div>
+          </div>
+          <img src="{% static 'img/event/emma_prusch_farm_park.jpg' %}"
+             class="img-responsive" alt="">
+        </a>
+        <div class="portfolio-caption" style="background-color: #eeeeee">
+          <h4>Location</h4>
+          <p class="text-muted">Emma Prusch farm park</p>
+          <p class="text-muted">From 140$</p>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-6 col-lg-4 portfolio-item">
+        <a href="#portfolioModal_food" class="portfolio-link" data-toggle="modal">
+          <div class="portfolio-hover">
+            <div class="portfolio-hover-content">
+              <i class="fa fa-plus fa-3x"></i>
+            </div>
+          </div>
+          <img src="{% static 'img/event/food/dosa_catering.jpg' %}"
+             class="img-responsive" alt="">
+        </a>
+        <div class="portfolio-caption" style="background-color: #eeeeee">
+          <h4>Food</h4>
+          <p class="text-muted">Dosa Catering + Food Trays</p>
+          <p class="text-muted">From 10/12$ per person</p>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-6 col-lg-4 portfolio-item">
+        <a href="#portfolioModal_cake" class="portfolio-link" data-toggle="modal">
+          <div class="portfolio-hover">
+            <div class="portfolio-hover-content">
+              <i class="fa fa-plus fa-3x"></i>
+            </div>
+          </div>
+          <img src="{% static 'img/event/cake/bijan_cake_eshaan.jpg' %}"
+             class="img-responsive" alt="">
+        </a>
+        <div class="portfolio-caption" style="background-color: #eeeeee">
+          <h4>Cake</h4>
+          <p class="text-muted">Customer Birthday cakex</p>
+          <p class="text-muted">From 100$ </p>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-6 col-lg-4 portfolio-item">
+        <a href="#portfolioModal_entertainment" class="portfolio-link" data-toggle="modal">
+          <div class="portfolio-hover">
+            <div class="portfolio-hover-content">
+              <i class="fa fa-plus fa-3x"></i>
+            </div>
+          </div>
+          <img src="{% static 'img/event/entertainment/face_painting.jpg' %}"
+             class="img-responsive" alt="">
+        </a>
+        <div class="portfolio-caption" style="background-color: #eeeeee">
+          <h4>Entertainment</h4>
+          <p class="text-muted">Face Painting</p>
+          <p class="text-muted">From 100$ per hour</p>
+        </div>
+      </div>      
+
+
+      <div class="col-md-4 col-sm-6 col-lg-4 portfolio-item">
+        <a href="#portfolioModal_activity" class="portfolio-link" data-toggle="modal">
+          <div class="portfolio-hover">
+            <div class="portfolio-hover-content">
+              <i class="fa fa-plus fa-3x"></i>
+            </div>
+          </div>
+          <img src="{% static 'img/event/activity/farm_tour.jpg' %}"
+             class="img-responsive" alt="">
+        </a>
+        <div class="portfolio-caption" style="background-color: #eeeeee">
+          <h4>Activity</h4>
+          <p class="text-muted">Farm Tour + Butter Making </p>
+          <p class="text-muted">From 6$ per person</p>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-6 col-lg-4 portfolio-item">
+        <a href="#portfolioModal_gifts" class="portfolio-link" data-toggle="modal">
+          <div class="portfolio-hover">
+            <div class="portfolio-hover-content">
+              <i class="fa fa-plus fa-3x"></i>
+            </div>
+          </div>
+          <img src="{% static 'img/event/gifts/return_gifts.jpg' %}"
+             class="img-responsive" alt="">
+        </a>
+        <div class="portfolio-caption" style="background-color: #eeeeee">
+          <h4>Return Gifts</h4>
+          <p class="text-muted">Return Gifts</p>
+          <p class="text-muted">From 5$ per person</p>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-6 col-lg-4 portfolio-item">
+        <a href="#portfolioModal_theme" class="portfolio-link" data-toggle="modal">
+          <div class="portfolio-hover">
+            <div class="portfolio-hover-content">
+              <i class="fa fa-plus fa-3x"></i>
+            </div>
+          </div>
+          <img src="{% static 'img/event/theme/captain_america.jpg' %}"
+             class="img-responsive" alt="">
+        </a>
+        <div class="portfolio-caption" style="background-color: #eeeeee">
+          <h4>Theme</h4>
+          <p class="text-muted">Theme/Decoration</p>
+          <p class="text-muted">From 50$</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  {% comment %}
+  Do not remove the below select include, it includes the button to select
+  package
+{% endcomment %}
+  <br>
+  {% include 'packages/select.html' %} <br> <br>
+
+</section>
+
+</div>
+
+<div class="portfolio-modal modal fade" id="portfolioModal_location" tabindex="-1"
+     role="dialog" aria-hidden="true">
+  <div class="modal-content">
+    <div class="close-modal" data-dismiss="modal">
+      <div class="lr">
+        <div class="rl">
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <div class="modal-body">
+
+            <h2>Location</h2>
+            <p class="item-intro text-muted">Emma Prusch Farm Park <br> Redwood Picnic Area </p>
+            <img class="img-responsive img-centered"
+                 src="{% static 'img/event/location/emma_prusch_farm_park.jpg' %}"
+                 alt="">
+
+            <a href="http://www.pruschfarmpark.org/" target="_blank"> Emma Prusch Farm Park</a>
+            <br>
+            Redwood Picnic Area  <br>
+            Ample Parking. <br>
+            <a href="http://www.yelp.com/biz/emma-prusch-farm-park-san-jose" target="_blank">
+              Yelp Rating - 4.5 Stars, 131 Reviews
+            </a>
+            <br>
+            <br>
+            <b>Rental Price</b> - 140$ onwards <br>
+            Rental Timings - 10am - 5pm <br>
+            <br>    
+            <b>Amenities</b> <br>
+            7 tables, <br>
+            70 people max, <br>
+            1 Large BBQ area <br>
+            <br>
+            <b> Location Rules </b><br>
+            No balloons<br>
+            No alcohol <br>
+            Adult present by 10am <br> <br> <br>
+              <button type="button" class="btn btn-primary"
+                      data-dismiss="modal"><i class="fa fa-times"></i> Close
+              </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="portfolio-modal modal fade" id="portfolioModal_food" tabindex="-1"
+     role="dialog" aria-hidden="true">
+  <div class="modal-content">
+    <div class="close-modal" data-dismiss="modal">
+      <div class="lr">
+        <div class="rl">
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <div class="modal-body">
+
+            <h2>Food</h2>
+            <p class="item-intro text-muted">Dosa Catering</p>
+
+            <img class="img-responsive img-centered"
+                 src="{% static 'img/event/food/dosa_catering.jpg' %}"
+                 alt="">
+
+            <p>
+              <b> Description </b> <br>
+              Live dosa catering.
+            </p>
+            <p>
+              4 Varieties of dosa - plain, masala, onion, cheese <br>
+              2 Chutneys tray <br> 
+              1 Sambhar tray <br>
+              2 Appetizers - Bonda, Onion Pakora <br>
+              1 Desert - Rava Kesari <br>
+            </p>
+
+            <p>
+              Price - 10-12$ per person <br>
+              Number of people - 50<br>
+              Total price - 500-600$<br>
+            </p>
+
+            <p>
+              Setup time - 11:30 AM 
+              Total catering time - 3 hours
+            </p>
+            <br> 
+            <br>
+              <button type="button" class="btn btn-primary"
+                      data-dismiss="modal"><i class="fa fa-times"></i> Close
+              </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="portfolio-modal modal fade" id="portfolioModal_cake" tabindex="-1"
+     role="dialog" aria-hidden="true">
+  <div class="modal-content">
+    <div class="close-modal" data-dismiss="modal">
+      <div class="lr">
+        <div class="rl">
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <div class="modal-body">
+
+            <h2>Cake</h2>
+            <p class="item-intro text-muted">Themed birthday cake</p>
+
+            <img class="img-responsive img-centered"
+                 src="{% static 'img/event/cake/bijan_cake_eshaan.jpg' %}"
+                 alt="">
+
+
+            <p>
+              <b> Description </b> <br>
+              Cake 
+            </p>
+            <p>
+              Type - White cake <br>
+              Filling - Strawberry Custard <br>
+              Size - 1/2 Sheet <br> 
+              Theme - Any image <br>
+            </p>
+
+            <p>
+              Price - 110$ <br>
+              Delivery - Yes<br>
+              Pickup Time - 10am, 11 Sept
+            </p>
+
+            <br>
+              <button type="button" class="btn btn-primary"
+                      data-dismiss="modal"><i class="fa fa-times"></i> Close
+              </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="portfolio-modal modal fade" id="portfolioModal_entertainment" tabindex="-1"
+     role="dialog" aria-hidden="true">
+  <div class="modal-content">
+    <div class="close-modal" data-dismiss="modal">
+      <div class="lr">
+        <div class="rl">
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <div class="modal-body">
+
+            <h2>Entertainment</h2>
+            <p class="item-intro text-muted">Face Painting </p>
+
+            <img class="img-responsive img-centered"
+                 src="{% static 'img/event/entertainment/face_painting.jpg' %}"
+                 alt="">
+
+            <p>
+              <b> Description </b> <br>
+              Fancy face painting options to entertain the kids. 
+            </p>
+
+            <p>
+              Price - 100$ per hour<br>
+              Time - 1-2 pm<br>
+            </p>  
+            <br>
+              <button type="button" class="btn btn-primary"
+                      data-dismiss="modal"><i class="fa fa-times"></i> Close
+              </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="portfolio-modal modal fade" id="portfolioModal_activity" tabindex="-1"
+     role="dialog" aria-hidden="true">
+  <div class="modal-content">
+    <div class="close-modal" data-dismiss="modal">
+      <div class="lr">
+        <div class="rl">
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <div class="modal-body">
+
+            <h2>Activity</h2>
+            <p class="item-intro text-muted">Farm tour + Butter making</p>
+
+            <img class="img-responsive img-centered"
+                 src="{% static 'img/event/activity/farm_tour.jpg' %}"
+                 alt="">
+
+            <p>
+              <b> Description </b>
+              <br>
+              This park is an educational “hands-on”
+              tour of the park’s gardens, barn, and
+              small animal area. During the tour
+              children will learn about the origins of
+              the food they eat, have close
+              encounters with farm animals, and
+              explore the Prusch gardens.
+              Throughout the tour, children will
+              make butter, which they will sample
+              with crackers at the conclusion of the
+              tour.            
+
+              </p>
+
+            <p>
+              Price - 6$ per person<br>
+              Time - 2-3 pm<br>
+            </p>  
+
+
+            <br>
+              <button type="button" class="btn btn-primary"
+                      data-dismiss="modal"><i class="fa fa-times"></i> Close
+              </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="portfolio-modal modal fade" id="portfolioModal_gifts" tabindex="-1"
+     role="dialog" aria-hidden="true">
+  <div class="modal-content">
+    <div class="close-modal" data-dismiss="modal">
+      <div class="lr">
+        <div class="rl">
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <div class="modal-body">
+
+            <h2>Return gifts / Goody bags</h2>
+            <p class="item-intro text-muted">Gifts for children from Learning Express</p>
+
+            <img class="img-responsive img-centered"
+                 src="{% static 'img/event/gifts/return_gifts.jpg' %}"
+                 alt="">
+
+            <p>
+              <b> Description </b>
+              <br>
+              Educational <br>
+              Sports <br>
+              Fun <br>
+            </p>
+
+            <p>
+              Price - 5$ per person onwards <br>
+              Delivery - Yes <br>
+            </p>
+            <br>
+              <button type="button" class="btn btn-primary"
+                      data-dismiss="modal"><i class="fa fa-times"></i> Close
+              </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="portfolio-modal modal fade" id="portfolioModal_theme" tabindex="-1"
+     role="dialog" aria-hidden="true">
+  <div class="modal-content">
+    <div class="close-modal" data-dismiss="modal">
+      <div class="lr">
+        <div class="rl">
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <div class="modal-body">
+
+            <h2>Theme</h2>
+            <p class="item-intro text-muted">Any theme and decoration</p>
+
+            <img class="img-responsive img-centered"
+                 src="{% static 'img/event/theme/captain_america.jpg' %}"
+                 alt="">
+            <p>
+              <b> Description </b>
+              <br>
+              Tableware<br>
+              Decoration <br>
+              Plates + Glasses + Misc 
+              </p>
+
+            <p>
+              Price - 50-100$ <br>
+              Setup - Yes
+              Setup Time - 10am <br>
+            </p>
+            <br>
+              <button type="button" class="btn btn-primary"
+                      data-dismiss="modal"><i class="fa fa-times"></i> Close
+              </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
