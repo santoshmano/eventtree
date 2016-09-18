@@ -10,24 +10,20 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
-import environ
-
-root = environ.Path(__file__) - 2  # 1 folder back (/a/ - 1 = /)
-env = environ.Env(DEBUG=(bool, False), )  # set default values and casting
-environ.Env.read_env()  # reading .env file
+import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = root
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SITE_URL = env('SITE_URL', default='http://localhost:8000/')
+SITE_URL = os.getenv('SITE_URL', 'http://localhost:8000/')
 
-DJANGO_MODE = env('Mode', default='Local').lower()
+DJANGO_MODE = os.getenv('DJANGO_MODE', 'Production').lower()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if DJANGO_MODE == 'local':
@@ -35,7 +31,7 @@ if DJANGO_MODE == 'local':
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(',')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
 
 # HTTPS stuff
 if DJANGO_MODE != 'local':
@@ -83,7 +79,7 @@ ROOT_URLCONF = 'selebmvp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [root('selebmvp', 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'selebmvp', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -100,24 +96,24 @@ WSGI_APPLICATION = 'selebmvp.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-DB_BACKEND = env('DB_BACKEND')
+DB_BACKEND = os.getenv('DB_BACKEND')
 
 if DB_BACKEND == 'SQLITE3':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': root(env('DB_NAME', default='db.sqlite3')),
+            'NAME': os.getenv('DB_NAME', 'db.sqlite3'),
         }
     }
 elif DB_BACKEND == 'POSTGRES':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': env('DB_NAME', default='eventtree'),
-            'USER': env('DB_USER', default='postgre'),
-            'PASSWORD': env('DB_PASSWORD', default='root123'),
-            'HOST': env('DB_HOST', default='localhost'),
-            'PORT': env('DB_PORT', default='5432'),
+            'NAME': os.getenv('DB_NAME', 'eventtree'),
+            'USER': os.getenv('DB_USER', 'postgre'),
+            'PASSWORD': os.getenv('DB_PASSWORD', 'root123'),
+            'HOST': os.getenv('DB_HOST', 'localhost'),
+            'PORT': os.getenv('DB_PORT', '5432'),
         }
     }
 
@@ -138,7 +134,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': root('logs', 'debug.log'),
+            'filename': os.path.join(BASE_DIR,'logs', 'debug.log'),
             'formatter': 'verbose'
         },
     },
@@ -155,7 +151,6 @@ LOGGING = {
     }
 }
 
-env('SITE_URL', default='http://localhost:8000/')
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
@@ -181,21 +176,22 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = env('LANGUAGE_CODE', default='en-us')
-TIME_ZONE = env('TIME_ZONE', default='US/Pacific')
-USE_I18N = env('USE_I18N', default=True)
-USE_L10N = env('USE_L10N', default=True)
-USE_TZ = env('USE_TZ', default=True)
+LANGUAGE_CODE = os.getenv('LANGUAGE_CODE', 'en-us')
+TIME_ZONE = os.getenv('TIME_ZONE', 'US/Pacific')
+USE_I18N = os.getenv('USE_I18N', True)
+USE_L10N = os.getenv('USE_L10N', True)
+USE_TZ = os.getenv('USE_TZ', True)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_ROOT = root('static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'selebmvp', 'static'),
+STATIC_ROOT = 'static' 
 
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    root('frontend'),
+    os.path.join(BASE_DIR, 'frontend'),
 )
 
 # Custom Auth
@@ -204,26 +200,26 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
 
 # Email BACKEND
-EMAIL_BACKEND = env('EMAIL_BACKEND')
+EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
 
 if EMAIL_BACKEND == 'django.core.mail.backends.smtp.EmailBackend':
-    EMAIL_HOST = env('EMAIL_HOST')
-    EMAIL_PORT = env('EMAIL_PORT')
-    EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-    EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-    EMAIL_USE_TLS = env('EMAIL_USE_TLS')
+    EMAIL_HOST = os.getenv('EMAIL_HOST')
+    EMAIL_PORT = os.getenv('EMAIL_PORT')
+    EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+    EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
 elif EMAIL_BACKEND == 'selebmvp.app_mailer.AWSSESBackend':
     # AWS SES stuff
-    AWS_ACCESS_KEY = env('AWS_ACCESS_KEY')
-    AWS_SECRET_KEY = env('AWS_SECRET_KEY')
-    AWS_SES_REGION_NAME = env('AWS_SES_REGION_NAME')
-    AWS_SES_REGION_ENDPOINT = env('AWS_SES_REGION_ENDPOINT')
-    AWS_SES_AUTO_THROTTLE = env('AWS_SES_AUTO_THROTTLE')
+    AWS_ACCESS_KEY = os.getenv('AWS_ACCESS_KEY')
+    AWS_SECRET_KEY = os.getenv('AWS_SECRET_KEY')
+    AWS_SES_REGION_NAME = os.getenv('AWS_SES_REGION_NAME')
+    AWS_SES_REGION_ENDPOINT = os.getenv('AWS_SES_REGION_ENDPOINT')
+    AWS_SES_AUTO_THROTTLE = os.getenv('AWS_SES_AUTO_THROTTLE')
 
-APP_EMAIL_RETURN_PATH = env('APP_EMAIL_RETURN_PATH')
-APP_TO_EMAIL = env('APP_TO_EMAIL')
-DEFAULT_FROM_EMAIL = APP_EMAIL_RETURN_PATH = env('APP_EMAIL_RETURN_PATH')
+APP_EMAIL_RETURN_PATH = os.getenv('APP_EMAIL_RETURN_PATH')
+APP_TO_EMAIL = os.getenv('APP_TO_EMAIL')
+DEFAULT_FROM_EMAIL = APP_EMAIL_RETURN_PATH = os.getenv('APP_EMAIL_RETURN_PATH')
 
 # STRIPE
-STRIPE_PVT_KEY = env('STRIPE_PK')
-STRIPE_SEC_KEY = env('STRIPE_SK')
+STRIPE_PVT_KEY = os.getenv('STRIPE_PK')
+STRIPE_SEC_KEY = os.getenv('STRIPE_SK')
