@@ -16,7 +16,48 @@
         made/booking is confirmed etc.
         {% endcomment %}
 
-      <h2> Invite </h2>
+
+
+    <div class="container">
+      <h2>
+        Packages
+      </h2>
+
+      <div>
+        {% if event.booking.count %}
+          <p> You have selected 
+          <strong>{{ event.booking.first.package.name }}</strong> package for your
+          event. </p>
+
+          <p>Kindly email or call us if you want any changes.</p>
+        {% else %}
+          <p>Please look at your different options and Confirm a certain packages </p>
+          <p>Kindly email/call us if you want any changes to a package.</p>
+        {% endif %}
+      </div>
+      <div>
+        <ul class="nav nav-pills" role="tablist">
+          {% for package in event.packages.all %}
+            <li role="presentation"
+                class="{% if forloop.first %}active{% endif %}">
+              <a href="#{{ package.event.slug}}{{ package.id }}"  class="btn btn-default" aria-controls="{{ package.name }}"
+                 role="tab" data-toggle="tab">{{ package.name }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+        <div class="tab-content">
+          {% for package in event.packages.all %}
+            <div role="tabpanel"
+                 class="tab-pane {% if forloop.first %}active{% endif %}"
+                 id="{{ package.event.slug}}{{ package.id }}" >
+              {% include 'packages/'|add:package.filename %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+          <h2> Invite </h2>
 
 
       {% if event.invite %}
@@ -87,47 +128,6 @@
             Selected/payment is
             made/booking is confirmed etc.
           {% endcomment %}
-    </div>
-
-    <br>
-
-    <div class="container">
-      <h2>
-        Packages
-      </h2>
-
-      <div>
-        {% if event.booking.count %}
-          <p> You have selected 
-          <strong>{{ event.booking.first.package.name }}</strong> package for your
-          event. </p>
-
-          <p>Kindly email or call us if you want any changes.</p>
-        {% else %}
-          <p>Please look at your different options and Confirm a certain packages </p>
-          <p>Kindly email/call us if you want any changes to a package.</p>
-        {% endif %}
-      </div>
-      <div>
-        <ul class="nav nav-pills" role="tablist">
-          {% for package in event.packages.all %}
-            <li role="presentation"
-                class="{% if forloop.first %}active{% endif %}">
-              <a href="#{{ package.event.slug}}{{ package.id }}"  class="btn btn-default" aria-controls="{{ package.name }}"
-                 role="tab" data-toggle="tab">{{ package.name }}</a>
-            </li>
-          {% endfor %}
-        </ul>
-        <div class="tab-content">
-          {% for package in event.packages.all %}
-            <div role="tabpanel"
-                 class="tab-pane {% if forloop.first %}active{% endif %}"
-                 id="{{ package.event.slug}}{{ package.id }}" >
-              {% include 'packages/'|add:package.filename %}
-            </div>
-          {% endfor %}
-        </div>
-      </div>
     </div>
   </main>
 {% endblock %}
