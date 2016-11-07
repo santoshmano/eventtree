@@ -1,0 +1,39 @@
+{% load static %}
+
+<div >
+
+<section id="portfolio" >
+
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-4 col-sm-6 col-lg-4 portfolio-item">
+        <a href="#portfolioModal_rental" class="portfolio-link" data-toggle="modal">
+          <div class="portfolio-hover">
+            <div class="portfolio-hover-content">
+              <i class="fa fa-plus fa-3x"></i>
+            </div>
+          </div>
+          <img src="{% static 'img/event/rentals/popcorn.jpg' %}"
+             class="img-responsive" alt="">
+        </a>
+        <div class="portfolio-caption" style="background-color: #eeeeee">
+          <h4> Rentals - Pinata Rentals</h4>
+          <p class="text-muted"> 80$ (includes delivery) <br>
+          Delivery Time - 9-10 AM, Monday Dec31<br>
+          1 Popcorn machine + Supplies for 50 </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% comment %}
+  Do not remove the below select include, it includes the button to select
+  package
+{% endcomment %}
+  <br>
+  {% include 'packages/select.html' %} <br> <br>
+
+</section>
+
+</div>
