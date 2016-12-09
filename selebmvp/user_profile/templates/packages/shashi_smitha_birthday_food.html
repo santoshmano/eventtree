@@ -8,6 +8,7 @@
     <br><br>
 
     <div class="row">
+      <a href="#portfolioModal_Food" data-toggle="modal">
       <div class="col-md-4 col-sm-6 col-lg-4 portfolio-item">
           <img src="{% static 'img/event/food/catering.jpg' %}"
              class="img-responsive center-block" alt="">
@@ -23,12 +24,15 @@
           </p>
         </div>
       </div>
+      </a>
+
+      <a href="#portfolioModal_Food" data-toggle="modal">
 
       <div class="col-md-4 col-sm-6 col-lg-4 portfolio-item">
           <img src="{% static 'img/event/food/catering.jpg' %}"
              class="img-responsive center-block" alt="">
         <div class="portfolio-caption" style="background-color: #eeeeee">
-          <h4> Peacock - Deluxe Package <h4>
+          <h4> Peacock - Deluxe Package </h4>
           <p class="text-muted">$13 per person <br>
             Two Apetizers (1reg, 1 special) <br>
             Two Veg Curries (1 reg, 1 special) <br>
@@ -38,7 +42,10 @@
             Dessert
           </p>
         </div>
-      </div>
+        </div>
+      </a>
+
+      <a href="#portfolioModal_Food" data-toggle="modal">
 
       <div class="col-md-4 col-sm-6 col-lg-4 portfolio-item">
           <img src="{% static 'img/event/food/catering.jpg' %}"
@@ -56,6 +63,7 @@
           </p>
         </div>
       </div>
+      </a>
     </div>
 
     <center> <h3> Additional Food </h3> </center>
@@ -63,7 +71,7 @@
     <br><br>
 
       <div class="col-md-4 col-sm-6 col-lg-4 portfolio-item">
-          <img src="{% static 'img/event/veg_tandoori.jpg' %}"
+          <img src="{% static 'img/event/food/veg_tandoori.jpg' %}"
              class="img-responsive center center-block" alt="">
         <div class="portfolio-caption" style="background-color: #eeeeee">
           <h4> Tandoori Live Cook </h4>
@@ -73,9 +81,9 @@
         </div>
       </div>
 
-      
+
       <div class="col-md-4 col-sm-6 col-lg-4 portfolio-item">
-          <img src="{% static 'img/event/channa_bhatura.jpg' %}"
+          <img src="{% static 'img/event/food/channa_bhatura.jpg' %}"
              class="img-responsive center center-block" alt="">
         <div class="portfolio-caption" style="background-color: #eeeeee">
           <h4> Channa Bhatura Live Cook </h4>
@@ -98,7 +106,7 @@
 
 
       <div class="col-md-4 col-sm-6 col-lg-4 portfolio-item">
-          <img src="{% static 'img/event/appetizers_tray.jpg' %}"
+          <img src="{% static 'img/event/food/appetizers_tray.jpg' %}"
              class="img-responsive center center-block" alt="">
         <div class="portfolio-caption" style="background-color: #eeeeee">
           <h4> Appetizer/Curry Trays </h4>
@@ -126,3 +134,57 @@
   <br>
 
 </section>
+
+
+<div class="portfolio-modal modal fade" id="portfolioModal_Food" tabindex="-1"
+     role="dialog" aria-hidden="true">
+  <div class="modal-content">
+    <div class="close-modal" data-dismiss="modal">
+      <div class="lr">
+        <div class="rl">
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <div class="modal-body">
+
+            <h2>Food Options</h2>
+
+<p>
+<b>Regular Apetizers </b>
+Palak Pakora, Onion Pakora, Punugulu, Medhu wada, Cut Mirchi, Onion Spinach Bonda
+
+<b>Special Apetizers </b>
+Gobi Mancurian, Mushroom Manchurian, Mushroom 65, Mixed Veg Pakora, Veg65.
+
+<b>Regular Curries </b>
+Bagara Baingan, Andhra Dal, Baingan Bartha, Alu Kurma, Alu Fry, Alu Gobi, Channa Masala, Navaratan Kurma, Paneer butter masala, Alu Curry, Tomato Paneer
+
+<b>Special Curries </b>
+Eggplant and Pakora Fry, Okra Pakora Fry, Tindoora Pakora Fry, Karela Fry, Malai Kofta, Kadai Vegetables, Vegetable Jalfrezi, Alu Methi, Alu Mutter, Stuffed Egg Plant, Mutter Paneer, Palak Paneer, Chenna Paneer, Veg Koftha
+
+<b>Breads </b>
+Naan, Butter Naan, Garlic Naan, Cheese Naan, Onion Kulcha, Paneer Naan
+
+<b>Variety Rice</b>
+Tamarind Rice, Coconut Rice, Tomato Rice, Lemon Rice, Curry Leaf Rice
+
+<b>Dessert Options</b>
+Gulab Jamun, Sabudhana Kheer, Semiya Payasam, Double-ka-meetha, Carrot Halwa, Rava, Kesari(Flavors - Vanilla, Mango), Mango Mousse
+
+</p>
+
+Special items
+Chapati, poori, Bhatura, Tandoora Roti, Kheema Naan, Malabar Paratha, Methi Paratha
+
+              <button type="button" class="btn btn-primary"
+                      data-dismiss="modal"><i class="fa fa-times"></i> Close
+              </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
