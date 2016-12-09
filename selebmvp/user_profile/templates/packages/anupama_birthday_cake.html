@@ -1,0 +1,89 @@
+{% load static %}
+
+<section id="portfolio" >
+  <div class="container">
+
+    <center> <h3> Bijan Cake  </h3> </center>
+
+    <br><br>
+
+    <div class="row">
+
+      <div class="col-md-4 col-sm-6 col-lg-4 portfolio-item">
+            <a href="#portfolioModal_Cake" data-toggle="modal">
+                <div class="portfolio-hover">
+            <div class="portfolio-hover-content">
+              <i class="fa fa-plus fa-3x"></i>
+            </div>
+          </div>
+          <img src="{% static 'img/event/cake/bijan/plain_strawberry_filling.jpg' %}"
+             class="img-responsive center-block" alt="">
+                   </a>
+
+        <div class="portfolio-caption" style="background-color: #eeeeee">
+          <h4> Strawberry Filling</h4>
+        </div>
+      </div>
+
+
+
+  </div>
+
+
+
+    {% comment %}
+  Do not remove the below select include, it includes the button to select
+  package
+{% endcomment %}
+  <br>
+  <br>
+
+</section>
+
+
+<div class="portfolio-modal modal fade" id="portfolioModal_Cake" tabindex="-1"
+     role="dialog" aria-hidden="true">
+  <div class="modal-content">
+    <div class="close-modal" data-dismiss="modal">
+      <div class="lr">
+        <div class="rl">
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <div class="modal-body">
+
+            <h2>Cake Options</h2>
+
+<p>
+<b> Size </b> <br>
+6" cake - $25-30, serves 6 <br>
+8" cake - $35-40, serves 8-12 <br>
+1/4 sheet cake - $53-60, serves 20-25 <br>
+1/2 sheet cake - $83-90, serves 40-50 <br>
+1 sheet cake - - $180-200, serves 80-100 <br><br>
+
+<b> Cake Flavors </b><br>
+
+Chiffon (White , Chocolate , Ribbon) <br>
+
+<b>Cake Filling</b><br> 
+
+Jams (Raspberry, Cherry, Lemon), Custard, Rasp & Custard, Truffle, Variety of Mousses, Fresh fruits <br> <br>
+
+<b>Cake Icing</b><br>
+
+Whip Cream, French Butter Cream, Marzipan, Chocolate Ganache (Upgrades available upon request)</p>
+
+
+              <button type="button" class="btn btn-primary"
+                      data-dismiss="modal"><i class="fa fa-times"></i> Close
+              </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
