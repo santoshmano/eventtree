@@ -1,0 +1,23 @@
+-r base.txt
+
+astroid==1.4.8
+awsebcli==3.7.8
+cement==2.8.2
+colorama==0.3.7
+docker-py==1.7.2
+dockerpty==0.4.1
+docopt==0.6.2
+isort==4.2.5
+lazy-object-proxy==1.2.2
+mccabe==0.5.2
+pathspec==0.3.4
+pylint==1.6.4
+pylint-django==0.7.2
+pylint-plugin-utils==0.2.4
+PyYAML==3.12
+semantic-version==2.5.0
+texttable==0.8.4
+websocket-client==0.37.0
+wrapt==1.10.8
+django-debug-toolbar==1.4
+sqlparse==0.1.19

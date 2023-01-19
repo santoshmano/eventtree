@@ -61,9 +61,6 @@ Session.vim
 __pycache__/
 *.py[cod]
 
-# C extensions
-*.so
-
 # Distribution / packaging
 bin/
 build/
@@ -103,14 +100,14 @@ coverage.xml
 .ropeproject
 
 # Django stuff:
-*.log
+#*.log
 *.pot
 
-######## Seleb Project start ######## 
+######## Seleb Project start ########
+*.env
+*.env.*
 
-seleb_hh_1/static/photos/
-
-######## Seleb Project end ######## 
+######## Seleb Project end ########
 
 
 ######## Frontend start ########A
@@ -149,6 +146,11 @@ frontend/dist
 .vscode
 
 # Mac files
-.DS_Store
+frontend/.DS_Store
 
 ######## Frontend end #########
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

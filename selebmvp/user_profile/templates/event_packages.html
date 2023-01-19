@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Select a package for {{ event.name }}
+{% endblock %}
+
+{% block content %}
+  <main class="user-body">
+    <div class="container">
+      <h1>
+        {{ event.name }}
+      </h1>
+
+      {% comment %}Start - For later , do this if a If Package is
+        Selected/payment is
+        made/booking is confirmed etc.
+        {% endcomment %}
+
+      <h2> Invite </h2>
+
+
+      {% if event.invite %}
+        <div class="table-responsive">
+          <table class="table table-hover table-condensed table-bordered ">
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>Attending?</th>
+              <th>#Adults</th>
+              <th>#Children</th>
+              <th>Email</th>
+              <th>Message</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for invitee in event.invite.invites.all %}
+              <tr>
+                <td>{{ invitee.full_name }}</td>
+                <td>{{ invitee.attending|lower|capfirst }}</td>
+                <td>{{ invitee.num_of_adults|default_if_none:"-" }}</td>
+                <td>{{ invitee.num_of_children|default_if_none:"-" }}</td>
+                <td>{{ invitee.email }}</td>
+                <td>{{ invitee.message }}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <div>
+          {% if not event.invite.invites.count %}
+            No RSVP's received so far
+          {% else %}
+            {{ num_adults_attending|default_if_none:"0" }} adults,
+            {{ num_children_attending|default_if_none:"0" }} children, responded
+            Yes.
+            {{ num_adults_maybe|default_if_none:"0" }} adults,
+            {{ num_children_maybe|default_if_none:"0" }} children, responded
+            Maybe.
+            {{ num_not_attending }} responded No.<br/>
+          {% endif %}
+        </div>
+
+        <br>
+
+      {% endif %}
+      <div>
+        {% if not event.invite %}
+          {% if event.can_invite %}
+            To get the invite to your email <a href="{% url 'send_event_invite' event.slug %}" class="btn btn-default">click here</a>
+            <br/>
+          {% elif event.booking.count %}
+            Your invitation will appear here as soon as Admin approves your package selection.
+          {% else %}
+            Your invitation will appear once you select a package below. {{ event.booking.status }}.
+          {% endif %}
+          {% comment %} Change the ability to invite only after booking is confirmed or is in progress {% endcomment %}
+        {% else %}
+          
+          To re-send the invite to your email <a href="{% url 'send_event_invite' event.slug %}" class="btn btn-default">click here </a>
+          <br/>
+        {% endif %}
+      </div>
+      {% comment %}
+          End For later , do this if a If Package is
+            Selected/payment is
+            made/booking is confirmed etc.
+          {% endcomment %}
+    </div>
+
+    <br>
+
+    <div class="container">
+      <h2>
+        Packages
+      </h2>
+
+      <div>
+        {% if event.booking.count %}
+          <p> You have selected 
+          <strong>{{ event.booking.first.package.name }}</strong> package for your
+          event. </p>
+
+          <p>Kindly email or call us if you want any changes.</p>
+        {% else %}
+          <p>Please confirm a package below. Email/Call us for any changes.</p>
+        {% endif %}
+      </div>
+      <div>
+        <ul class="nav nav-pills" role="tablist">
+          {% for package in event.packages.all %}
+            <li role="presentation"
+                class="{% if forloop.first %}active{% endif %}">
+              <a href="#{{ package.event.slug}}{{ package.id }}"  class="btn btn-default" aria-controls="{{ package.name }}"
+                 role="tab" data-toggle="tab">{{ package.name }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+        <div class="tab-content">
+          {% for package in event.packages.all %}
+            <div role="tabpanel"
+                 class="tab-pane {% if forloop.first %}active{% endif %}"
+                 id="{{ package.event.slug}}{{ package.id }}" >
+              {% include 'packages/'|add:package.filename %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}

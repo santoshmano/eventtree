@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  {{ request.user }}'s Bookings
+{% endblock %}
+
+{% block content %}
+  <main class="user-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Pending Bookings</h2>
+          {% if not bookings.count %}
+            You do not have any pending bookings
+          {% endif %}
+          {% for booking in bookings %}
+            <table class="table table-bordered col-xs-12" class="text-center">
+              <tr>
+              <tr>
+                <td class="col-xs-12">
+                  <div class="text-center">
+                  <p>
+                    <h4>{{ booking.event.name}}</h4>
+                  </p>
+                  <p>
+                    {{ booking.summary | safe }}
+                  </p>
+                  <p>
+                    <b>Total:</b> ${{ booking.amount }}
+                  </p>
+                  <p>
+                  <form
+                      action="{% url 'user_stripe_charge' booking.event.slug booking.slug %}"
+                      method="POST">
+                    {% csrf_token %}
+                    <script
+                        src="https://checkout.stripe.com/checkout.js"
+                        class="stripe-button"
+                        data-key={{ stripe_pvt_key }}
+                            data-amount="${{ booking.amount }}"
+                        data-locale="auto"
+                        data-email="{{ request.user.email }}"
+                        data-description="Payment via Stripe"
+                        data-image="{% static 'img/brand.png' %}"
+                        data-allow-remember-me="false">
+                    </script>
+                  </form>
+                  </p>
+                  </div>
+                </center>
+              </td>
+              </tr>
+              <tr>
+                <td>
+                  {% include "bookings/"|add:booking.filename %}
+                </td>
+              </tr>
+            </table>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Completed Bookings</h2>
+          {% if not completed_bookings.count %}
+            You do not have any completed bookings
+          {% endif %}
+          {% for booking in completed_bookings %}
+            <table class="table table-bordered col-xs-12 text-center"
+                   style="background: #eeeeee">
+              <tr>
+                <td>
+                  <h4>{{ booking.event.name}}</h4>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  {{ booking.summary | safe }}
+                </td>
+              </tr>
+              <tr>
+                <td class="col-xs-12">
+                  Total : ${{ booking.amount }}, Paid
+                    on: {{ booking.payment_date }}
+                </td>
+
+              </tr>
+            </table>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}

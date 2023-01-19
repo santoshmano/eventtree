@@ -1,0 +1,132 @@
+{% load static %}
+
+
+<div >
+<section id="portfolio" >
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-4 col-sm-6 col-lg-4 portfolio-item">
+        <a href="#portfolioModal_food" class="portfolio-link" data-toggle="modal">
+          <div class="portfolio-hover">
+            <div class="portfolio-hover-content">
+              <i class="fa fa-plus fa-3x"></i>
+            </div>
+          </div>
+          <img src="{% static 'img/event/food/dosa_catering.jpg' %}"
+             class="img-responsive" alt="">
+        </a>
+        <div class="portfolio-caption" style="background-color: #eeeeee">
+          <h4>Food</h4>
+          <p class="text-muted">Dosa Catering + Food Trays</p>
+          <p class="text-muted">600$ all inclusive<br>
+          4 dosa varieties + 2 chutney + 1 sambhar<br>
+          + 2 appetizers + 1 dessert</p>
+        </div>
+      </div>
+
+     <div class="col-md-4 col-sm-6 col-lg-4 portfolio-item">
+        <a href="#portfolioModal_entertainment_standard" class="portfolio-link" data-toggle="modal">
+          <div class="portfolio-hover">
+            <div class="portfolio-hover-content">
+              <i class="fa fa-plus fa-3x"></i>
+            </div>
+          </div>
+          <img src="{% static 'img/event/entertainment/balloon_twisting.jpg' %}"
+             class="img-responsive" alt="">
+        </a>
+        <div class="portfolio-caption" style="background-color: #eeeeee">
+          <h4>Entertainment</h4>
+          <p class="text-muted">Balloon Twisting or </p>
+          <p class="text-muted">Balloon + Face Painting </p>
+          <p class="text-muted">140$ all inclusive, 1hour </p>
+          <p class="text-muted">Additional charges/discount usage based</p>
+        </div>
+    </div>      
+
+     <div class="col-md-4 col-sm-6 col-lg-4 portfolio-item">
+        <a href="#portfolioModal_activity" class="portfolio-link" data-toggle="modal">
+          <div class="portfolio-hover">
+            <div class="portfolio-hover-content">
+              <i class="fa fa-plus fa-3x"></i>
+            </div>
+          </div>
+          <img src="{% static 'img/event/activity/bouncehouse_standard.jpg' %}"
+             class="img-responsive" alt="">
+        </a>
+        <div class="portfolio-caption" style="background-color: #eeeeee">
+          <h4>Activity</h4>
+          <p class="text-muted">Bounce House/Jumper</p>
+          <p class="text-muted">195$ all inclusive, 5hrs</p>
+          <p class="text-muted">Baly Bali Jumpers</p>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-6 col-lg-4 portfolio-item">
+        <a href="#portfolioModal_theme" class="portfolio-link" data-toggle="modal">
+          <div class="portfolio-hover">
+            <div class="portfolio-hover-content">
+              <i class="fa fa-plus fa-3x"></i>
+            </div>
+          </div>
+          <img src="{% static 'img/event/theme/captain_america.jpg' %}"
+             class="img-responsive" alt="">
+        </a>
+        <div class="portfolio-caption" style="background-color: #eeeeee">
+          <h4>Theme/Decoration Setup</h4>
+          <p class="text-muted">Theme/Decoration</p>
+          <p class="text-muted">From 50-150$ <br>
+          10am setup, Staff cost discounted</p>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-6 col-lg-4 portfolio-item">
+        <a href="#portfolioModal_eventstaff" class="portfolio-link" data-toggle="modal">
+          <div class="portfolio-hover">
+            <div class="portfolio-hover-content">
+              <i class="fa fa-plus fa-3x"></i>
+            </div>
+          </div>
+          <img src="{% static 'img/event/event_staff/event_staff.jpg' %}"
+             class="img-responsive" alt="">
+        </a>
+        <div class="portfolio-caption" style="background-color: #eeeeee">
+          <h4>Event Staff</h4>
+          <p class="text-muted">Indian aunty, 70$ - 4hrs</p>
+          <p class="text-muted">Indian uncle, 60$ - 3hrs<br>
+          Caring & Loving help during event.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-6 col-lg-4 portfolio-item">
+        <a href="#portfolioModal_cake" class="portfolio-link" data-toggle="modal">
+          <div class="portfolio-hover">
+            <div class="portfolio-hover-content">
+              <i class="fa fa-plus fa-3x"></i>
+            </div>
+          </div>
+          <img src="{% static 'img/event/cake/bijan_cake.jpg' %}"
+             class="img-responsive" alt="">
+        </a>
+        <div class="portfolio-caption" style="background-color: #eeeeee">
+          <h4>Cake</h4>
+          <p class="text-muted">Birthday cake pickup</p>
+          <p class="text-muted">Pickup - No charge <br>
+          Address to pickup - TBD</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="text-center">
+  {% comment %}
+  Do not remove the below select include, it includes the button to select
+  package
+{% endcomment %}
+  <br>
+  {% include 'packages/select.html' %} <br> <br>
+  </div>
+</section>
+
+</div>
