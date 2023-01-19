@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  {{ request.user }}'s Events
+{% endblock %}
+
+{% block content %}
+
+  <main class="user-body">
+    <div class="container">
+      <h2> My Events</h2>
+      <br>
+      <div class="row">
+        {% for event in user.events.all %}
+          {% include 'event_panel.html' %}
+        {% endfor %}
+        <div class="col-md-4 col-sm-6 event-item">
+          <a href="{% url 'home' %}#contact"
+             class="event-link external">
+            <div class="event-hover">
+              <div class="event-hover-content">
+                <i class="fa fa-plus fa-3x"></i>
+              </div>
+            </div>
+            <img src="{% static 'img/event/add_new_event.jpg' %}"
+                 class="img-responsive" alt="">
+          </a>
+
+          <div class="event-caption" style="background-color: #eeeeee">
+            <p>Start an Event</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}

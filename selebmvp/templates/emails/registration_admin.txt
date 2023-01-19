@@ -1,0 +1,3 @@
+Yippee! we have a new user {{ email }} :)
+
+

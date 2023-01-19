@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block menu %}
+  {% include "auth_menu.html" %}
+{% endblock %}
+
+{% block title %}
+  Register
+{% endblock %}
+
+{% block content %}
+  <main class="auth-body" style="background: #eeeeee">
+    <div class="container">
+      <div class="login-page">
+        <!-- log in form -->
+        <div class="form">
+          <form class="login-form" method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            <div
+                class="form-group {% if form.email.errors %} has-error {% endif %}">
+              <label class="control-label" for="signin-email">E-mail</label>
+              <input class="form-control" type="email" id="signin-email"
+                     placeholder="E-mail" name="email"
+                     value="{{ form.email.value|default_if_none:"" }}">
+              {% if form.email.errors %}
+                <div class="form-group has-error">
+                  <div class="control-label">
+                    {{ form.email.errors }}
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+            <div class="form-group">
+              <label class="control-label"
+                     for="signin-password1">Password</label>
+              <input id="signin-password1" class="form-control" type="password"
+                     placeholder="Password" name="password1">
+              {% if form.password1.errors %}
+                <div class="form-group has-error">
+                  <div class="control-label">
+                    {{ form.password1.errors }}
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+            <div class="form-group">
+              <label class="control-label"
+                     for="signin-password2">Re-Password</label>
+              <input id="signin-password2" class="form-control" type="password"
+                     placeholder="Retype Password" name="password2">
+              {% if form.password2.errors %}
+                <div class="form-group has-error">
+                  <div class="control-label">
+                    {{ form.password2.errors }}
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+            <div class="form-group">
+              <input class="form-control btn btn-primary" type="submit"
+                     value="Register">
+            </div>
+          </form>
+          <p class="message">Already Registered? <a href="{% url 'login' %}">Login
+            Now</a></p>
+          <p class="message">Your details are Secure and Private to you.<br>
+            We do not Spam</p>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}
