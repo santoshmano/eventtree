@@ -1,0 +1,39 @@
+{% load static %}
+
+<div class="text-center col-xs-12">
+
+  <br>
+  <div class="row">
+    <div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-6">
+      <img src="{% static 'img/event/bouncehouse_standard.jpg' %}" alt="">
+    </div>
+
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-6">
+      <br> <br> <br>
+      <h4> Activity Rental </h4>
+
+      Standard 15x15ft BounceHouse <br>
+      Rental Timeframe - Upto 6hrs <br>
+      Rental Price - 90$ <br>
+      <br>
+
+      <b>Vendor</b> <br>
+      Bounce House Rentals, San Jose <br>
+      Yelp Ratings 5/5, #Yelp Reviews 66 <br>
+    </div>  
+  </div>
+
+{% comment %}
+  Do not remove the below select include, it includes the button to select
+  package
+{% endcomment %}
+<br>
+{% include 'packages/select.html' %} <br> 
+
+
+</div>

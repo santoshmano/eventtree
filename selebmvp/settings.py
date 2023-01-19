@@ -15,18 +15,32 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+SITE_URL = os.getenv('SITE_URL', 'http://localhost:8000/')
+
+DJANGO_MODE = os.getenv('DJANGO_MODE', 'Production').lower()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '1ot_exld@pk!rri%_$)-jz4y^#x)r7w31xvfm=l9k=&=p9=@=l'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if DJANGO_MODE == 'local':
+    DEBUG = True
+else:
+    DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
 
+# HTTPS stuff
+if DJANGO_MODE != 'local':
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SESSION_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 86400
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 # Application definition
 
@@ -37,7 +51,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'selebmvp.user_profile',
+    'selebmvp.user_packages',
+    'selebmvp.app_mailer',
+    'selebmvp.event_invites',
+    'selebmvp.vendors',
 ]
+
+if DJANGO_MODE == 'local':
+    INSTALLED_APPS += [
+        'debug_toolbar',
+    ]
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,7 +79,7 @@ ROOT_URLCONF = 'selebmvp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'selebmvp', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,52 +94,132 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'selebmvp.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
+DB_BACKEND = os.getenv('DB_BACKEND')
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if DB_BACKEND == 'SQLITE3':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.getenv('DB_NAME', 'db.sqlite3'),
+        }
+    }
+elif DB_BACKEND == 'POSTGRES':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('DB_NAME', 'eventtree'),
+            'USER': os.getenv('DB_USER', 'postgre'),
+            'PASSWORD': os.getenv('DB_PASSWORD', 'root123'),
+            'HOST': os.getenv('DB_HOST', 'localhost'),
+            'PORT': os.getenv('DB_PORT', '5432'),
+        }
+    }
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s]\
+                       %(message)s",
+            'datefmt': "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR,'logs', 'debug.log'),
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+        'selebmvp.app_mailer': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+        },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation'
+                '.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation'
+                '.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation'
+                '.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation'
+                '.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
-
+LANGUAGE_CODE = os.getenv('LANGUAGE_CODE', 'en-us')
+TIME_ZONE = os.getenv('TIME_ZONE', 'US/Pacific')
+USE_I18N = os.getenv('USE_I18N', True)
+USE_L10N = os.getenv('USE_L10N', True)
+USE_TZ = os.getenv('USE_TZ', True)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
+# STATIC_ROOT = os.path.join(BASE_DIR, 'selebmvp', 'static'),
+STATIC_ROOT = 'static' 
+
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'frontend'),
+)
+
+# Custom Auth
+AUTH_USER_MODEL = 'user_profile.SelebUser'
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/login/'
+
+# Email BACKEND
+EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
+
+if EMAIL_BACKEND == 'django.core.mail.backends.smtp.EmailBackend':
+    EMAIL_HOST = os.getenv('EMAIL_HOST')
+    EMAIL_PORT = os.getenv('EMAIL_PORT')
+    EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+    EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
+elif EMAIL_BACKEND == 'selebmvp.app_mailer.AWSSESBackend':
+    # AWS SES stuff
+    AWS_ACCESS_KEY = os.getenv('AWS_ACCESS_KEY')
+    AWS_SECRET_KEY = os.getenv('AWS_SECRET_KEY')
+    AWS_SES_REGION_NAME = os.getenv('AWS_SES_REGION_NAME')
+    AWS_SES_REGION_ENDPOINT = os.getenv('AWS_SES_REGION_ENDPOINT')
+    AWS_SES_AUTO_THROTTLE = os.getenv('AWS_SES_AUTO_THROTTLE')
+
+APP_EMAIL_RETURN_PATH = os.getenv('APP_EMAIL_RETURN_PATH')
+APP_TO_EMAIL = os.getenv('APP_TO_EMAIL')
+DEFAULT_FROM_EMAIL = APP_EMAIL_RETURN_PATH = os.getenv('APP_EMAIL_RETURN_PATH')
+
+# STRIPE
+STRIPE_PVT_KEY = os.getenv('STRIPE_PK')
+STRIPE_SEC_KEY = os.getenv('STRIPE_SK')

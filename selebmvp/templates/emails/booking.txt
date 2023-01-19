@@ -1,0 +1,7 @@
+{% block content %}
+We have a Package confirmation from {{ user }}!
+
+    Event: {{ booking.event }}
+    
+    Package: {{ booking.package }}
+{% endblock %}
